@@ -38,29 +38,31 @@ Class Article {
 
         return $sell;
     }
+    
+    function setArticle($desc, $group, $buyPrice, $unit, $packUnit, $packSize, $minLevel, $surcharge) {
+        $this->articleDesc = $desc;
+        $this->articleGroup = $group;
+        $this->buyingPrice = $buyPrice;
+        $this->unit = $unit;
+        $this->packingUnit = $packUnit;
+        $this->packingSize = $packSize;
+        $this->minimumStockLevel = $minLevel;
+        $this->surcharge = $surcharge;
+        
+        //to do Datenbank set
+    }
 
     function getArticleNumber() {
         return $this->articleNumber;
     }
 
-    function setArticleDesc($desc) {
-        $this->articleDesc = $desc;
-    }
 
     function getArticleDesc() {
         return $this->articleDesc;
     }
 
-    function setArticleGroup($group) {
-        $this->articleGroup = $group;
-    }
-
     function getArticleGroup() {
         return $this->articleGroup;
-    }
-
-    function setBuyingPrice($price) {
-        $this->buyingPrice = $price;
     }
 
     function getBuyingPrice() {
@@ -71,40 +73,20 @@ Class Article {
         return $this->sellingPrice;
     }
 
-    function setUnit($unit) {
-        $this->unit = $unit;
-    }
-
     function getUnit() {
         return $this->unit;
-    }
-
-    function setPackingUnit($packUnit) {
-        $this->packingUnit = $packUnit;
     }
 
     function getPackingUnit() {
         return $this->packingUnit;
     }
 
-    function setPackingSize($size) {
-        $this->packingSize = $size;
-    }
-
     function getPackingSize() {
         return $this->packingSize;
     }
 
-    function setMinimumLevel($min) {
-        $this->minimumStockLevel = $min;
-    }
-
     function getMinimumLevel() {
         return $this->minimumStockLevel;
-    }
-
-    function setSurcharge($surcharge) {
-        $this->surcharge = $surcharge;
     }
 
     function getSurcharge() {
