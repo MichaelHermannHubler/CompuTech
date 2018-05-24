@@ -37,15 +37,15 @@ Class Article {
 
         return $sell;
     }
-    
-    function getArticleNumber(){
+
+    function getArticleNumber() {
         return $this->articleNumber;
     }
-    
+
     function setArticleDesc($desc) {
         $this->articleDesc = $desc;
     }
-    
+
     function getArticleDesc() {
         return $this->articleDesc;
     }
@@ -53,8 +53,61 @@ Class Article {
     function setArticleGroup($group) {
         $this->articleGroup = $group;
     }
-    
+
     function getArticleGroup() {
-        
+        return $this->articleGroup;
     }
+
+    function setBuyingPrice($price) {
+        $this->buyingPrice = $price;
+    }
+
+    function getBuyingPrice() {
+        return $this->buyingPrice;
+    }
+
+    function getSellingPrice() {
+        return $this->sellingPrice;
+    }
+
+    function setUnit($unit) {
+        $this->unit = $unit;
+    }
+
+    function getUnit() {
+        return $this->unit;
+    }
+
+    function setPackingUnit($packUnit) {
+        $this->packingUnit = $packUnit;
+    }
+
+    function getPackingUnit() {
+        return $this->packingUnit;
+    }
+
+    function setPackingSize($size) {
+        $this->packingSize = $size;
+    }
+
+    function getPackingSize() {
+        return $this->packingSize;
+    }
+
+    function setMinimumLevel($min) {
+        $this->minimumStockLevel = $min;
+    }
+
+    function getMinimumLevel() {
+        return $this->minimumStockLevel;
+    }
+
+    function setSurcharge($surcharge) {
+        $this->surcharge = $surcharge;
+    }
+
+    function getSurcharge() {
+        return $this->surcharge;
+    }
+
 }
