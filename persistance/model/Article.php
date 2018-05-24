@@ -12,8 +12,8 @@ Class Article {
     private $packingSize = 0;
     private $minimumStockLevel = 0;
     private $surcharge = 0;
-
-    function Article($number, $desc, $group, $buyPrice, $unit, $packUnit, $packSize, $min, $surcharge) {
+    
+    function __construct($number, $desc, $group, $buyPrice, $unit, $packUnit, $packSize, $min, $surcharge) {
         $this->articleNumber = $number;
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
@@ -26,6 +26,7 @@ Class Article {
         $this->sellingPrice = $this->calcSellPrice($this->buyingPrice, $this->surcharge);
     }
 
+   
     private function calcSellPrice($buyPrice, $surcharge) {
         $sell = 0;
 
