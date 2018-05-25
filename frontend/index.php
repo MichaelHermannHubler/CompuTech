@@ -19,6 +19,14 @@
         <main>
             <h1>HELLO WORLD!</h1>
 
+			<?php
+
+				require "controller/loginController.php";
+
+
+			?>
+
+
         </main>
 
 
