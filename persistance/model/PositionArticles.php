@@ -1,6 +1,6 @@
 <?php
 
-Class PositionArticles{
+Class PositionArticles {
     private $articleNumber;
     private $price;
     private $quantity;

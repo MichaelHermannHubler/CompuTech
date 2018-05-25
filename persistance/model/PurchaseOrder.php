@@ -1,31 +1,30 @@
 <?php
 
-Class Order extends OfferOrders {
+Class PurchaseOrder extends Voucher {
     
     private $orderDate;
     private $offerNumber = null;
     private $ordered = false;
 
-    function __construct($orderNum, $vendorNum, $create, $offerNum, $articles) {
-        parent::__construct($orderNum, $vendorNum, $create, $articles);
+    
+    function __construct($num, $party, $createDate, $articles, $offerNum) {
+        parent::__construct($num, $party, $createDate, $articles);
         $this->offerNumber = $offerNum;
+    }
+    
+    function setOrder($party, $createDate, $articles, $offerNum) {
+        $this->party = $party;
+        $this->createDate = $createDate;
+        $this->articles = $articles;
+        $this->offerNumber = $offerNum;
+        
+        //to do DB set
     }
 
     function getOrderDate() {
         return $this->orderDate;
     }
     
-    function getVendor() {
-        parent::getVendor();
-    }
-   
-    function getNum() {
-        parent::getNum();
-    }
-    
-    function getCreateDate() {
-        parent::getCreateDate();
-    }
     
     function getOfferNumber() {
         return $this->offerNumber;

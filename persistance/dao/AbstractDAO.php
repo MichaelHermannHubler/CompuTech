@@ -13,12 +13,10 @@ class AbstractDAO
     private $pwd = "orcldbpwd";
     private $host = "infdb.technikum-wien.at:1521/o10";
     protected $conn = null;
-    private
-        $mitarbeiterArray = array();
 
     protected function doConnect()
     {
-        $this->conn = oci_connect($this->user, $this->pwd, $this->host);
+        $this->conn = new mysqli($this->user, $this->pwd, $this->host);
     }
 
     protected function closeConnect()
