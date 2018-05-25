@@ -21,6 +21,9 @@ class AbstractDAO
 
     protected function closeConnect()
     {
+        if(!empty($result)) {
+            $result->close();
+        }
         $this->conn = close();
     }
 

@@ -6,5 +6,16 @@ Class OfferOrderDAO extends AbstractDAO {
         
     }
     
+    function getOfferOrder() {
+        $this->doConnect();
+        
+        $this->closeConnect();
+    }
+    
+    function setOfferOrder() {
+        $this->doConnect();
+        
+        $this->closeConnect();
+    }
 
 }

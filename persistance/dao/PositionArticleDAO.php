@@ -1,21 +1,21 @@
 <?php
 
-Class PurchasOrderDAO extends AbstractDAO {
-
+Class PositionArticleDAO extends AbstractDAO{
+    
     function __construct() {
         
     }
     
-    function getPurchaseOrder() {
+    function getPositionArticle(){
         $this->doConnect();
         
         $this->closeConnect();
     }
     
-    function setPurchaseOrder() {
+    function setPositionArticle() {
         $this->doConnect();
         
         $this->closeConnect();
     }
-
 }
+

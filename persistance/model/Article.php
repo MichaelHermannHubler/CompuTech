@@ -11,18 +11,21 @@ Class Article {
     private $packingUnit = "";
     private $packingSize = 0;
     private $minimumStockLevel = 0;
+    private $vendor;
     private $surcharge = 0;
     
-    function __construct($number, $desc, $group, $buyPrice, $unit, $packUnit, $packSize, $min, $surcharge) {
+    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $surcharge, $vendor) {
         $this->articleNumber = $number;
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
         $this->buyingPrice = $buyPrice;
+        $this->sellingPrice = $sellPrice;
         $this->unit = $unit;
         $this->packingUnit = $packUnit;
         $this->packingSize = $packSize;
         $this->minimumStockLevel = $min;
         $this->surcharge = $surcharge;
+        $this->vendor = $vendor;
         $this->sellingPrice = $this->calcSellPrice($this->buyingPrice, $this->surcharge);
     }
 

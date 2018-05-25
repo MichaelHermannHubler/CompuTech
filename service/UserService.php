@@ -5,8 +5,7 @@
  * Date: 24.05.2018
  * Time: 18:38
  */
-include "../persistance/dao/UserDAO.php";
-
+include '../persistance/dao/dao_sales/UserDAO.php';
 class UserService
 {
 
