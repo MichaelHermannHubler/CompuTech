@@ -7,18 +7,23 @@ Class PurchaseOrder extends Voucher {
     private $orderStatus;
     private $deliveryType;
                 
-    function __construct($num, $party, $createDate, $articles, $offerNum, $orderDate, $orderStatus, $deliveryType) {
-        parent::__construct($num, $party, $createDate, $articles);
+    function __construct($num, $party, $createDate, $offerNum, $orderDate, $orderStatus, $deliveryType) {
+        parent::__construct($num, $party, $createDate);
         $this->offerNumber = $offerNum;
         $this->orderDate = $orderDate;
         $this->deliveryType = $deliveryType;
         $this->orderStatus = $orderStatus;
     }
     
-    function setOrder($party, $createDate, $articles, $offerNum, $orderStatus, $deliveryType) {
-        $this->party = $party;
+    function setOrder($party, $createDate, $offerNum, $orderStatus, $deliveryType) {
+        $db = new SupplierDAO();
+        $check = $db->getSupplier($party);
+        if($check){
+            $this->party = $party;
+        }else{
+            echo "VendorNumber doesn't exist.";
+        }
         $this->createDate = $createDate;
-        $this->articles = $articles;
         $this->offerNumber = $offerNum;
         $this->orderStatus = $orderStatus;
         $this->deliveryType = $deliveryType;

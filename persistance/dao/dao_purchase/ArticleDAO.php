@@ -19,7 +19,6 @@ Class ArticleDAO extends AbstractDAO {
         
         if($stmt->fetch()){
             $article = new Article($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge);
-
         }
 
         $this->closeConnect();
@@ -40,6 +39,25 @@ Class ArticleDAO extends AbstractDAO {
         $stmt->execute();
 
         $this->closeConnect();
+    }
+    
+    function getVendor($articleNum){
+        $this->doConnect();
+        
+        $stmt = $this->conn-prepare("select SupplierID from article where Number = ?");
+        
+        $stmt->bind_param("i", $articleNum);
+        
+        $stmt->execute();
+        
+        $stmt->bind_result($vendor);
+        
+        if($stmt->fetch()){
+            $vendor = $vendor;
+        }
+        
+        $this->closeConnect();
+        return $vendor;
     }
 
 }

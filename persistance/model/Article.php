@@ -13,23 +13,35 @@ Class Article {
     private $minimumStockLevel = 0;
     private $vendor;
     private $surcharge = 0;
-    
-    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $surcharge, $vendor) {
+
+    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge) {
         $this->articleNumber = $number;
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
-        $this->buyingPrice = $buyPrice;
-        $this->sellingPrice = $sellPrice;
+        if ($buyPrice > 0) {
+            $this->buyingPrice = $buyPrice;
+        } else {
+            echo "BuyingPrice should be higher than zero.";
+        }
+        if ($sellPrice > 0) {
+            $this->sellingPrice = $sellPrice;
+        } else if ($sellPrice == null) {
+            $this->sellingPrice = $this->calcSellPrice($this->buyingPrice, $this->surcharge);
+        } else {
+            echo "SellingPrice should be higher than zero.";
+        }
         $this->unit = $unit;
         $this->packingUnit = $packUnit;
-        $this->packingSize = $packSize;
+        if ($packSize > 0) {
+            $this->packingSize = $packSize;
+        } else {
+            echo "PackingSize should be higher than zero.";
+        }
         $this->minimumStockLevel = $min;
-        $this->surcharge = $surcharge;
         $this->vendor = $vendor;
-        $this->sellingPrice = $this->calcSellPrice($this->buyingPrice, $this->surcharge);
+        $this->surcharge = $surcharge;
     }
 
-   
     private function calcSellPrice($buyPrice, $surcharge) {
         $sell = 0;
 
@@ -41,24 +53,32 @@ Class Article {
 
         return $sell;
     }
-    
-    function setArticle($desc, $group, $buyPrice, $unit, $packUnit, $packSize, $minLevel, $surcharge) {
+
+    function setArticle($desc, $group, $buyPrice, $unit, $packUnit, $packSize, $minLevel, $vendor, $surcharge) {
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
-        $this->buyingPrice = $buyPrice;
+        if ($buyPrice > 0) {
+            $this->buyingPrice = $buyPrice;
+        } else {
+            echo "BuyingPrice should be higher than zero.";
+        }
         $this->unit = $unit;
         $this->packingUnit = $packUnit;
-        $this->packingSize = $packSize;
+        if ($packSize > 0) {
+            $this->packingSize = $packSize;
+        } else {
+            echo "PackingSize should be higher than zero.";
+        }
         $this->minimumStockLevel = $minLevel;
+        $this->vendor = $vendor;
         $this->surcharge = $surcharge;
-        
+
         //to do Datenbank set
     }
 
     function getArticleNumber() {
         return $this->articleNumber;
     }
-
 
     function getArticleDesc() {
         return $this->articleDesc;
@@ -90,6 +110,10 @@ Class Article {
 
     function getMinimumLevel() {
         return $this->minimumStockLevel;
+    }
+
+    function getVendor() {
+        return $this->vendor;
     }
 
     function getSurcharge() {
