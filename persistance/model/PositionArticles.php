@@ -49,9 +49,18 @@ Class PositionArticles {
         } else {
             echo "Please insert an Article Object.;";
         }
+        
+        
+        
+        $db = new ArticleDAO;
+        $vendor = $db->getVendor($this->articleNumber);
+        
+        $db2 = new OfferOrderDAO;
+        $this->refereceNumber = $db2->getAvailableOffer($vendor);
+        
+        
 
         //to do DB set
-        //to do update ReferenceNum
     }
 
     function setPositionArticlesPurchaseOrder($article) {

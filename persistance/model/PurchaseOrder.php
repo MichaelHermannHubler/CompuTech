@@ -17,7 +17,7 @@ Class PurchaseOrder extends Voucher {
     
     function setOrder($party, $createDate, $offerNum, $orderStatus, $deliveryType) {
         $db = new SupplierDAO();
-        $check = $db->getSupplier($party);
+        $check = $db->checkSupplier($party);
         if($check){
             $this->party = $party;
         }else{
