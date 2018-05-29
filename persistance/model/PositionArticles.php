@@ -1,5 +1,7 @@
 <?php
-
+include './Article.php';
+include '../dao/dao_purchase/OfferOrderDAO.php';
+include '../dao/dao_purchase/ArticleDAO.php';
 Class PositionArticles {
 
     private $articleNumber;

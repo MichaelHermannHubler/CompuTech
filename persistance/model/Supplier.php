@@ -1,5 +1,5 @@
 <?php
-
+include '../dao/AddressDAO.php';
 Class Supplier {
     
     private $id;

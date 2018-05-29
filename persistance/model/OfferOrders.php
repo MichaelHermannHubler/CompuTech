@@ -1,5 +1,5 @@
 <?php
-
+include '../dao/dao_purchase/SupplierDAO.php';
 Class OfferOrders extends Voucher{
    
 

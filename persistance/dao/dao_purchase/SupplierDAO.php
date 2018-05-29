@@ -1,5 +1,5 @@
 <?php
-
+include '../../model/Supplier.php';
 Class SupplierDAO extends AbstractDAO {
 
     function __construct() {
