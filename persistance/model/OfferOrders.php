@@ -1,5 +1,6 @@
 <?php
 include '../dao/dao_purchase/SupplierDAO.php';
+include '../dao/dao_purchase/OfferOrderDAO.php';
 Class OfferOrders extends Voucher{
    
 
@@ -21,11 +22,13 @@ Class OfferOrders extends Voucher{
         $this->number = $number;        
         $this->createDate = $create;
         
-        //todo DB set
+        $offerDB = new OfferOrderDAO;
+        
+        $offerDB->setOfferOrder($number, $vendorNumber, $create);
     }
 
     function convertOfferToOrder($this) {
-        
+        //necessary?
     }
     
 

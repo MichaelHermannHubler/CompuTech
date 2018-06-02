@@ -1,5 +1,5 @@
 <?php
-
+include '../dao/AddressDAO.php';
 Class Address {
     
     private $id;
@@ -14,6 +14,26 @@ Class Address {
         $this->city = $city;
         $this->postalCode = $postCode;
         $this->countryCode = $country;
+    }
+    
+    function setAddress($id, $street, $city, $postCode, $countryCode) {
+        $this->id = $id;
+        
+        $this->street = $street;
+        
+        $this->city = $city;
+        
+        $this->postalCode = $postCode;
+        
+        $this->countryCode = $countryCode;
+        
+        $db = new AddressDAO;
+        
+        if($this->id == null){
+            $this->id = $db->setAddress($this->id, $this->street, $this->city, $this->postalCode, $this->countryCode);
+        }else{
+            $db->setAddress($this->id, $this->street, $this->city, $this->postalCode, $this->countryCode);
+        }
     }
     
     function getId() {

@@ -7,27 +7,27 @@ Class ArticleGroupDAO extends AbstractDAO {
     function __construct() {
         
     }
-    
-    function setArticleGroup($id, $name, $desc){
+
+    function setArticleGroup($id, $name, $desc) {
         $this->doConnect();
-        
-        if($id == null){
+
+        if ($id == null) {
             $stmt = $this->conn->prepare("insert into articlegroup (Name, Description) values (?,?)");
             $stmt->bind_param("ss", $name, $desc);
-        }else{
+        } else {
             $stmt = $this->conn->prepare("update articlegroup set Name = ?, Description = ? where ID = ?");
             $stmt->bind_param("ssi", $name, $desc, $id);
         }
-        
+
         $stmt->execute();
-        
-        if($id == null && $stmt->fetch()){
-            
-           $id =  mysqli_insert_id($stmt);
+
+        if ($id == null && $stmt->fetch()) {
+
+            $id = mysqli_insert_id($stmt);
         }
-        
+
         $this->closeConnect();
-        
+
         return $id;
     }
 
