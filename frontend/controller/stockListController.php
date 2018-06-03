@@ -6,13 +6,13 @@ include_once '../../persistance/model/Article.php';
 $db = new ArticleDAO;
 $stock = $db->getStockList();
 
+echo "<button>Neuer Artikel</button>";
+
 for ($i = 0; $i < count($stock); $i++) {
     echo "<div class=\"article\">";
     echo $stock[$i]->getArticleNumber();
     echo "<br/>";
     echo $stock[$i]->getArticleDesc();
-    echo "<br/>";
-    echo $stock[$i]->getArticleGroup();
     echo "<br/>";
     echo $stock[$i]->getBuyingPrice();
     echo "<br/>";
