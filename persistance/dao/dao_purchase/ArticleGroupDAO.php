@@ -1,6 +1,6 @@
 <?php
 
-include '../../model/ArticleGroup.php';
+include_once'../../model/ArticleGroup.php';
 
 Class ArticleGroupDAO extends AbstractDAO {
 

@@ -1,6 +1,6 @@
 <?php
 
-include '../model/Address.php';
+include_once '../model/Address.php';
 
 Class AddressDAO extends AbstractDAO {
 

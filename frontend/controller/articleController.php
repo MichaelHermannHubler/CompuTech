@@ -1,6 +1,10 @@
 <?php
-if (!empty($_SESSION['articleNum'])) {
-    include './OldArticleDataTable.php';
+if (!empty($_SESSION['articleNum']) || !empty($_GET['articleNum'])) {
+    
+    if(empty($_SESSION['articleNum'])){
+        $_SESSION['articleNum'] = $_GET['articleNum'];
+    }
+    include_once './OldArticleDataTable.php';
     $new = false;
 }
 ?>
@@ -12,8 +16,8 @@ if (!empty($_SESSION['articleNum'])) {
     <select name="group">
         <option>Test</option>
         <?php
-        include '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-        include '../../persistance/model/ArticleGroup.php';
+        include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
+        include_once '../../persistance/model/ArticleGroup.php';
         $db = new ArticleGroupDAO;
         
         $groups = $db->getAllArtikleGroup();

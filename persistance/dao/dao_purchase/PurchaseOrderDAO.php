@@ -1,6 +1,6 @@
 <?php
 
-include '../../model/PurchaseOrder.php';
+include_once '../../model/PurchaseOrder.php';
 
 Class PurchasOrderDAO extends AbstractDAO {
 

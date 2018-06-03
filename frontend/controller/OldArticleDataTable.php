@@ -1,6 +1,6 @@
 <?php
 
-include '../../persistance/dao/dao_purchase/ArticleDAO.php';
+include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
 $db = new ArticleDAO;
 $article = $db->getArticle($_SESSION['articleNum']);
 echo "<table>";

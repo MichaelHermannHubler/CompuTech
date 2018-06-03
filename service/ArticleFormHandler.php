@@ -1,13 +1,13 @@
 <?php
 
 if (!empty($_GET['subNewArticle']) && !empty($_GET['name']) && !empty($_GET['group']) && !empty($_GET['buyPrice']) && !empty($_GET['sellPrice']) && !empty($_GET['unit']) && !empty($_GET['packUnit']) && !empty($_GET['packSize']) && !empty($_GET['minStock']) && !empty($_GET['vendor']) && !empty($_GET['surcharge'])) {
-    include '../persistance/model/Article.php';
+    include_once '../persistance/model/Article.php';
 
     $article = new Article(null, $_GET['name'], $_GET['group'], $_GET['buyPrice'], $_GET['sellPrice'], $_GET['unit'], $_GET['packUnit'], $_GET['packSize'], $_GET['minStock'], $_GET['vendor'], $_GET['surcharge']);
     
     
 } else if (!empty($_GET['modArticle']) && !empty($_SESSION['articleNum'])) {
-    include '../persistance/dao/dao_purchase/ArticleDAO.php';
+    include_once '../persistance/dao/dao_purchase/ArticleDAO.php';
     $db = new ArticleDAO;
     
     $article = $db->getArticle($_SESSION['articleNum']);

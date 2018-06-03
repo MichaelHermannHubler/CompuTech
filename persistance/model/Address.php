@@ -1,5 +1,5 @@
 <?php
-include '../dao/AddressDAO.php';
+include_once '../dao/AddressDAO.php';
 Class Address {
     
     private $id;
