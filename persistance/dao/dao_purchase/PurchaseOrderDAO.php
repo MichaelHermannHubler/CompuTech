@@ -2,7 +2,7 @@
 
 include_once '../../model/PurchaseOrder.php';
 
-Class PurchasOrderDAO extends AbstractDAO {
+Class PurchaseOrderDAO extends AbstractDAO {
 
     function __construct() {
         
