@@ -1,6 +1,6 @@
 <?php
+require_once '../../persistance/dao/AbstractDAO.php';
 
-include_once '../../model/PurchaseOrder.php';
 Class PurchaseOrderDAO extends AbstractDAO {
 
     function __construct() {
