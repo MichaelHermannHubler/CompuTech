@@ -6,7 +6,8 @@
  * Time: 16:07
  */
 
-
+include '../loginController.php';
+include_once './articleListDisplay.php';
 
 
 echo "<table>";
@@ -27,15 +28,16 @@ foreach ($_SESSION['articleList'] as $item){
     echo '</td>';
 
     echo '<td>';
-    echo '<button>';
+    echo '<form enctype="multipart/form-data" method="post">';
+    echo '<input type="hidden" name="articleIdToDelete"  value="';
+    echo $item->getArtikelId();
+    echo '"/>';
+    echo '<input type="submit" value="loeschen" >';
     echo 'Löschen';
     echo '</button>';
 
     echo '</td>';
 
-    echo '<td>';
-
-    echo '</td>';
 
     echo '</tr>';
 

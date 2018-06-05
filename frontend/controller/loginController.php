@@ -8,7 +8,7 @@
 session_start();
 $_SESSION['signedIn']=false;
 $_SESSION['user']=null;
-
+$_SESSION['articleList']=null;
 
 
 include "../service/UserService.php";

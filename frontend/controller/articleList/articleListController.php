@@ -10,11 +10,11 @@ $_SESSION['articleList'] = array();
 
 $arrayUtil = new ArrayUtil();
 
-if (isset($_GET['articleIdToAdd']) && isset($_GET['desc'])) {
+if (isset($_POST['articleIdToAdd']) && isset($_POST['desc'])) {
 
 
     foreach ($_SESSION['articleList'] as $item) {
-        if ($item->getArticleId() == $_GET['articleIdToAdd']) {
+        if ($item->getArticleId() == $_POST['articleIdToAdd']) {
             $item->setAmount($item->getAmount() + 1);
             $article = $item;
             break;
@@ -22,16 +22,16 @@ if (isset($_GET['articleIdToAdd']) && isset($_GET['desc'])) {
     }
 
     if ($article == null) {
-        array_push($_SESSION['articleList'], new ArticleListDTO($_GET['articleIdToAdd'], 1, $_GET['desc']));
+        array_push($_SESSION['articleList'], new ArticleListDTO($_POST['articleIdToAdd'], 1, $_POST['desc']));
     }
 
 
 }
 
-if (isset($_GET['articleIdToDelete'])) {
+if (isset($_POST['articleIdToDelete'])) {
 
     foreach ($_SESSION['articleList'] as $item) {
-        if ($item->getArticleId() == $_GET['articleIdToDelete']) {
+        if ($item->getArticleId() == $_POST['articleIdToDelete']) {
             if ($item->getAmount() == 1) {
                 $item->setAmount($item->getAmount() - 1);
             } else {
