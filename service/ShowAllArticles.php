@@ -24,7 +24,5 @@ include_once '../persistance/dao/AbstractDAO.php';
         }
     }
     echo "</table>";
-    
-    echo "yes yes";
 
 ?>
