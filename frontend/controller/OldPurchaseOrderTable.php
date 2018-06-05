@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../persistance/dao/dao_purchase/PurchaseOrderDAO.php.php';
+include_once '../../persistance/dao/dao_purchase/PurchaseOrderDAO.php';
 $db = new PurchaseOrderDAO;
 $order = $db->getPurchaseOrder($_SESSION['orderNum']);
 echo "<table>";

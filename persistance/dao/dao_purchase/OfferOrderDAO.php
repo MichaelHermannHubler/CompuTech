@@ -1,6 +1,5 @@
 <?php
-
-include_once '../../model/OfferOrders.php';
+require_once '../../persistance/dao/AbstractDAO.php';
 
 Class OfferOrderDAO extends AbstractDAO {
 

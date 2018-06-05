@@ -9,7 +9,7 @@ echo "<th>Price</th>";
 echo "</tr>";
 foreach ($offerOrders as $offerOrder) {
     echo"<tr>";
-    echo "<td>" . $offerOrders->getPrice() . "</td>";
+    echo "<td>" . $offerOrders->getNum() . "</td>";
     echo "</tr>";
 }
 echo "</table>";

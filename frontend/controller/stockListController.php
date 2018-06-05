@@ -1,7 +1,6 @@
 <?php
 
 include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
-include_once '../../persistance/model/Article.php';
 
 $db = new ArticleDAO;
 $stock = $db->getStockList();

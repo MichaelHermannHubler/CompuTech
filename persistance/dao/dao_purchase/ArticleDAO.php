@@ -1,7 +1,5 @@
 <?php
-
-include_once '../../model/Article.php';
-include_once './ArticleGroupDAO.php';
+require_once '../../persistance/dao/AbstractDAO.php';
 
 Class ArticleDAO extends AbstractDAO {
 
