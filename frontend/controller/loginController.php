@@ -6,12 +6,12 @@
  * Time: 18:36
  */
 session_start();
-$_SESSION['signedIn']=false;
-$_SESSION['user']=null;
+$_SESSION['signedIn']=true;
 
 
+include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/util/ArrayUtil.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/UserService.php';
 
-include "../service/UserService.php";
 
 
 if (isset($_POST['username']) && isset($_POST['pw'])){
@@ -27,15 +27,19 @@ if (isset($_POST['username']) && isset($_POST['pw'])){
 }
 
 
+
+
+if (!$_SESSION['signedIn'])
+echo "<form method=\"post\">
+	<label for=\"username\">Username:</label>
+    <input type=\"text\" name=\"username\" required>
+	<label for=\"pw\">PW:</label>
+	<input type=\"password\" name=\"pw>\" required>
+	<input type=\"submit\" name=\"submit\" value=\"submit\">
+</form>";
 ?>
 
 
 
 
-<form method="post">
-	<label for="username">Username:</label>
-    <input type="text" name="username" required>
-	<label for="pw">PW:</label>
-	<input type="password" name="pw>" required>
-	<input type="submit" name="submit" value="submit">
-</form>
+

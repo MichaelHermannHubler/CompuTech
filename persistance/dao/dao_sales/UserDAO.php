@@ -6,6 +6,7 @@
  * Time: 18:40
  */
 
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/AbstractDAO.php';
 
 class UserDAO extends AbstractDAO
 {

@@ -9,14 +9,16 @@
 class AbstractDAO
 {
 
-    private $user = "bpohn2";
-    private $pwd = "orcldbpwd";
-    private $host = "infdb.technikum-wien.at:1521/o10";
+    private $user = "root";
+    private $pwd = "";
+    private $host = "127.0.0.1";
+    private $dbname ="computecherp";
     protected $conn = null;
+
 
     protected function doConnect()
     {
-        $this->conn = new mysqli($this->user, $this->pwd, $this->host);
+        $this->conn = new mysqli($this->host, $this->user, $this->pwd, $this->dbname);
     }
 
     protected function closeConnect()
@@ -24,7 +26,7 @@ class AbstractDAO
         if(!empty($result)) {
             $result->close();
         }
-        $this->conn = close();
+        $this->conn->close();
     }
 
 
