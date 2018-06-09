@@ -6,8 +6,8 @@
  * Time: 13:53
  */
 
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/dto/ArticleListDTO.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/loginController.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/loginController.php';
 
 
 
@@ -55,4 +55,3 @@ if (isset($_GET['articleIdToDelete'])) {
 
 }
 
-print_r($_SESSION['articleList']);

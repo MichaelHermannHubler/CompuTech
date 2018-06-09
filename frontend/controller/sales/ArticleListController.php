@@ -1,7 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleListService.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 ?>
 
@@ -20,7 +20,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articl
 
 
 
-$articleService = new ArticleListService();
+$articleService = new ArticleService();
 $filter = null;
 if (isset($_POST['search'])){
 	$filter = $_POST['search'];

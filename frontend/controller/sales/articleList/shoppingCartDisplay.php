@@ -6,17 +6,18 @@
  * Time: 16:07
  */
 
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 
 echo "<table>";
 $firstRow = true;
+$sum = 0;
 
 foreach ($_SESSION['articleList'] as $item){
 
     if ($firstRow){
 
-        echo "<table><tr><th>ID</th><th>Name</th><th>Retail Price</th><th>Aktionen</th></tr>";
+        echo "<table><tr><th>Name</th><th>Anzahl</th><th>Retail Price</th><th>Aktionen</th></tr>";
         $firstRow = false;
     }
 
@@ -25,10 +26,6 @@ foreach ($_SESSION['articleList'] as $item){
 
         echo '<td>';
         $id = $item->getArticleId();
-        echo $id;
-        echo '</td>';
-
-        echo '<td>';
         echo $item->getArticleDesc();
         echo '</td>';
 
@@ -36,6 +33,11 @@ foreach ($_SESSION['articleList'] as $item){
         echo $item->getAmount();
         echo '</td>';
 
+        echo '<td>';
+        echo $item->getPrice();
+        echo '</td>';
+
+        $sum = $sum + ($item->getAmount()*$item->getPrice());
         echo '<td>';
         echo '<form method="get">';
         echo '<input type="hidden" name="articleIdToDelete"  value="'.$id.'"/>';
@@ -63,3 +65,10 @@ foreach ($_SESSION['articleList'] as $item){
 
 
 echo "</table>";
+
+echo "<h2>Summe:".$sum."</h2>";
+?>
+
+
+<a href="../checkoutAdressController.php">Zur Kassa gehen</a>
+

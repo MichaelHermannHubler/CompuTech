@@ -32,6 +32,18 @@ Class ArticleDAO extends AbstractDAO {
         return $article;
     }
 
+    function reduceAvailability($articleID, $amount){
+
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("UPDATE ARTICLE SET Number = (SELECT NUMBER FROM ARTICLE WHERE ID = i) - i WHERE ID = i");
+
+        $stmt->bind_param("iii", $articleID, $amount,$articleID);
+
+        $stmt->execute();
+
+    }
+
     function setArticle($num, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier) {
         $this->doConnect();
 

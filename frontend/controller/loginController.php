@@ -9,8 +9,9 @@ session_start();
 $_SESSION['signedIn']=true;
 
 
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/util/ArrayUtil.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/UserService.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/util/ArrayUtil.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Compu<Tech/service/UserService.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/dao_purchase/ArticleDAO.php';
 
 
 
