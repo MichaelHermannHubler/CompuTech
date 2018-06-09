@@ -11,9 +11,9 @@ class ArrayUtil
 
     function array_remove($array, $value)
     {
-        return array_filter($array, function($a) use($value) {
-            return $a !== $value;
-        });
+        foreach (array_keys($array, $value) as $key) {
+            unset($array[$key]);
+        }
     }
 
 }

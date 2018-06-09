@@ -12,18 +12,37 @@ class ArticleListDTO
     private $articleId;
     private $amount;
     private $articleDesc;
+    private $price;
 
     /**
      * ArticleListDTO constructor.
      * @param $articleId
      * @param $amount
      * @param $articleDesc
+     * @param $price
      */
-    public function __construct($articleId, $amount, $articleDesc)
+    public function __construct($articleId, $amount, $articleDesc, $price)
     {
         $this->articleId = $articleId;
         $this->amount = $amount;
         $this->articleDesc = $articleDesc;
+        $this->price = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
 

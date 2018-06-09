@@ -1,6 +1,7 @@
 <?php
 
-include_once'../../model/ArticleGroup.php';
+include $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/ArticleGroup.php';
+include $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/AbstractDAO.php';
 
 Class ArticleGroupDAO extends AbstractDAO {
 

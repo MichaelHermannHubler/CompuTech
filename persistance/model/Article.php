@@ -1,6 +1,6 @@
 <?php
 
-include_once '../dao/dao_purchase/ArticleDAO.php';
+include_once  $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/ArticleDAO.php';
 
 Class Article {
 
@@ -94,48 +94,182 @@ Class Article {
         }
     }
 
-    function getArticleNumber() {
+    /**
+     * @return int|string
+     */
+    public function getArticleNumber()
+    {
         return $this->articleNumber;
     }
 
-    function getArticleDesc() {
+    /**
+     * @param int|string $articleNumber
+     */
+    public function setArticleNumber($articleNumber)
+    {
+        $this->articleNumber = $articleNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArticleDesc()
+    {
         return $this->articleDesc;
     }
 
-    function getArticleGroup() {
+    /**
+     * @param string $articleDesc
+     */
+    public function setArticleDesc($articleDesc)
+    {
+        $this->articleDesc = $articleDesc;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArticleGroup()
+    {
         return $this->articleGroup;
     }
 
-    function getBuyingPrice() {
+    /**
+     * @param int $articleGroup
+     */
+    public function setArticleGroup($articleGroup)
+    {
+        $this->articleGroup = $articleGroup;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBuyingPrice()
+    {
         return $this->buyingPrice;
     }
 
-    function getSellingPrice() {
+    /**
+     * @param int $buyingPrice
+     */
+    public function setBuyingPrice($buyingPrice)
+    {
+        $this->buyingPrice = $buyingPrice;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getSellingPrice()
+    {
         return $this->sellingPrice;
     }
 
-    function getUnit() {
+    /**
+     * @param float|int $sellingPrice
+     */
+    public function setSellingPrice($sellingPrice)
+    {
+        $this->sellingPrice = $sellingPrice;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnit()
+    {
         return $this->unit;
     }
 
-    function getPackingUnit() {
+    /**
+     * @param string $unit
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackingUnit()
+    {
         return $this->packingUnit;
     }
 
-    function getPackingSize() {
+    /**
+     * @param string $packingUnit
+     */
+    public function setPackingUnit($packingUnit)
+    {
+        $this->packingUnit = $packingUnit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPackingSize()
+    {
         return $this->packingSize;
     }
 
-    function getMinimumLevel() {
+    /**
+     * @param int $packingSize
+     */
+    public function setPackingSize($packingSize)
+    {
+        $this->packingSize = $packingSize;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMinimumStockLevel()
+    {
         return $this->minimumStockLevel;
     }
 
-    function getVendor() {
+    /**
+     * @param int $minimumStockLevel
+     */
+    public function setMinimumStockLevel($minimumStockLevel)
+    {
+        $this->minimumStockLevel = $minimumStockLevel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVendor()
+    {
         return $this->vendor;
     }
 
-    function getSurcharge() {
+    /**
+     * @param mixed $vendor
+     */
+    public function setVendor($vendor)
+    {
+        $this->vendor = $vendor;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSurcharge()
+    {
         return $this->surcharge;
     }
+
+    /**
+     * @param int $surcharge
+     */
+    public function setSurcharge($surcharge)
+    {
+        $this->surcharge = $surcharge;
+    }
+
+
 
 }

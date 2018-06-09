@@ -1,7 +1,8 @@
 <?php
 
-include_once '../../model/Article.php';
-include_once './ArticleGroupDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/Article.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/ArticleGroupDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/AbstractDAO.php';
 
 Class ArticleDAO extends AbstractDAO {
 
@@ -97,4 +98,43 @@ Class ArticleDAO extends AbstractDAO {
         return $artikelStock;
     }
 
+    function getArticlesByFilter($filter){
+        $db = new ArticleGroupDAO;
+
+        $this->doConnect();
+        if ($filter != null){
+            echo "filter:";
+            echo $filter;
+
+            $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where Name = ?");
+            $stmt->bind_param("s", $filter);
+
+        }else{
+            echo "nofilter";
+            $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article");
+
+        }
+
+
+
+
+
+        $stmt->execute();
+
+        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
+
+        $articleArray = array();
+
+        while ($stmt->fetch()) {
+            $articleArrayEntry = array(new Article($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge));
+            array_push($articleArray, $articleArrayEntry);
+
+        }
+
+        $this->closeConnect();
+
+        return $articleArray;
+
+
+    }
 }

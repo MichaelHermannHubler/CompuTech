@@ -5,7 +5,7 @@
  * Date: 04.06.2018
  * Time: 16:14
  */
-
+include $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/ArticleDAO.php';
 class ArticleListService
 {
 
@@ -23,4 +23,14 @@ class ArticleListService
     }
 
    */
+
+    function getArticles($filter)
+    {
+
+
+
+        $articleDAO = new ArticleDAO();
+        return $articleDAO->getArticlesByFilter($filter);
+
+    }
 }
