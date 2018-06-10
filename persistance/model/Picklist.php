@@ -4,11 +4,13 @@ Class Picklist {
 
     private $id = 0;
     private $number = "";
+    private $completed = 0;
     private $articles = array();
 
-    function __construct($id, $number) {
+    function __construct($id, $number, $completed) {
         $this->id = $id;
         $this->number = $number;
+        $this->completed = $completed;
     }
 
     function addArticle($articleID, $quantity) {
@@ -44,6 +46,15 @@ Class Picklist {
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCompleted()
+    {
+        if($this->completed == 1) return true;
+        return false;
     }
 
     /**

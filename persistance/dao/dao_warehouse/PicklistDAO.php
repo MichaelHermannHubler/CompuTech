@@ -7,22 +7,45 @@ Class PicklistDAO extends AbstractDAO
 
     function __construct() { }
 
-    function getPicklists()
+    function getPicklist($id)
     {
         $this->doConnect();
-        $stmt = $this->conn->prepare("SELECT ID, Number from picklist");
-        
+        $stmt = $this->conn->prepare("SELECT ID, Number, Completed from picklist where id = ?");
+        $stmt->bind_param("i", $id);
+
         $stmt->execute();
 
         $id = "";
         $number = "";
-        $stmt->bind_result($id, $number);
+        $completed = 0;
+        $stmt->bind_result($id, $number, $completed);
+
+        if($stmt->fetch())
+        {
+            $picklist = new Picklist($id, $number, $completed);
+        }
+
+        $this->closeConnect();
+        return $picklist;
+    }
+
+    function getPicklists()
+    {
+        $this->doConnect();
+        $stmt = $this->conn->prepare("SELECT ID, Number, Completed from picklist");
+
+        $stmt->execute();
+
+        $id = "";
+        $number = "";
+        $completed = 0;
+        $stmt->bind_result($id, $number, $completed);
 
         $picklists =  array();
 
         while($stmt->fetch())
         {
-            $picklist = new Picklist($id, $number);
+            $picklist = new Picklist($id, $number, $completed);
 
             array_push($picklists, $picklist);
         }
@@ -34,23 +57,27 @@ Class PicklistDAO extends AbstractDAO
     function getPicklistArticles($picklistID)
     {
         $this->doConnect();
-        $stmt = $this->conn->prepare("SELECT ArticleID, Quantity from picklistarticle where picklistid = ?");
+        $stmt = $this->conn->prepare("SELECT ArticleID, Quantity, Completed from picklistarticle where picklistid = ?");
         $stmt->bind_param("i", $picklistID);
 
         $stmt->execute();
 
         $articleID = 0;
         $quantity = 0;
-        $stmt->bind_result($articleID, $quantity);
+        $completed = false;
+        $stmt->bind_result($articleID, $quantity, $completed);
 
         $articleArray = array();
 
         while($stmt->fetch())
         {
+            if(is_null($completed) || $completed == 0) $completed = false;
+            else $completed = true;
+
             $articleGetter = new ArticleDAO();
             $article = $articleGetter->getArticle($articleID);
 
-            $articleArrayEntry = array($article, $quantity);
+            $articleArrayEntry = array($article, $quantity, $completed);
 
             array_push($articleArray, $articleArrayEntry);
         }
@@ -97,5 +124,25 @@ Class PicklistDAO extends AbstractDAO
             }
             $this->closeConnect();
         }
+    }
+
+    function setPosCompleted($picklistID, $articleId, $quantity){
+        $this->doConnect();
+
+        $call = $this->conn->prepare("update picklistarticle set completed = 1 where picklistid = ? and articleid = ? and quantity = ? and coalesce(completed, 0) = 0");
+        $call->bind_param('iii', $picklistID, $articleId, $quantity);
+
+        $call->execute();
+        $this->closeConnect();
+    }
+
+    function setCompleted($picklistID){
+        $this->doConnect();
+
+        $call = $this->conn->prepare("update picklist set completed = 1 where id = ?");
+        $call->bind_param('i', $picklistID);
+
+        $call->execute();
+        $this->closeConnect();
     }
 }

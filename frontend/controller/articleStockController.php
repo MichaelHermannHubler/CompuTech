@@ -22,6 +22,9 @@ $warehousedb = new WarehouseLocationDAO();
 $warehouses = $warehousedb->getWarehouseLocations();
 ?>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
 <script type="text/javascript">
     function switchSelectValue(){
         var selectType = document.getElementById("filtertype").value;
@@ -38,9 +41,6 @@ $warehouses = $warehousedb->getWarehouseLocations();
         selectElement.value = "-1";
     }
 </script>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <select class="custom-select" id="filtertypearticle_preset" style="visibility: hidden">
     <option value="-1">Filter auswählen</option>
@@ -108,7 +108,7 @@ $warehouses = $warehousedb->getWarehouseLocations();
         <?php
         if(isset($_GET["filtertype"]) && $_GET["filter"] != -1) {
             ?>
-            <table class="table" id="pickedTable">
+            <table class="table" id="returnTable">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
