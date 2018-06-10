@@ -32,7 +32,7 @@ Class SupplierDAO extends AbstractDAO {
         
         $stmt->bind_result($id, $name, $addressID, $vatNum);
         
-        if($stmt->fetch()){
+        while($stmt->fetch()){
             $supplier = new Supplier($id, $name, $addressID, $vatNum);
             array_push($suppliers, $supplier);
         }
