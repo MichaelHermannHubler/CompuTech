@@ -22,17 +22,47 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
             <option>Default</option>
             <?php
             include_once '../../persistance/dao/dao_purchase/OfferOrderDAO.php';
-            include_once '../../persistance/model/OfferOrders.php';
-            $db = new OfferOrderDAO;
+            $dbOffer = new OfferOrderDAO;
 
-            $orders = $db->getAllOfferOrder();
-
+            $orders = $dbOffer->getAllOfferOrder();
+            
             for ($i = 0; $i < count($orders); $i++) {
-                echo "<option name=" . $orders[$i]->getNum() . ">";
+                echo "<option name='" . $orders[$i]->getNum() . "'>";
                 echo $orders[$i]->getNum();
                 echo "</option>";
             }
             ?>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Erstellen</button>
+</form>
+
+<h2>Bestellung ohne Angebot anlegen</h2>
+
+<form method='GET'>
+    <div class="form-group">
+        <label for="supplier">Lieferant</label>
+        <select id="supplier" class="form-control">
+                <option>Default</option>
+                <?php
+            include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
+            $dbSupplier = new SupplierDAO;
+
+            $supplier = $dbSupplier->getSupplierStock();
+
+            for ($i = 0; $i < count($supplier); $i++) {
+                echo "<option name=" . $supplier[$i]->getName() . ">";
+                echo $supplier[$i]->getName();
+                echo "</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="deliveryType">Lieferungsart</label>
+        <select id="deliveryType" class="form-control">
+            <option>Standard</option>
+            <option>Express</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Erstellen</button>
