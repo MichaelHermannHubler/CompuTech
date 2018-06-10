@@ -11,6 +11,8 @@ DROP FOREIGN KEY OrderArticle_Article;
 ALTER TABLE warehouselocationarticle
 DROP FOREIGN KEY WarehouseLocationArticle_Article;
 
+ALTER TABLE `article` CHANGE `ID` `ID` INT(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE accountingrecord
 ADD CONSTRAINT `AccountingRecord_Article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ID`);
 
@@ -22,6 +24,3 @@ ADD CONSTRAINT `OrderArticle_Article` FOREIGN KEY (`ArticleID`) REFERENCES `arti
 
 ALTER TABLE warehouselocationarticle
 ADD CONSTRAINT `WarehouseLocationArticle_Article` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`ID`);
-
-alter table article
-modify ID int(11) not null auto_increment PRIMARY KEY;
