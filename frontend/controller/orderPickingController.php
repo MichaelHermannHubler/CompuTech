@@ -73,7 +73,7 @@ include_once '../../persistance/model/Picklist.php';
                         <label class="input-group-text" for="article">Artikel:</label>
                     </div>
                     <select class="custom-select" id="article" name="article" required>
-                        <option value="-1">Auswahl treffen</option>
+                        <option value="-1">Artikel auswählen</option>
                         <?php
                         foreach ($articles as $article) {
                             ?>
