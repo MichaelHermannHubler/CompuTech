@@ -1,4 +1,0 @@
-use computech;
-
-alter table article
-modify ID int(11) not null auto_increment PRIMARY KEY;

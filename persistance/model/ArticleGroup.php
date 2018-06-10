@@ -1,6 +1,6 @@
 <?php
 
-include_once '../dao/dao_purchase/ArticleGroupDAO.php';
+
 
 class ArticleGroup {
 

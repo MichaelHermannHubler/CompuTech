@@ -1,4 +1,4 @@
 use computecherp;
 
-alter table ArticleWarehouseLocation
+alter table WarehouseLocation
 add ReservedStock int null default 0;

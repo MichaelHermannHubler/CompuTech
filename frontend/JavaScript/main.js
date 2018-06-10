@@ -5,6 +5,10 @@ $(function () {
         var selection = ($(document.activeElement).val());
         window.location = "./Computech/index.php?articleNum=" + selection;
     });
+    
+    $(".NewArticle").click(function()){
+        alert('hi');
+    });
 });
 
 

@@ -1,4 +1,5 @@
 <?php
+
 require_once '../../persistance/dao/AbstractDAO.php';
 
 Class ArticleDAO extends AbstractDAO {
@@ -10,7 +11,7 @@ Class ArticleDAO extends AbstractDAO {
     function getArticle($num) {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where ID = ?");
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where Number = ?");
 
         $stmt->bind_param("i", $num);
 
@@ -21,9 +22,9 @@ Class ArticleDAO extends AbstractDAO {
         if ($stmt->fetch()) {
             $db = new ArticleGroupDAO;
             $articleGroupName = $db->getArtikelGroupName($articleGroup);
+
             $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
         }
-
         $this->closeConnect();
 
         return $article;
@@ -34,23 +35,52 @@ Class ArticleDAO extends AbstractDAO {
 
         $db = new ArticleGroupDAO;
 
+        $group = utf8_encode($group);
         $artikelGroupID = $db->getArtikelGroupID($group);
 
-        if ($num == null) {
-            $stmt = $this->conn->prepare("insert into articles (Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("siiissiiii", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier);
+        $vendDB = new SupplierDAO;
+        if ($this->checkNumber($num) == null) {
+            $vendID = $vendDB->getSupplierIDByName($supplier);
         } else {
-            $stmt = $this->conn->prepare("update articles set Name = ?, ArticleGroupID = ?, PurchasePrice = ?, RetailPrice = ?, Unit = ?, PackingType = ?, PackingQuantity = ?, MinimalStorage = ?, Surcharge = ?, SupplierID = ? where ID = ?");
-            $stmt->bind_param("siiissiiiii", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier, $num);
+            $vendID = $supplier;
         }
 
-        $stmt->execute();
 
-        if ($num == null && $stmt->fetch()) {
-            $id = mysqli_insert_id($stmt);
+        if ($this->checkNumber($num) == null) {
+            $link = $this->doConnect();
+            $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)";
+            mysqli_query($this->conn, $query);
+            //$stmt = $this->conn->prepare("INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)");
+            //$stmt = $this->conn->prepare("INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values (?,?,?,?,?,?,?,?,?,?,?)");        
+            //$stmt->bind_param("ssiddssiiid", $num, $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $vendID, $surcharge);
+            //$stmt = $this->conn->prepare("insert into article (Number, Name, MinimalStorage, PurchasePrice, RetailPrice, SupplierID, Surcharge, ArticleGroupID, Unit, PackingType, PackingQuantity) values( '$num', '$desc',$minStockLevel, $buyPrice, $sellPrice, $vendID, $surcharge, $artikelGroupID, '$unit', '$packUnit', $packSize)");
+            //echo $stmt;
+            //$stmt = $this->conn->prepare("insert into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ($num,'$desc', $artikelGroupID, '$buyPrice', '$sellPrice', '$unit', '$packUnit', '$packSize', '$minStockLevel', $vendID, $surcharge)");        
+            // $stmt->execute();
+        } else {
+            $link = $this->doConnect();
+            $query = "update article set Name = '$desc', ArticleGroupID = $artikelGroupID, PurchasePrice = $buyPrice, RetailPrice = $sellPrice, Unit = '$unit', PackingType = '$packUnit', PackingQuantity = $packSize, MinimalStorage = $minStockLevel, SupplierID = $vendID, Surcharge = $surcharge where Number = '$num'";
+            mysqli_query($this->conn, $query);
+            /*  $stmt = $this->conn->prepare("update articles set Name = ?, ArticleGroupID = ?, PurchasePrice = ?, RetailPrice = ?, Unit = ?, PackingType = ?, PackingQuantity = ?, MinimalStorage = ?, SupplierID = ?, Surcharge = ? where Number = ?");
+              $stmt->bind_param("siddssiidis", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $vendID, $surcharge, $num);
+              $stmt->execute(); */
         }
+        /*
+          if ($num == null) {
+          $stmt = $this->conn->prepare("insert into articles (Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+          $stmt->bind_param("siiissiiii", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $vendID);
+          } else {
+          $stmt = $this->conn->prepare("update articles set Name = ?, ArticleGroupID = ?, PurchasePrice = ?, RetailPrice = ?, Unit = ?, PackingType = ?, PackingQuantity = ?, MinimalStorage = ?, Surcharge = ?, SupplierID = ? where Number = ?");
+          $stmt->bind_param("siiissiiiii", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $vendID, $num);
+          }
+         */
+
+        /*
+          if ($num == null && $stmt->fetch()) {
+          $id = mysqli_insert_id($stmt);
+          } */
         $this->closeConnect();
-        return $id;
+        //   return $id;
     }
 
     function getVendor($articleNum) {
@@ -77,11 +107,11 @@ Class ArticleDAO extends AbstractDAO {
 
         $artikelStock = array();
 
-        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article");
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage,SupplierID, Surcharge from article");
 
         $stmt->execute();
 
-        $stmt->bind_result($num, $name, $articleGroup, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $surcharge, $vendor);
+        $stmt->bind_result($num, $name, $articleGroup, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
 
         while ($stmt->fetch()) {
             $db = new ArticleGroupDAO;
@@ -93,6 +123,42 @@ Class ArticleDAO extends AbstractDAO {
         $this->closeConnect();
 
         return $artikelStock;
+    }
+
+    function getHighestID() {
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("select ID from article order by ID desc LIMIT 1");
+
+        $stmt->execute();
+
+        $stmt->bind_result($id);
+
+        if ($stmt->fetch()) {
+            $id = $id;
+        }
+
+        $this->closeConnect();
+        return $id;
+    }
+
+    function checkNumber($num) {
+        $exist = false;
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("select ID from article where Number = ?");
+
+        $stmt->bind_param("s", $num);
+
+        $stmt->execute();
+
+
+        if ($stmt->fetch()) {
+            $exist = true;
+        }
+
+        $this->closeConnect();
+        return $exist;
     }
 
 }
