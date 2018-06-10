@@ -1,5 +1,8 @@
 <?php
-include '../../model/Article.php';
+
+include_once '../../model/Article.php';
+include_once './ArticleGroupDAO.php';
+
 Class ArticleDAO extends AbstractDAO {
 
     function __construct() {
@@ -9,55 +12,89 @@ Class ArticleDAO extends AbstractDAO {
     function getArticle($num) {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select articleNumber, articleDesc, articleGroup, buyingPrice, sellingPrice, unit, packingUnit, packingSize, minimumStockLevel, surcharge from article where articlenumber = ?");
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where ID = ?");
 
         $stmt->bind_param("i", $num);
 
         $stmt->execute();
 
-        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge);
-        
-        if($stmt->fetch()){
-            $article = new Article($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge);
+        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
+
+        if ($stmt->fetch()) {
+            $db = new ArticleGroupDAO;
+            $articleGroupName = $db->getArtikelGroupName($articleGroup);
+            $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
         }
 
         $this->closeConnect();
-        
+
         return $article;
     }
 
-    function setArticle($num, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge) {
+    function setArticle($num, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier) {
         $this->doConnect();
 
-        if($num == null){
-            $stmt = $this->conn->prepare("insert into articles (desc, group, buyPrice, sellPrice, unit, packUnit, packSize, minStocklevel, surcharge) values ($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge)");
-        }else{
-            $stmt = $this->conn->prepare("update articles set desc = $desc, group = $group, buyPrice = $buyPrice, sellPrice = $sellPrice, unit = $unit, packUnit = $packUnit, packSize = $packSize, minStockLevel = $minStockLevel, surcharge = $surcharge where articleNumber = ?");
-                    $stmt->bind_param("i", $num);
+        $db = new ArticleGroupDAO;
+
+        $artikelGroupID = $db->getArtikelGroupID($group);
+
+        if ($num == null) {
+            $stmt = $this->conn->prepare("insert into articles (Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("siiissiiii", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier);
+        } else {
+            $stmt = $this->conn->prepare("update articles set Name = ?, ArticleGroupID = ?, PurchasePrice = ?, RetailPrice = ?, Unit = ?, PackingType = ?, PackingQuantity = ?, MinimalStorage = ?, Surcharge = ?, SupplierID = ? where ID = ?");
+            $stmt->bind_param("siiissiiiii", $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier, $num);
         }
 
         $stmt->execute();
 
+        if ($num == null && $stmt->fetch()) {
+            $id = mysqli_insert_id($stmt);
+        }
         $this->closeConnect();
+        return $id;
     }
-    
-    function getVendor($articleNum){
+
+    function getVendor($articleNum) {
         $this->doConnect();
-        
-        $stmt = $this->conn-prepare("select SupplierID from article where Number = ?");
-        
+
+        $stmt = $this->conn->prepare("select SupplierID from article where Number = ?");
+
         $stmt->bind_param("i", $articleNum);
-        
+
         $stmt->execute();
-        
+
         $stmt->bind_result($vendor);
-        
-        if($stmt->fetch()){
+
+        if ($stmt->fetch()) {
             $vendor = $vendor;
         }
-        
+
         $this->closeConnect();
         return $vendor;
+    }
+
+    function getStockList() {
+        $this->doConnect();
+
+        $artikelStock = array();
+
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article");
+
+        $stmt->execute();
+
+        $stmt->bind_result($num, $name, $articleGroup, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $surcharge, $vendor);
+
+        while ($stmt->fetch()) {
+            $db = new ArticleGroupDAO;
+            $articleGroupName = $db->getArtikelGroupName($articleGroup);
+            $artikel = new Article($num, $name, $articleGroupName, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
+            array_push($artikelStock, $artikel);
+        }
+
+        $this->closeConnect();
+
+        return $artikelStock;
     }
 
 }
