@@ -1,6 +1,6 @@
 <?php
-include '../../model/WarehouseLocation.php';
-include '../dao_purchase/ArticleDAO.php';
+//include '../../model/WarehouseLocation.php';
+//include '../dao_purchase/ArticleDAO.php';
 
 Class WarehouseLocationDAO extends AbstractDAO
 {
@@ -12,13 +12,13 @@ Class WarehouseLocationDAO extends AbstractDAO
         $this->doConnect();
         $stmt = $this->conn->prepare("SELECT Rack, Position from warehouselocation where ID = ?");
         $stmt->bind_param("i", $id);
-        
+
         $stmt->execute();
 
         $rack = "";
         $position = "";
         $stmt->bind_result($rack, $position);
-        
+
         if($stmt->fetch())
         {
             $warehouseLocation = new WarehouseLocation($id, $rack, $position);
@@ -26,6 +26,31 @@ Class WarehouseLocationDAO extends AbstractDAO
 
         $this->closeConnect();
         return $warehouseLocation;
+    }
+
+    function getWarehouseLocations()
+    {
+        $this->doConnect();
+        $stmt = $this->conn->prepare("SELECT Id, Rack, Position from warehouselocation");
+
+        $stmt->execute();
+
+        $id = 0;
+        $rack = "";
+        $position = "";
+        $stmt->bind_result($id, $rack, $position);
+
+        $warehouseLocations = array();
+
+        while($stmt->fetch())
+        {
+            $warehouseLocation = new WarehouseLocation($id, $rack, $position);
+
+            array_push($warehouseLocations, $warehouseLocation);
+        }
+
+        $this->closeConnect();
+        return $warehouseLocations;
     }
 
     function getWarehouseLocationArticles($warehouseLocationId)
