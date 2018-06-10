@@ -42,7 +42,7 @@ Class WarehouseLocationDAO extends AbstractDAO
 
         $articleArray = array();
 
-        if($stmt->fetch())
+        while($stmt->fetch())
         {
             $articleGetter = new ArticleDAO();
             $article = $articleGetter->getArticle($articleID);
