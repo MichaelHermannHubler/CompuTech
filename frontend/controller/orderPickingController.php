@@ -35,7 +35,7 @@ include_once '../../persistance/model/Picklist.php';
     $released = false;
     if(isset($_GET["release"])){
         $picklistDB = new PicklistDAO();
-        $picklist = new Picklist(null, $picklistDB->getNextNumber());
+        $picklist = new Picklist(null, $picklistDB->getNextNumber(), false);
 
         if (isset($_GET["pos"]) && is_array($_GET["pos"])) {
             foreach ($_GET["pos"] as $pos) {

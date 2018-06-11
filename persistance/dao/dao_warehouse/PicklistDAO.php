@@ -88,7 +88,7 @@ Class PicklistDAO extends AbstractDAO
 
     function getNextNumber(){
         $this->doConnect();
-        $stmt = $this->conn->prepare("select concat(date_format(CURRENT_DATE, \"%Y/%m/%d/\"), right(concat(\"0000\", cast((max(substring(number, 12, 4)) + 1) as char)), 4)) from picklist where substring(number, 1, 10) = date_format(CURRENT_DATE, \"%Y/%m/%d\")");
+        $stmt = $this->conn->prepare("select concat( date_format(CURRENT_DATE, \"%Y/%m/%d/\"), right( concat( \"0000\", cast( COALESCE(( select max(substring(number, 12, 4)) from picklist where substring(number, 1, 10) = date_format(CURRENT_DATE, \"%Y/%m/%d\") ), 0) + 1 as char)), 4))");
 
         $stmt->execute();
 
@@ -128,6 +128,9 @@ Class PicklistDAO extends AbstractDAO
 
     function setPosCompleted($picklistID, $articleId, $quantity){
         $this->doConnect();
+
+        $warehousLocationDb = new WarehouseLocationDAO();
+        $warehousLocationDb->removeStock(null, $articleId, $quantity);
 
         $call = $this->conn->prepare("update picklistarticle set completed = 1 where picklistid = ? and articleid = ? and quantity = ? and coalesce(completed, 0) = 0");
         $call->bind_param('iii', $picklistID, $articleId, $quantity);

@@ -10,9 +10,11 @@ include_once'../../persistance/dao/AbstractDAO.php';
 include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
 include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
 include_once "../../persistance/dao/dao_warehouse/PicklistDAO.php";
+include_once "../../persistance/dao/dao_warehouse/WarehouseLocationDAO.php";
 include_once '../../persistance/model/Article.php';
 include_once'../../persistance/model/ArticleGroup.php';
 include_once "../../persistance/model/Picklist.php";
+include_once "../../persistance/model/WarehouseLocation.php";
 
 $picklistdb = new PicklistDAO();
 $cont = true;
@@ -31,10 +33,12 @@ $cont = true;
 
             $articles = $picklistdb->getPicklistArticles($picklistID);
             foreach ($articles as $value) {
-                $article = $value[0];
-                $quantity = $value[1];
+                if(!$value[2]){
+                    $article = $value[0];
+                    $quantity = $value[1];
 
-                $picklistdb->setPosCompleted($picklistID, $article->getID(), $quantity);
+                    $picklistdb->setPosCompleted($picklistID, $article->getID(), $quantity);
+                }
             }
 
             $picklistdb->setCompleted($picklistID);
@@ -50,11 +54,13 @@ $cont = true;
             $picklist = $picklistdb->getPicklist($picklistID);
             $arr = $_GET["chb"];
 
-            foreach ($arr as $value){
-                $articleID = explode(";", $value)[1];
-                $quantity = explode(";", $value)[2];
+            foreach ($arr as $value) {
+                if (!explode(";", $value)[3]) {
+                    $articleID = explode(";", $value)[1];
+                    $quantity = explode(";", $value)[2];
 
-                $picklistdb->setPosCompleted($picklistID, $articleID, $quantity);
+                    $picklistdb->setPosCompleted($picklistID, $articleID, $quantity);
+                }
             }
 
             ?>
@@ -125,7 +131,7 @@ $cont = true;
                                 type="checkbox"
                                 <?php if($completed) echo "checked"; ?>
                                 name="chb[]"
-                                value="<?php echo $picklist->getId() . ";" . $article->getID() . ";" . $quantity ?>"
+                                value="<?php echo $picklist->getId() . ";" . $article->getID() . ";" . $quantity . ";" . $completed ?>"
                             >
                         </td>
                     </tr>

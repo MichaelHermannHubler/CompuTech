@@ -81,4 +81,46 @@ Class WarehouseLocationDAO extends AbstractDAO
         return $articleArray;
     }
 
+    function removeStock($warehouseLocationID, $articleID, $quantity){
+        $this->doConnect();
+        $stmt = $this->conn->prepare("SELECT ID, QuantityStored from warehouselocationarticle where warehouseLocationID = coalesce(?, warehouseLocationID) and ArticleID = ? order by QuantityStored desc");
+        $stmt->bind_param("ii", $warehouseLocationID, $articleID);
+
+        $stmt->execute();
+
+        $warehouseLocationArticleID = 0;
+        $quantityStock = 0;
+        $stmt->bind_result($warehouseLocationArticleID, $quantityStock);
+
+        $locationarray = array();
+        while($stmt->fetch())
+        {
+            $locationArrayEntry = array($warehouseLocationArticleID, $quantityStock);
+
+            array_push($locationarray, $locationArrayEntry);
+        }
+
+        $i = 0;
+        while($quantity > 0){
+            $warehouseLocationArticleID = $locationarray[$i][0];
+            $quantityStock = $locationarray[$i][1];
+
+            $quantitynew = $quantity - $quantityStock;
+            if($quantityStock - $quantity > 0) $quantityStock -= $quantity;
+            else $quantityStock = 0;
+
+            $quantity = $quantitynew;
+
+            $stmt2 = $this->conn->prepare("update warehouselocationarticle set quantityStored = ? where ID = ?");
+            $stmt2->bind_param("ii", $quantityStock, $warehouseLocationArticleID);
+
+            $stmt2->execute();
+
+            $i++;
+        }
+
+        $this->closeConnect();
+
+    }
+
 }
