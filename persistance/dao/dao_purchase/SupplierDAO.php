@@ -1,5 +1,5 @@
 <?php
-require_once '../../persistance/dao/AbstractDAO.php';
+
 
 Class SupplierDAO extends AbstractDAO {
 

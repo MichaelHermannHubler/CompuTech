@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../persistance/dao/AbstractDAO.php';
+
 
 Class ArticleDAO extends AbstractDAO {
 
