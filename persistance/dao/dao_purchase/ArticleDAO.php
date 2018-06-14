@@ -50,7 +50,7 @@ Class ArticleDAO extends AbstractDAO {
             $link = $this->doConnect();
             $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)";
             mysqli_query($this->conn, $query);
-            echo "insert";
+            
             //$stmt = $this->conn->prepare("INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)");
             //$stmt = $this->conn->prepare("INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values (?,?,?,?,?,?,?,?,?,?,?)");        
             //$stmt->bind_param("ssiddssiiid", $num, $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $vendID, $surcharge);
