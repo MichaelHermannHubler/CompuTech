@@ -27,9 +27,7 @@ Class OfferOrders extends Voucher{
         $offerDB->setOfferOrder($number, $vendorNumber, $create);
     }
 
-    function convertOfferToOrder($this) {
-        //necessary?
-    }
+   
     
 
 }

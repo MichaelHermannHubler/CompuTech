@@ -2,6 +2,12 @@
 /*falls alle felder ausgefüllt wurden:
  * neues Offer in DB inserten: setOffer 
  *  */
+include_once '../../persistance/dao/dao_purchase/OfferOrderDAO.php';
+include_once '../../persistance/model/OfferOrders.php';
+include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
+include_once '../../persistance/model/Supplier.php';
+
+
 ?>
 
 <h2>Angebot eintragen</h2>
@@ -10,10 +16,9 @@
     Angebotsnummer <input type='text' name='offernumber'>
     <?php
         /*Datenbankzugriff: Eingegebenen Angebotsnummer mit bereits gespeicherten vergleichen:*/
-        /*braucht man dafür irgendeine Form von Submit?*/
+        /*eventuell doch lieber automatisch genrieren lassen?? brauche funktion!*/
     
-        include_once '../../persistance/dao/dao_purchase/OfferOrderDAO.php';
-        include_once '../../persistance/model/OfferOrders.php';
+        
         $dbobj = new OrderOfferDAO;
         
         $alloffers = $dbobj->getAllOfferOrder();
@@ -28,7 +33,7 @@
 
     Lieferant auswählen 
     <select name="suppliername">
-        <option>Lieferant</option>
+        <!--<option>Lieferant</option>-->
         <?php
             /*Datenbankzugriff
              * Exisitierende Lieferantennamen zur Auswahl anzeigen*/
@@ -36,77 +41,55 @@
               *weiter unten ausgewählt werden können, die dem gewählten Lieferanten
               *zuzurechnen sind. jquery: onchange submit
               */
-        
-            include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-            include_once '../../persistance/model/Supplier.php';
             $db = new SupplierDAO;
             $suppliers = $db->getSupplierStock();
             
             for($i = 0; $i < count($suppliers); $i++){
-                echo "<option name=" . $suppliers[$i]->getName() . ">";
+                echo "<option name=" . $suppliers[$i]->getID() . ">";
                 echo $suppliers[$i]->getName();
                 echo "</option>";
+                
             }
              
-        ?>
-    </select>
-
-    </br>
-
-    Anzahl unterschiedlicher Artikel <input type='number' name='numberofarticles'>
-    </br>
-        
-    <?php
-     /*mit javascript arbeiten? muss direkt das formular daran angepasst werden,
-       um wie viele unterschiedliche artikel es sich handelt*/
-    ?>
-    
-     Artikel auswählen 
-    <select name="articlename">
-         
-        <option>Artikel</option>
-        <?php
-        /*brauche Funktion: getArticlesVendor (alle Artikel eines Lieferanten) 
-         *oder muss man das auch mit javascript machen? (kann ja nicht jedes mal ein submit machen)
-        */?>       
+        ?>       
     </select>
     </br>
+    <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
     
-    Stückzahl Artikel <input type='text' name='quantityarticle'>
     </br>
+
+    <!--Anzahl unterschiedlicher Artikel <input type='number' name='numberofarticles'>
+    </br>-->
         
-    
     <?php
-    if (isset($_GET['numberofarticles'])) {
-        $numberartoffer = $_GET['numberofarticles'];
-        
-        for($i=0; $i<=$numberartoffer; $i++) {
-            
-            echo "Artikel auswählen <select name='articlename'>";
-            echo "<option>Artikel</option>";
-        
-        /*Datenbankzugriff
-         * brauche Funktion: getArticlesVendor (alle Artikel eines Lieferanten) 
-         * Exisitierende Artikel zu oben gewähltem Lieferanten zur Auswahl anzeigen
-            echo "</option>";
-        */     
-            echo "</select>";
-            echo "</br>";
-    
-            echo "Stückzahl Artikel <input type='text' name='quantityarticle'>";
-            echo "</br>";    
-            $i++;
-        }
-          
+   
+    if (isset($_GET['suppliername'])) {
+        $supplierID = $_GET['suppliername'];
     }
         
+    $dbobje = new ArticleDAO;
+    $articles = $dbobje->getArticleFromSupplier($supplierID);
+        
+    $count = count($supplierID);    
+        
+     
+        echo "Artikel des gewählten Lieferanten: ";
+        echo "</br>";
+        
+    foreach ($articles as $article => $articleDesc) {
+        echo ".$articleDesc.";
+        echo "</br>";
+        echo "Stückzahl Artikel auswählen: ";
+        echo "<input type='number' name='stueckzahl'>";
+        }
+
     ?>
     
     
     Gesamtpreis Angebot <input type='text' name='buyPrice'>
     
-    /*funktion: gesamtpreis der ausgewählten artikel (unter berücksichtigung der 
-    gewählten stückzahl berechnen*/
+    <!--funktion: gesamtpreis der ausgewählten artikel (unter berücksichtigung der 
+    gewählten stückzahl berechnen-->
     
     </br>   
     <input type="submit" name="submit" value="Eintragen"/>
