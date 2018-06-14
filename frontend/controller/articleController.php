@@ -1,13 +1,10 @@
 <?php
-session_start();
-include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-include_once '../../persistance/model/ArticleGroup.php';
-include_once '../../persistance/model/Article.php';
-include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-include_once '../../persistance/model/Supplier.php';
-include_once '../../persistance/model/Address.php';
-include_once '../../persistance/dao/AddressDAO.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+
 if (!empty($_GET['articleNum'])) {
 
    

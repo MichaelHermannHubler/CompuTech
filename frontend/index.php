@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once './includes.php';
 ?>
 
@@ -7,9 +8,12 @@ include_once './includes.php';
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <title>Computech</title>       
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" href="style/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="JavaScript/main.js"></script>
+
     </head>
     <body>
         <nav>
@@ -20,12 +24,32 @@ include_once './includes.php';
         <main>
             <h1>HELLO WORLD!</h1>
 
-			<?php
+            <?php
+            if (empty($_SESSION['user'])) {
+                require "controller/loginController.php";
+            }
 
-				require "controller/loginController.php";
+            if (!empty($_SESSION['user'])) {
+                include './controller/DepartmentController/PurchaseController.php';
+            }
 
 
-			?>
+            if (!empty($_GET['menu'])) {
+                $_SESSION['menu'] = $_GET['menu'];
+               
+            }
+
+            if (!empty($_SESSION['menu'])) {
+                if ($_GET['menu'] == "offer") {
+                    include_once './controller/offerController.php';
+                } else if ($_GET['menu'] == "order") {
+                    echo "Order";
+                } else {
+                    include_once './controller/stockListController.php';
+                }
+            }
+            ?>
+
 
 
         </main>

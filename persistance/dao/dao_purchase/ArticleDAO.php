@@ -35,7 +35,7 @@ Class ArticleDAO extends AbstractDAO {
 
         $db = new ArticleGroupDAO;
 
-        //$group = utf8_decode($group);
+        $group = utf8_encode($group);
         $artikelGroupID = $db->getArtikelGroupID($group);
 
         $vendDB = new SupplierDAO;
@@ -45,6 +45,8 @@ Class ArticleDAO extends AbstractDAO {
             $vendID = $supplier;
         }
 
+        
+        
 
         if (!$this->checkNumber($num)) {
             $link = $this->doConnect();

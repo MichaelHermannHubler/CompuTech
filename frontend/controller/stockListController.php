@@ -1,19 +1,15 @@
 <?php
-include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-include_once '../../persistance/model/ArticleGroup.php';
-include_once '../../persistance/model/Article.php';
-include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-include_once '../../persistance/model/Supplier.php';
-include_once '../../persistance/model/Address.php';
-include_once '../../persistance/dao/AddressDAO.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 $db = new ArticleDAO;
 $stock = $db->getStockList();
 $vendor = new SupplierDAO;
 ?>
-<button class="NewArticle"><a href="articleController.php">Neuer Artikel</a></button>
+<button class="NewArticle"><a href="./controller/articleController.php">Neuer Artikel</a></button>
 
 <table class="table table-bordered">
     <thead>
@@ -48,7 +44,7 @@ $vendor = new SupplierDAO;
             echo "<td>" . $stock[$i]->getPackingSize() . "</td>";
             echo "<td>" . $stock[$i]->getMinimumLevel() . "</td>";
             echo "<td>$supplierName</td>";
-            echo "<td><button><a href=\"articleController.php?articleNum=$articleNumber\">Bearbeiten</a></button></td>";
+            echo "<td><button><a href=\"./controller/articleController.php?articleNum=$articleNumber\">Bearbeiten</a></button></td>";
             echo "</div>";
             echo"</tr>";
         }

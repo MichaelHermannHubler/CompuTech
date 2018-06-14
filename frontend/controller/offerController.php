@@ -2,10 +2,6 @@
 /*falls alle felder ausgefüllt wurden:
  * neues Offer in DB inserten: setOffer 
  *  */
-include_once '../../persistance/dao/dao_purchase/OfferOrderDAO.php';
-include_once '../../persistance/model/OfferOrders.php';
-include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-include_once '../../persistance/model/Supplier.php';
 
 
 ?>
