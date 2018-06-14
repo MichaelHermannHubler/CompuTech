@@ -6,7 +6,7 @@ $(function () {
         window.location = "./Computech/index.php?articleNum=" + selection;
     });
     
-    $(".NewArticle").click(function()){
+    $(".NewArticle").click(function(){
         alert('hi');
     });
 });

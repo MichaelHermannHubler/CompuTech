@@ -1,62 +1,96 @@
 <?php
-if(isset($_GET['offernumber']) && isset($_GET['suppliername']) && isset($_GET['articlename']) && isset($_GET['quantityarticle']) & isset($_GET['buyPrice'])){
-	
-	if($_GET['offernumber'] != "" && $_GET['suppliername'] != "" && $_GET['articlename'] != "" && $_GET['quantityarticle'] != "" && $_GET['buyprice'] != "" ){
-		
-		/*if($_GET['offernumber'] == ){ //??? überprüfen, ob die eingegebene offernumber bereits existiert // vs. exisiterender Offernumbers
-			
-			wenn offernumber noch nicht exisitiert - in DB eintragen
-			
-		}else{
-			echo = "Angebotsnummer exisitiert bereits, bitte neue Nummer eingeben!";
-		}*/
-            	
-	}else{
-            echo "Bitte alle Pflichtfelder ausfüllen!";
-        }
-}
+/*falls alle felder ausgefüllt wurden:
+ * neues Offer in DB inserten: setOffer 
+ *  */
+include_once '../../persistance/dao/dao_purchase/OfferOrderDAO.php';
+include_once '../../persistance/model/OfferOrders.php';
+include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
+include_once '../../persistance/model/Supplier.php';
+
+
 ?>
+
 <h2>Angebot eintragen</h2>
 </br>
-<form action="" method="get" name="offercontroller" id="createoffer">
+<form action="" method="get" name="createoffer">
     Angebotsnummer <input type='text' name='offernumber'>
-    </br>
+    <?php
+        /*Datenbankzugriff: Eingegebenen Angebotsnummer mit bereits gespeicherten vergleichen:*/
+        /*eventuell doch lieber automatisch genrieren lassen?? brauche funktion!*/
     
+        
+        $dbobj = new OrderOfferDAO;
+        
+        $alloffers = $dbobj->getAllOfferOrder();
+        
+        foreach ($alloffers as $offer => $number) {
+           if ($_GET['offernumber'] == $number) {
+               echo "Angebotsnummer exisitert bereits, bitte eine neue Nummer eingeben";
+           }
+       }
+    ?>
+    </br>
+
     Lieferant auswählen 
     <select name="suppliername">
-        <option>Lieferant</option>
+        <!--<option>Lieferant</option>-->
         <?php
             /*Datenbankzugriff
-             * Exisitierende Lieferantennamen zur Auswahl anzeigen
-             * 
-            include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-            include_once '../../persistance/model/Supplier.php';
+             * Exisitierende Lieferantennamen zur Auswahl anzeigen*/
+             /*ausgewählter Lieferant muss übergeben werden, da nur jene Artikel
+              *weiter unten ausgewählt werden können, die dem gewählten Lieferanten
+              *zuzurechnen sind. jquery: onchange submit
+              */
             $db = new SupplierDAO;
-            $suppliers = $db->getSupplier();
-            for ($i = 0; $i < count($suppliers); $i++) {
-                echo "<option name=" . $suppliers[$i]->name . ">";
+            $suppliers = $db->getSupplierStock();
+            
+            for($i = 0; $i < count($suppliers); $i++){
+                echo "<option name=" . $suppliers[$i]->getID() . ">";
+                echo $suppliers[$i]->getName();
                 echo "</option>";
+                
             }
-             */
-        ?>
+             
+        ?>       
     </select>
     </br>
+    <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
     
-    Artikel auswählen 
-    <select name="articlename">
-         
-        <option>Artikel</option>
-        <?php
-        /*Datenbankzugriff
-         * Exisitierende Artikel zu oben gewähltem Lieferanten zur Auswahl anzeigen
-            echo "</option>";
-        */?>       
-    </select>
     </br>
+
+    <!--Anzahl unterschiedlicher Artikel <input type='number' name='numberofarticles'>
+    </br>-->
+        
+    <?php
+   
+    if (isset($_GET['suppliername'])) {
+        $supplierID = $_GET['suppliername'];
+    }
+        
+    $dbobje = new ArticleDAO;
+    $articles = $dbobje->getArticleFromSupplier($supplierID);
+        
+    $count = count($supplierID);    
+        
+     
+        echo "Artikel des gewählten Lieferanten: ";
+        echo "</br>";
+        
+    foreach ($articles as $article => $articleDesc) {
+        echo ".$articleDesc.";
+        echo "</br>";
+        echo "Stückzahl Artikel auswählen: ";
+        echo "<input type='number' name='stueckzahl'>";
+        }
+
+    ?>
     
-    Stückzahl Artikel <input type='text' name='quantityarticle'>
-    </br>
+    
     Gesamtpreis Angebot <input type='text' name='buyPrice'>
+    
+    <!--funktion: gesamtpreis der ausgewählten artikel (unter berücksichtigung der 
+    gewählten stückzahl berechnen-->
+    
     </br>   
     <input type="submit" name="submit" value="Eintragen"/>
  

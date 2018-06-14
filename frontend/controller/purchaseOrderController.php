@@ -25,7 +25,7 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
             $dbOffer = new OfferOrderDAO;
 
             $orders = $dbOffer->getAllOfferOrder();
-            
+
             for ($i = 0; $i < count($orders); $i++) {
                 echo "<option name='" . $orders[$i]->getNum() . "'>";
                 echo $orders[$i]->getNum();
@@ -43,9 +43,10 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
     <div class="form-group">
         <label for="supplier">Lieferant</label>
         <select id="supplier" class="form-control">
-                <option>Default</option>
-                <?php
+            <option>Default</option>
+            <?php
             include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
+            include_once '../../persistance/model/Supplier.php';
             $dbSupplier = new SupplierDAO;
 
             $supplier = $dbSupplier->getSupplierStock();
@@ -67,57 +68,58 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
     </div>
     <button type="submit" class="btn btn-primary">Erstellen</button>
 </form>
-<?php /*
-<form method='GET'>
-    Artikelname <input type='text' name='name'>    
-    Einkaufspreis <input type='text' name='buyPrice'>
-    Verkaufspreis <input type="text" name="sellPrice">
-    Basiseinheit <input type="text" name="unit">
-    Verpackungseinheit<input type="text" name="packUnit">
-    Verpackungsgröße <input type="text" name="packSize">
-    Mindestbestand <input type="text" name="minStock">   
-    Margenaufschlag <input type="text" name="surcharge">
-    <?php 
-    if ($new) {
-        echo " <button type='submit' name=\"subNewArticle\">Eintragen</button>";
-    } else {
-        echo " <button type='submit' name=\"modArticle\">Eintragen</button>";
-    }
-    ?>
-    Lieferant 
-    <select name="vendor">
-        <option>Test</option>
-        <?php
-        include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-        include_once '../../persistance/model/Supplier.php';
-        $db = new SupplierDAO;
+<?php
+/*
+  <form method='GET'>
+  Artikelname <input type='text' name='name'>
+  Einkaufspreis <input type='text' name='buyPrice'>
+  Verkaufspreis <input type="text" name="sellPrice">
+  Basiseinheit <input type="text" name="unit">
+  Verpackungseinheit<input type="text" name="packUnit">
+  Verpackungsgröße <input type="text" name="packSize">
+  Mindestbestand <input type="text" name="minStock">
+  Margenaufschlag <input type="text" name="surcharge">
+  <?php
+  if ($new) {
+  echo " <button type='submit' name=\"subNewArticle\">Eintragen</button>";
+  } else {
+  echo " <button type='submit' name=\"modArticle\">Eintragen</button>";
+  }
+  ?>
+  Lieferant
+  <select name="vendor">
+  <option>Test</option>
+  <?php
+  include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
+  include_once '../../persistance/model/Supplier.php';
+  $db = new SupplierDAO;
 
-        $vendors = $db->getSupplierStock();
+  $vendors = $db->getSupplierStock();
 
-        for ($i = 0; $i < count($vendors); $i++) {
-            echo "<option name=" . $vendors[$i]->getId() . ">";
-            echo $vendors[$i]->getName();
-            echo "</option>";
-        }
-        ?>
-    </select>
-    Artikelgruppe
-    <select name="group">
-        <option>Test</option>
-        <?php
-        include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-        include_once '../../persistance/model/ArticleGroup.php';
-        $db = new ArticleGroupDAO;
+  for ($i = 0; $i < count($vendors); $i++) {
+  echo "<option name=" . $vendors[$i]->getId() . ">";
+  echo $vendors[$i]->getName();
+  echo "</option>";
+  }
+  ?>
+  </select>
+  Artikelgruppe
+  <select name="group">
+  <option>Test</option>
+  <?php
+  include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
+  include_once '../../persistance/model/ArticleGroup.php';
+  $db = new ArticleGroupDAO;
 
-        $groups = $db->getAllArtikleGroup();
+  $groups = $db->getAllArtikleGroup();
 
-        for ($i = 0; $i < count($groups); $i++) {
-            echo "<option name=" . $article[$i]->getId() . ">";
-            echo $groups[$i]->getName();
-            echo "</option>";
-        }
-        ?>
-    </select>
-</form>
+  for ($i = 0; $i < count($groups); $i++) {
+  echo "<option name=" . $article[$i]->getId() . ">";
+  echo $groups[$i]->getName();
+  echo "</option>";
+  }
+  ?>
+  </select>
+  </form>
 
-*/?>
+ */?>

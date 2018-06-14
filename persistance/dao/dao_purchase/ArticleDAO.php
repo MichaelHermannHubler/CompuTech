@@ -162,4 +162,36 @@ Class ArticleDAO extends AbstractDAO {
         return $exist;
     }
 
+    
+        function getArticleFromSupplier($supplierID) {
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where SupplierID = ?");
+
+        $stmt->bind_param("i", $supplierID);
+
+        $stmt->execute();
+
+        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
+
+        $db = new ArticleGroupDAO;
+        
+        $supplierArticles = array();
+        
+        while ($stmt->fetch()) {
+            
+            $articleGroupName = $db->getArtikelGroupName($articleGroup);
+
+            $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
+            array_push($supplierArticles, $article);
+        }
+        $this->closeConnect();
+
+        return $supplierArticles;
+    }
+    
+    
+    
+    
+    
 }
