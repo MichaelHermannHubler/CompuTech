@@ -16,6 +16,10 @@ Class Article {
 
     function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge) {
         $db = new ArticleDAO;
+        
+      
+        
+        
         if($number == null){
             
             $num = ($db->getHighestID()) + 1;
@@ -46,10 +50,9 @@ Class Article {
         $this->vendor = $vendor;
         $this->surcharge = $surcharge;
       
-        
-            if($number == null){
+     
                 $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor);
-            }
+            
             
         
     }
@@ -68,7 +71,7 @@ Class Article {
 
     function setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minLevel, $vendor, $surcharge) {
 
-
+ 
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
         if ($buyPrice > 0) {

@@ -12,6 +12,7 @@ include_once '../../persistance/dao/AddressDAO.php';
 
 if (!empty($_GET['subNewArticle']) && !empty($_GET['name']) && !empty($_GET['group']) && !empty($_GET['buyPrice']) && !empty($_GET['sellPrice']) && !empty($_GET['unit']) && !empty($_GET['packUnit']) && !empty($_GET['packSize']) && !empty($_GET['minStock']) && !empty($_GET['vendor']) && !empty($_GET['surcharge'])) {
 
+  
     $groupDAO = new ArticleGroupDAO;
     $articleGroupID = $groupDAO->getArtikelGroupID($_GET['group']);
 

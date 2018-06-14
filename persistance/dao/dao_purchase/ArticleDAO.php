@@ -35,21 +35,22 @@ Class ArticleDAO extends AbstractDAO {
 
         $db = new ArticleGroupDAO;
 
-        $group = utf8_encode($group);
+        //$group = utf8_decode($group);
         $artikelGroupID = $db->getArtikelGroupID($group);
 
         $vendDB = new SupplierDAO;
-        if ($this->checkNumber($num) == null) {
+        if (!$this->checkNumber($num)) {
             $vendID = $vendDB->getSupplierIDByName($supplier);
         } else {
             $vendID = $supplier;
         }
 
 
-        if ($this->checkNumber($num) == null) {
+        if (!$this->checkNumber($num)) {
             $link = $this->doConnect();
             $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)";
             mysqli_query($this->conn, $query);
+            echo "insert";
             //$stmt = $this->conn->prepare("INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)");
             //$stmt = $this->conn->prepare("INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values (?,?,?,?,?,?,?,?,?,?,?)");        
             //$stmt->bind_param("ssiddssiiid", $num, $desc, $artikelGroupID, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $vendID, $surcharge);
