@@ -1,5 +1,5 @@
 <?php
-include_once '../dao/AddressDAO.php';
+
 Class Supplier {
     
     private $id;
@@ -11,7 +11,7 @@ Class Supplier {
         $this->id = $id;
         $this->name = $name;
         $this->address = $address;
-        $this->vatNum;
+        $this->vatNum = $vatNum;
     }
     
     function getId() {

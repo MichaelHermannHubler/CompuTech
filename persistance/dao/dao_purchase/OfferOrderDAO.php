@@ -1,6 +1,5 @@
 <?php
 
-include_once '../../model/OfferOrders.php';
 
 Class OfferOrderDAO extends AbstractDAO {
 

@@ -1,5 +1,5 @@
 <?php
-include '../../model/AccountingRecord.php';
+
 
 Class AccountingRecordDAO extends AbstractDAO
 {

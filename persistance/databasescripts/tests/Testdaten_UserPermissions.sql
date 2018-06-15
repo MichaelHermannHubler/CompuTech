@@ -1,0 +1,11 @@
+INSERT INTO userpermission (UserID, PermissionCode) values(3,'adm');
+INSERT INTO userpermission (UserID, PermissionCode) values(4,'ek');
+INSERT INTO userpermission (UserID, PermissionCode) values(5,'ek');
+INSERT INTO userpermission (UserID, PermissionCode) values(6,'ek');
+INSERT INTO userpermission (UserID, PermissionCode) values(7,'ek');
+INSERT INTO userpermission (UserID, PermissionCode) values(8,'lg');
+INSERT INTO userpermission (UserID, PermissionCode) values(9,'lg');
+INSERT INTO userpermission (UserID, PermissionCode) values(10,'lg');
+INSERT INTO userpermission (UserID, PermissionCode) values(11,'vk');
+INSERT INTO userpermission (UserID, PermissionCode) values(12,'vk');
+INSERT INTO userpermission (UserID, PermissionCode) values(13,'vk');

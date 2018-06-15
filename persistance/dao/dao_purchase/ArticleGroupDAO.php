@@ -1,6 +1,5 @@
 <?php
 
-include_once'../../model/ArticleGroup.php';
 
 Class ArticleGroupDAO extends AbstractDAO {
 
@@ -52,10 +51,11 @@ Class ArticleGroupDAO extends AbstractDAO {
 
     function getArtikelGroupID($name) {
         $this->doConnect();
+        $name = utf8_decode($name);
 
         $stmt = $this->conn->prepare("Select ID from articlegroup where Name = ?");
 
-        $stmt->bind_param("", $name);
+        $stmt->bind_param("s", $name);
 
         $stmt->execute();
 

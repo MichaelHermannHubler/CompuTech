@@ -1,10 +1,8 @@
 <?php
 
-include_once '../dao/dao_purchase/ArticleDAO.php';
-
 Class Article {
 
-    private $articleNumber = 0;
+    private $articleNumber = null;
     private $articleDesc = "";
     private $articleGroup = 0;
     private $buyingPrice = 0;
@@ -17,7 +15,16 @@ Class Article {
     private $surcharge = 0;
 
     function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge) {
-        $this->articleNumber = $number;
+        $db = new ArticleDAO;
+        
+        if($number == null){
+            
+            $num = ($db->getHighestID()) + 1;
+            $this->articleNumber = 10000+$num;
+        }else{
+            $this->articleNumber = $number;
+        }
+        
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
         if ($buyPrice > 0) {
@@ -34,20 +41,17 @@ Class Article {
         }
         $this->unit = $unit;
         $this->packingUnit = $packUnit;
-        if ($packSize > 0) {
-            $this->packingSize = $packSize;
-        } else {
-            echo "PackingSize should be higher than zero.";
-        }
+        $this->packingSize = $packSize;
+
         $this->minimumStockLevel = $min;
         $this->vendor = $vendor;
         $this->surcharge = $surcharge;
-
-        if ($this->articleNumber == null) {
-            $db = new ArticleDAO;
-
-            $this->articleNumber = $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge);
-        }
+      
+     
+                $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor);
+            
+            
+        
     }
 
     private function calcSellPrice($buyPrice, $surcharge) {
@@ -63,6 +67,8 @@ Class Article {
     }
 
     function setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minLevel, $vendor, $surcharge) {
+
+ 
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
         if ($buyPrice > 0) {
@@ -86,56 +92,111 @@ Class Article {
         $this->vendor = $vendor;
         $this->surcharge = $surcharge;
 
+        
         $db = new ArticleDAO;
-        if ($this->articleNumber == null) {
-            $this->articleNumber = $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor);
-        } else {
-            $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor);
+
+        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor);
+    }
+    
+    function getID(){
+        if($this->articleNumber != null){
+            return $this->articleNumber - 10000;
         }
     }
 
-    function getArticleNumber() {
+    /**
+     * @return int|string
+     */
+    public function getArticleNumber()
+    {
         return $this->articleNumber;
     }
 
-    function getArticleDesc() {
+
+    /**
+     * @return string
+     */
+    public function getArticleDesc()
+    {
         return $this->articleDesc;
     }
 
-    function getArticleGroup() {
+
+    /**
+     * @return int
+     */
+    public function getArticleGroup()
+    {
         return $this->articleGroup;
     }
 
-    function getBuyingPrice() {
+
+    /**
+     * @return int
+     */
+    public function getBuyingPrice()
+    {
         return $this->buyingPrice;
     }
 
-    function getSellingPrice() {
+    /**
+     * @return float|int
+     */
+    public function getSellingPrice()
+    {
         return $this->sellingPrice;
     }
 
-    function getUnit() {
+    /**
+     * @return string
+     */
+    public function getUnit()
+    {
         return $this->unit;
     }
 
     function getPackingUnit() {
+        if ($this->packingUnit == null) {
+            return "NA";
+        }
         return $this->packingUnit;
     }
 
     function getPackingSize() {
+        if ($this->packingSize == null) {
+            return "NA";
+        }
         return $this->packingSize;
     }
 
-    function getMinimumLevel() {
+    /**
+     * @return int
+     */
+    public function getMinimumStockLevel()
+    {
         return $this->minimumStockLevel;
     }
 
-    function getVendor() {
+
+
+    /**
+     * @return mixed
+     */
+    public function getVendor()
+    {
         return $this->vendor;
     }
 
-    function getSurcharge() {
+
+    /**
+     * @return int
+     */
+    public function getSurcharge()
+    {
         return $this->surcharge;
     }
+
+
+
 
 }

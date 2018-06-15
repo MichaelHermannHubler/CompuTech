@@ -5,7 +5,7 @@
  * Date: 24.05.2018
  * Time: 18:38
  */
-include '../persistance/dao/dao_sales/UserDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 class UserService
 {
 
@@ -18,13 +18,33 @@ class UserService
         $userDAO = new UserDAO();
         //FIXME: ADD EXCEPTION HANDLIG darf nur ein Wert zurückkehren.
         //$result = $userDAO->getUser($username, $pw);
-        $result = $userDAO->getTestUser($username, $pw);
+        $result = $userDAO->getUser($username, $pw);
 
+        
+
+        
 
         return $result;
 
 
 
+    }
+    
+    function setUser($username, $pw, $first, $last){
+        
+        $userDAO = new UserDAO();
+        
+        $userDAO->setUser($username, $pw, $first, $last);
+        
+    }
+    
+    function searchIfUserExist($user){
+        
+        $userDAO = new UserDAO();
+        
+        $result = $userDAO->getIfUserExist($user);
+        
+        return $result;
     }
 
 
