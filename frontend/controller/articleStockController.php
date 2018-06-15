@@ -79,7 +79,6 @@ $warehouses = $warehousedb->getWarehouseLocations();
                         ?>
                         <option
                             value="<?php echo $article->getId(); ?>"
-                            <?php if($_GET["filter"] == $article->getId()) { echo "selected"; }?>
                              <?php if(isset($_GET["filter"]) && $_GET["filter"] == $article->getId()) { echo "selected"; }?>
                         >
                             <?php echo $article->getArticleNumber(); ?>
