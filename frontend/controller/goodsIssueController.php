@@ -6,15 +6,15 @@
  * Time: 21:59
  */
 
-include_once'../../persistance/dao/AbstractDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
-include_once "../../persistance/dao/dao_warehouse/PicklistDAO.php";
-include_once "../../persistance/dao/dao_warehouse/WarehouseLocationDAO.php";
-include_once '../../persistance/model/Article.php';
-include_once'../../persistance/model/ArticleGroup.php';
-include_once "../../persistance/model/Picklist.php";
-include_once "../../persistance/model/WarehouseLocation.php";
+include_once '../persistance/dao/AbstractDAO.php';
+include_once '../persistance/dao/dao_purchase/ArticleGroupDAO.php';
+include_once '../persistance/dao/dao_purchase/ArticleDAO.php';
+include_once "../persistance/dao/dao_warehouse/PicklistDAO.php";
+include_once "../persistance/dao/dao_warehouse/WarehouseLocationDAO.php";
+include_once '../persistance/model/Article.php';
+include_once '../persistance/model/ArticleGroup.php';
+include_once "../persistance/model/Picklist.php";
+include_once "../persistance/model/WarehouseLocation.php";
 
 $picklistdb = new PicklistDAO();
 $cont = true;
@@ -25,6 +25,7 @@ $cont = true;
 
 <div class="container">
     <form method="get">
+        <input type="hidden" name="page" value="goodsIssue">
 
         <?php
         if(isset($_GET["save_all"])){

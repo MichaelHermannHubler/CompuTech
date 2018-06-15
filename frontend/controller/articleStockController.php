@@ -6,13 +6,13 @@
  * Time: 16:03
  */
 
-include_once'../../persistance/dao/AbstractDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
-include_once '../../persistance/dao/dao_warehouse/WarehouseLocationDAO.php';
-include_once '../../persistance/model/Article.php';
-include_once'../../persistance/model/ArticleGroup.php';
-include_once '../../persistance/model/WarehouseLocation.php';
+include_once '../persistance/dao/AbstractDAO.php';
+include_once '../persistance/dao/dao_purchase/ArticleGroupDAO.php';
+include_once '../persistance/dao/dao_purchase/ArticleDAO.php';
+include_once '../persistance/dao/dao_warehouse/WarehouseLocationDAO.php';
+include_once '../persistance/model/Article.php';
+include_once '../persistance/model/ArticleGroup.php';
+include_once '../persistance/model/WarehouseLocation.php';
 
 
 $articledb = new ArticleDAO();
@@ -21,9 +21,6 @@ $articles = $articledb->getStockList();
 $warehousedb = new WarehouseLocationDAO();
 $warehouses = $warehousedb->getWarehouseLocations();
 ?>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <script type="text/javascript">
     function switchSelectValue(){
@@ -64,6 +61,7 @@ $warehouses = $warehousedb->getWarehouseLocations();
 </select>
 
 <form method="get">
+    <input type="hidden" name="page" value="articleStock">
     <div class="container">
         <div class="input-group">
             <div class="input-group-prepend">
@@ -71,7 +69,7 @@ $warehouses = $warehousedb->getWarehouseLocations();
             </div>
             <select class="custom-select" id="filtertype" name="filtertype" onchange="switchSelectValue();">
                 <option value="1" <?php if(!isset($_GET["filtertype"]) || $_GET["filtertype"] == 1){echo "selected"; } ?>>Artikel</option>
-                <option value="2" <?php if($_GET["filtertype"] == 2){echo "selected"; } ?>>Lagerplatz</option>
+                <option value="2" <?php if(isset($_GET["filtertype"]) && $_GET["filtertype"] == 2){echo "selected"; } ?>>Lagerplatz</option>
             </select>
             <select class="custom-select" id="filter" name="filter">
                 <option value="-1">Filter auswählen</option>
