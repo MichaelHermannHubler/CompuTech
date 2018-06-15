@@ -44,7 +44,7 @@ include_once '../persistance/model/Picklist.php';
                 $number = explode(";", $pos)[0];
                 $amount = explode(";", $pos)[1];
 
-                $article = $db->getArticle($number-1000);
+                $article = $db->getArticle($number-10000);
 
                 $picklist->addArticle($article->getID(), $amount);
             }
