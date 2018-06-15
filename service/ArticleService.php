@@ -38,7 +38,7 @@ class ArticleService
     {
 
 
-        $result = $this->checkAvailability();
+        $result = $this->checkAvailability($articleDTOList);
 
 
         if (is_array($result) ){

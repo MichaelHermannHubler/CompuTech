@@ -1,6 +1,8 @@
 <?php
 
-include_once '../model/Address.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/Address.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/AbstractDAO.php';
+
 
 Class AddressDAO extends AbstractDAO {
 

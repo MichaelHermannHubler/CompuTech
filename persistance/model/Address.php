@@ -1,5 +1,5 @@
 <?php
-include_once '../dao/AddressDAO.php';
+include_once  $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/AddressDAO.php';
 Class Address {
     
     private $id;
@@ -45,6 +45,7 @@ Class Address {
     }
     
     function getCity() {
+
         return $this->city;
     }
     

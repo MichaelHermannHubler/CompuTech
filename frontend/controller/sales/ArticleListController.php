@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 ?>
@@ -11,7 +11,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/a
 
 <div class="search-container">
 	<form method="post">
-		<input type="text" placeholder="Search.." name="search">
+		<input type="text" placeholder="Suche..." name="search">
 		<button type="submit"><i class="fa fa-search"></i></button>
 	</form>
 </div>
@@ -28,7 +28,7 @@ if (isset($_POST['search'])){
 }
 $resultCheck = $articleService->getArticles($filter);
 if (!empty($resultCheck)) {
-    echo "<table><tr><th>ID</th><th>Name</th><th>Retail Price</th><th>Aktionen</th></tr>";
+    echo "<table><tr><th>ID</th><th>Name</th><th>Preis</th><th>Aktionen</th></tr>";
 }
 foreach ($resultCheck as $list) {
     echo "<tr><td>" . $list[0]->getArticleNumber() . "</td><td>" . $list[0]->getArticleDesc() . "</td><td>" . $list[0]->getSellingPrice() . "</td>";

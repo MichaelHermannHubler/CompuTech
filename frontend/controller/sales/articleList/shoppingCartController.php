@@ -9,6 +9,7 @@
 include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
 include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/loginController.php';
 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/Address.php';
 
 
 $arrayUtil = new ArrayUtil();

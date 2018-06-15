@@ -11,26 +11,28 @@ Class ArticleDAO extends AbstractDAO {
     }
 
     function getArticle($num) {
-        $this->doConnect();
+    $this->doConnect();
 
-        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where ID = ?");
+    $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where ID = ?");
 
-        $stmt->bind_param("i", $num);
+    echo $num;
 
-        $stmt->execute();
+    $stmt->bind_param("i", $num);
 
-        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
+    $stmt->execute();
 
-        if ($stmt->fetch()) {
-            $db = new ArticleGroupDAO;
-            $articleGroupName = $db->getArtikelGroupName($articleGroup);
-            $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
-        }
+    $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
 
-        $this->closeConnect();
-
-        return $article;
+    if ($stmt->fetch()) {
+        $db = new ArticleGroupDAO;
+        $articleGroupName = $db->getArtikelGroupName($articleGroup);
+        $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
     }
+
+    $this->closeConnect();
+
+    return $article;
+}
 
     function reduceAvailability($articleID, $amount){
 

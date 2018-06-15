@@ -6,22 +6,22 @@
  * Time: 16:07
  */
 
-include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 
 echo "<table>";
 $firstRow = true;
 $sum = 0;
 
-foreach ($_SESSION['articleList'] as $item){
+foreach ($_SESSION['articleList'] as $item) {
 
-    if ($firstRow){
+    if ($firstRow) {
 
-        echo "<table><tr><th>Name</th><th>Anzahl</th><th>Retail Price</th><th>Aktionen</th></tr>";
+        echo "<table><tr><th>Name</th><th>Anzahl</th><th>Einkaufspreis</th><th>Aktionen</th></tr>";
         $firstRow = false;
     }
 
-    if ($item->getAmount() > 0){
+    if ($item->getAmount() > 0) {
         echo '<tr>';
 
         echo '<td>';
@@ -37,38 +37,42 @@ foreach ($_SESSION['articleList'] as $item){
         echo $item->getPrice();
         echo '</td>';
 
-        $sum = $sum + ($item->getAmount()*$item->getPrice());
-        echo '<td>';
-        echo '<form method="get">';
-        echo '<input type="hidden" name="articleIdToDelete"  value="'.$id.'"/>';
-        echo '<input type="submit" value="loeschen" >';
-        echo '</form>';
+        $sum = $sum + ($item->getAmount() * $item->getPrice());
+        if (isset($checkOut) && $checkOut) {
+            //Dont display buttons
 
-        echo '<form method="get">';
-        echo '<input type="hidden" name="articleIdToAdd"  value="'.$id.'"/>';
-        echo '<input type="hidden" name="desc"  value="'.$item->getArticleDesc().'"/>';
-        echo '<input type="hidden" name="price"  value="'.$item->getPrice().'"/>';
-        echo '<input type="submit" value="Hinzufügen" name="add">';
-        echo '</form>';
+        } else {
+            echo '<td>';
+            echo '<form method="get">';
+            echo '<input type="hidden" name="articleIdToDelete"  value="' . $id . '"/>';
+            echo '<input type="submit" value="-" >';
+            echo '</form>';
 
-        echo '</td>';
+            echo '<form method="get">';
+            echo '<input type="hidden" name="articleIdToAdd"  value="' . $id . '"/>';
+            echo '<input type="hidden" name="desc"  value="' . $item->getArticleDesc() . '"/>';
+            echo '<input type="hidden" name="price"  value="' . $item->getPrice() . '"/>';
+            echo '<input type="submit" value="+" name="add">';
+            echo '</form>';
 
+            echo '</td>';
+
+        }
 
         echo '</tr>';
 
-    }
 
+    }
 
 
 }
 
 
-
 echo "</table>";
 
-echo "<h2>Summe:".$sum."</h2>";
+echo "<h2>Summe:" . $sum . "</h2>";
 ?>
 
 
-<a href="../checkoutAdressController.php">Zur Kassa gehen</a>
+<a href="../checkoutAdressController.php">Zur Kasse gehen</a>
 
