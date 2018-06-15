@@ -6,13 +6,13 @@
  * Time: 08:49
  */
 
-include_once'../../persistance/model/ArticleGroup.php';
-include_once'../../persistance/dao/AbstractDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleGroupDAO.php';
-include_once '../../persistance/dao/dao_purchase/ArticleDAO.php';
-include_once '../../persistance/dao/dao_warehouse/PicklistDAO.php';
-include_once '../../persistance/model/Article.php';
-include_once '../../persistance/model/Picklist.php';
+include_once '../persistance/model/ArticleGroup.php';
+include_once '../persistance/dao/AbstractDAO.php';
+include_once '../persistance/dao/dao_purchase/ArticleGroupDAO.php';
+include_once '../persistance/dao/dao_purchase/ArticleDAO.php';
+include_once '../persistance/dao/dao_warehouse/PicklistDAO.php';
+include_once '../persistance/model/Article.php';
+include_once '../persistance/model/Picklist.php';
 ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -25,6 +25,7 @@ include_once '../../persistance/model/Picklist.php';
 </script>
 
 <form method="get">
+    <input type="hidden" name="page" value="picking">
     <div class="container">
 
     <?php
@@ -43,7 +44,7 @@ include_once '../../persistance/model/Picklist.php';
                 $number = explode(";", $pos)[0];
                 $amount = explode(";", $pos)[1];
 
-                $article = $db->getArticle($number-1000);
+                $article = $db->getArticle($number-10000);
 
                 $picklist->addArticle($article->getID(), $amount);
             }

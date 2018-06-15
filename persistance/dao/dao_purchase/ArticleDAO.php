@@ -196,4 +196,32 @@ Class ArticleDAO extends AbstractDAO {
     
     
     
+    function getWarehouseLocationArticles($articleID)
+    {
+        $this->doConnect();
+        $stmt = $this->conn->prepare("SELECT WarehouseLocationID, QuantityStored from warehouselocationarticle where ArticleID = ?");
+        $stmt->bind_param("i", $articleID);
+
+        $stmt->execute();
+
+        $warehouseLocationId = 0;
+        $quantity = 0;
+        $stmt->bind_result($warehouseLocationId, $quantity);
+
+        $warehouseArray = array();
+
+        while($stmt->fetch())
+        {
+            $warehouseLocationGetter = new WarehouseLocationDAO();
+            $warehouseLocation = $warehouseLocationGetter->getWarehouseLocation($warehouseLocationId);
+
+            $warehouseArrayEntry = array($warehouseLocation, $quantity);
+
+            array_push($warehouseArray, $warehouseArrayEntry);
+        }
+
+        $this->closeConnect();
+        return $warehouseArray;
+    }
+
 }
