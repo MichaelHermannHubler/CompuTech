@@ -45,6 +45,7 @@ Class Address {
     }
     
     function getCity() {
+
         return $this->city;
     }
     

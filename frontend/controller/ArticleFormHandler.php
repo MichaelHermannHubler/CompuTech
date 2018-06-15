@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+
 if (!empty($_GET['subNewArticle']) && !empty($_GET['name']) && !empty($_GET['group']) && !empty($_GET['buyPrice']) && !empty($_GET['sellPrice']) && !empty($_GET['unit']) && !empty($_GET['packUnit']) && !empty($_GET['packSize']) && !empty($_GET['minStock']) && !empty($_GET['vendor']) && !empty($_GET['surcharge'])) {
 
   
@@ -17,10 +18,10 @@ if (!empty($_GET['subNewArticle']) && !empty($_GET['name']) && !empty($_GET['gro
 
 
     $article = new Article(null, $_GET['name'], $_GET['group'], $_GET['buyPrice'], $_GET['sellPrice'], $_GET['unit'], $_GET['packUnit'], $_GET['packSize'], $_GET['minStock'], $_GET['vendor'], $_GET['surcharge']);
+    
     header("Location: http://localhost/Computech/frontend/?menu=article");
     
 } else if (!empty($_GET['modArticle'])) {
-    echo "HI";
     $db = new ArticleDAO;
 
     $article = $db->getArticle($_SESSION['articleNum']);
@@ -82,7 +83,7 @@ if (!empty($_GET['subNewArticle']) && !empty($_GET['name']) && !empty($_GET['gro
     } else {
         $surcharge = $article->getSurcharge();
     }
-
+    $group = utf8_encode($group);
     $article->setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
-          //  header("Location: http://localhost/Computech/frontend/?menu=article");
+         header("Location: http://localhost/Computech/frontend/?menu=article");
 }

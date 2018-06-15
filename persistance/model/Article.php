@@ -17,9 +17,6 @@ Class Article {
     function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge) {
         $db = new ArticleDAO;
         
-      
-        
-        
         if($number == null){
             
             $num = ($db->getHighestID()) + 1;
@@ -107,27 +104,54 @@ Class Article {
         }
     }
 
-    function getArticleNumber() {
+    /**
+     * @return int|string
+     */
+    public function getArticleNumber()
+    {
         return $this->articleNumber;
     }
 
-    function getArticleDesc() {
+
+    /**
+     * @return string
+     */
+    public function getArticleDesc()
+    {
         return $this->articleDesc;
     }
 
-    function getArticleGroup() {
+
+    /**
+     * @return int
+     */
+    public function getArticleGroup()
+    {
         return $this->articleGroup;
     }
 
-    function getBuyingPrice() {
+
+    /**
+     * @return int
+     */
+    public function getBuyingPrice()
+    {
         return $this->buyingPrice;
     }
 
-    function getSellingPrice() {
+    /**
+     * @return float|int
+     */
+    public function getSellingPrice()
+    {
         return $this->sellingPrice;
     }
 
-    function getUnit() {
+    /**
+     * @return string
+     */
+    public function getUnit()
+    {
         return $this->unit;
     }
 
@@ -145,16 +169,34 @@ Class Article {
         return $this->packingSize;
     }
 
-    function getMinimumLevel() {
+    /**
+     * @return int
+     */
+    public function getMinimumStockLevel()
+    {
         return $this->minimumStockLevel;
     }
 
-    function getVendor() {
+
+
+    /**
+     * @return mixed
+     */
+    public function getVendor()
+    {
         return $this->vendor;
     }
 
-    function getSurcharge() {
+
+    /**
+     * @return int
+     */
+    public function getSurcharge()
+    {
         return $this->surcharge;
     }
+
+
+
 
 }

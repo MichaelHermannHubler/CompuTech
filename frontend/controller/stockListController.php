@@ -42,7 +42,7 @@ $vendor = new SupplierDAO;
             echo "<td>" . $stock[$i]->getUnit() . "</td>";
             echo "<td>" . $stock[$i]->getPackingUnit() . "</td>";
             echo "<td>" . $stock[$i]->getPackingSize() . "</td>";
-            echo "<td>" . $stock[$i]->getMinimumLevel() . "</td>";
+            echo "<td>" . $stock[$i]->getMinimumStockLevel() . "</td>";
             echo "<td>$supplierName</td>";
             echo "<td><button><a href=\"./controller/articleController.php?articleNum=$articleNumber\">Bearbeiten</a></button></td>";
             echo "</div>";

@@ -6,7 +6,7 @@
  * Time: 18:40
  */
 
-class User
+Class User
 {
 
 

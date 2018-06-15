@@ -2,7 +2,11 @@
 /*falls alle felder ausgefüllt wurden:
  * neues Offer in DB inserten: setOffer 
  *  */
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 ?>
 
@@ -15,7 +19,7 @@
         /*eventuell doch lieber automatisch genrieren lassen?? brauche funktion!*/
     
         
-        $dbobj = new OrderOfferDAO;
+        $dbobj = new OfferOrderDAO;
         
         $alloffers = $dbobj->getAllOfferOrder();
         

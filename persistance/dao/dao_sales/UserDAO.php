@@ -79,6 +79,26 @@ class UserDAO extends AbstractDAO {
         return $exist;
     }
 
+    
+    function getUserID($username){
+        
+        $this->doConnect();
+        
+        $stmt = $this->conn->prepare("Select ID from user where Username = ? limit 1;");
+        
+        $stmt->bind_param("s", $username);
+        
+        $stmt->execute();
+        
+        $stmt->bind_result($id);
+        
+        if($stmt->fetch()){
+            $id = $id;
+        }
+        
+        $this->closeConnect();
+        return $id;
+    }
 }
 
 ?>

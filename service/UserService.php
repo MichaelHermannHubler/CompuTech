@@ -19,10 +19,7 @@ class UserService
         //FIXME: ADD EXCEPTION HANDLIG darf nur ein Wert zurückkehren.
         //$result = $userDAO->getUser($username, $pw);
         $result = $userDAO->getUser($username, $pw);
-        
-        if($result == null){
-            $result = $userDAO->getTestUser($username, $pw);
-        }
+
         
 
         

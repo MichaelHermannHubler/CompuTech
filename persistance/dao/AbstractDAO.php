@@ -15,9 +15,10 @@ class AbstractDAO
     private $dbname ="computecherp";
     protected $conn = null;
 
+
     protected function doConnect()
     {
-         $this->conn = new mysqli($this->host, $this->user, $this->pwd, $this->dbname);
+        $this->conn = new mysqli($this->host, $this->user, $this->pwd, $this->dbname);
     }
 
     protected function closeConnect()

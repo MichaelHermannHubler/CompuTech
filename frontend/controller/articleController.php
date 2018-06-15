@@ -6,7 +6,6 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 if (!empty($_GET['articleNum'])) {
-
    
         $_SESSION['articleNum'] = $_GET['articleNum'];
     
@@ -55,7 +54,7 @@ if (!empty($_GET['articleNum'])) {
         </tr>
         <tr>
             <td>Mindestbestand</td>
-            <td><input type="text" name="minStock" value="<?php if (empty($new)) {  echo $article->getMinimumLevel(); } ?>"> </td>
+            <td><input type="text" name="minStock" value="<?php if (empty($new)) {  echo $article->getMinimumStockLevel(); } ?>"> </td>
         </tr>
         <tr>
             <td>Margenaufschlag</td>
