@@ -16,6 +16,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
       integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <div class="container">
     <nav class="navbar navbar-light bg-light justify-content-between">
@@ -64,7 +66,7 @@ if(!isset($_GET["page"])){
 
 <?php
 }elseif ($_GET["page"] == "goodsReceipt"){
-
+    include "controller/goodsReceiptController.php";
 }elseif ($_GET["page"] == "articleStock"){
     include "controller/articleStockController.php";
 }elseif ($_GET["page"] == "picking"){

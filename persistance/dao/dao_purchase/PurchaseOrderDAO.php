@@ -103,4 +103,56 @@ Class PurchaseOrderDAO extends AbstractDAO {
         return $id;
     }
 
+    function getPurchaseOrderArticles($orderId)
+    {
+        $this->doConnect();
+        $stmt = $this->conn->prepare("SELECT ID, ArticleID, QuantityOrdered, coalesce(QuantityDelivered, 0), Defective from orderarticle where OrderID = ?");
+        $stmt->bind_param("i", $orderId);
+
+        $stmt->execute();
+
+        $articleID = 0;
+        $quantityOrd = 0;
+        $quantityDel = 0;
+        $id = 0;
+        $defective = 0;
+        $stmt->bind_result($id, $articleID, $quantityOrd, $quantityDel, $defective);
+
+        $articleArray = array();
+
+        while($stmt->fetch())
+        {
+            $articleGetter = new ArticleDAO();
+            $article = $articleGetter->getArticle($articleID);
+
+            $articleArrayEntry = array($article, $id, $quantityOrd, $quantityDel, $defective);
+
+            array_push($articleArray, $articleArrayEntry);
+        }
+
+        $this->closeConnect();
+        return $articleArray;
+    }
+
+    function setPurchaseOrderArticle($id, $deliveredAdd, $defective){
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("update orderarticle set QuantityDelivered = coalesce(QuantityDelivered, 0) + ?, Defective = ? where ID = ?");
+        $stmt->bind_param('ibi', $deliveredAdd, $defective, $id);
+
+
+        $stmt->execute();
+        $this->closeConnect();
+    }
+
+    function setComplete($id, $type){
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("update purchaseorder set DeliveryType = ? where ID = ?");
+        $stmt->bind_param('si', $type, $id);
+
+        $stmt->execute();
+        $this->closeConnect();
+    }
+
 }
