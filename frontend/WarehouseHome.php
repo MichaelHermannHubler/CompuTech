@@ -1,4 +1,5 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 /**
  * Created by PhpStorm.
  * User: Michael
