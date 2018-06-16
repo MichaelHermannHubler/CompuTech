@@ -56,7 +56,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     <?php
    
     if (isset($_GET['suppliername'])) {
-        $supplierID = $_GET['suppliername'];
+        $supplierDAO = new SupplierDAO;        
+        $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);;
     }
         
     $dbobje = new ArticleDAO;

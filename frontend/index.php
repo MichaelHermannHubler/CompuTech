@@ -48,7 +48,7 @@ include_once './includes.php';
 
                     if (!empty($_SESSION['menu'])) {
                         if ($_GET['menu'] == "offer") {
-                            include_once './controller/offerController.php';
+                            include_once './views/offers.php';
                         } else if ($_GET['menu'] == "order") {
                             include_once './views/orders.php';
                         } else {
