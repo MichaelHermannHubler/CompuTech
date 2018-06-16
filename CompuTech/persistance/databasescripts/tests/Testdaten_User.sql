@@ -1,0 +1,11 @@
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('admin', 'admin', 'Admin', 'Admin');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('ek1', 'einkauf1', 'Lukas', 'Kreidl');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('ek2', 'einkauf2', 'Mira', 'Nausner');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('ek3', 'einkauf3', 'Nikolaus', 'Weiss');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('ek4', 'einkauf4', 'Irina', 'Kuntze');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('lg1', 'lager1', 'Adam', 'Aranyosi');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('lg2', 'lager2', 'Michael', 'Hermann-Hubler');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('lg3', 'lager3', 'Oliver', 'Krenn');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk1', 'verkauf1', 'Michael', 'Hahn');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk2', 'verkauf2', 'Michael', 'Hahn');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk3', 'verkauf3', 'Michael', 'Hahn');
