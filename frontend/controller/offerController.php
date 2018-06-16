@@ -15,10 +15,9 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 <form action="" method="get" name="createoffer">
     Angebotsnummer <input type='text' name='offernumber'>
     <?php
-        /*Datenbankzugriff: Eingegebenen Angebotsnummer mit bereits gespeicherten vergleichen:*/
-        /*eventuell doch lieber automatisch genrieren lassen?? brauche funktion!*/
-    
-        
+        /*eigentlich wäre es besser, wenn die nummer im hintergrund festgelegt wird 
+         *und nicht durch user-eingabe
+         */ 
         $dbobj = new OfferOrderDAO;
         
         $alloffers = $dbobj->getAllOfferOrder();
@@ -26,6 +25,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         foreach ($alloffers as $offer => $number) {
            if ($_GET['offernumber'] == $number) {
                echo "Angebotsnummer exisitert bereits, bitte eine neue Nummer eingeben";
+           } else {
+             $offernumber = ($_GET['offernumber']);  
            }
        }
     ?>
@@ -33,14 +34,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
     Lieferant auswählen 
     <select name="suppliername">
-        <!--<option>Lieferant</option>-->
-        <?php
-            /*Datenbankzugriff
-             * Exisitierende Lieferantennamen zur Auswahl anzeigen*/
-             /*ausgewählter Lieferant muss übergeben werden, da nur jene Artikel
-              *weiter unten ausgewählt werden können, die dem gewählten Lieferanten
-              *zuzurechnen sind. jquery: onchange submit
-              */
+             <?php
+
             $db = new SupplierDAO;
             $suppliers = $db->getSupplierStock();
             
@@ -57,9 +52,6 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
     
     </br>
-
-    <!--Anzahl unterschiedlicher Artikel <input type='number' name='numberofarticles'>
-    </br>-->
         
     <?php
    
@@ -69,30 +61,104 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         
     $dbobje = new ArticleDAO;
     $articles = $dbobje->getArticleFromSupplier($supplierID);
+         
+        echo "Artikel des gewählten Lieferanten auswählen: ";
+        echo "</br>";
+        echo "Artikel 1: ";
+        echo "<select name='articleasupplier'>";
         
-    $count = count($supplierID);    
-        
-     
-        echo "Artikel des gewählten Lieferanten: ";
+            for($i = 0; $i<= count($articles); $i++) {
+                echo "<option name=" . $articles[$i]->getBuyingprice() . ">";
+                echo $articles[$i]->getArticleDesc();
+                echo "</option>";
+            }
+        echo "</select>";
+        echo "Stückzahl Artikel 1 angeben: ";
+        echo "<input type='number' name='articleaquantity'>";
         echo "</br>";
         
-    foreach ($articles as $article => $articleDesc) {
-        echo ".$articleDesc.";
+        echo "Artikel 2: ";
+        echo "<select name='articlebsupplier'>";
+        
+            for($i = 0; $i<= count($articles); $i++) {
+                echo "<option name=" . $articles[$i]->getBuyingPrice() . ">";
+                echo $articles[$i]->getArticleDesc();
+                echo "</option>";
+            }
+        echo "</select>";
+        echo "Stückzahl Artikel 2 angeben: ";
+        echo "<input type='number' name='articlebquantity'>";
         echo "</br>";
-        echo "Stückzahl Artikel auswählen: ";
-        echo "<input type='number' name='stueckzahl'>";
+        
+        echo "Artikel 3: ";
+        echo "<select name='articlecsupplier'>";
+        
+            for($i = 0; $i<= count($articles); $i++) {
+                echo "<option name=" . $articles[$i]->getBuyingPrice() . ">";
+                echo $articles[$i]->getArticleDesc();
+                echo "</option>";
+            }
+        echo "</select>";
+        echo "Stückzahl Artikel 3 angeben: ";
+        echo "<input type='number' name='articlecquantity'>";
+        echo "</br>";
+       
+    
+    ?>
+        <input type="submit" name="artikelauswahl" value="Auswahl bestätigen"/>
+    
+    
+    <?php
+    
+    if(isset($_GET['artikelauswahl']) && ((isset($_GET['articleasupplier']) && isset($_GET ['articleaquantity'])) ||  
+                                          (isset($_GET['articlebsupplier']) && isset($_GET ['articlebquantity'])) ||
+                                          (isset($_GET['articlecsupplier']) && isset($_GET ['articlecquantity']))) ) {
+        
+        echo "Berechneter Gesamtpreis Angebot: ";
+        
+        if(isset ($_GET['articleasupplier'])) {
+            $articleaPrice = ($_GET['articleasupplier']);
+            $articleaQuant = ($_GET ['articleaquantity']);
+            
+            $priceA = $articleaPrice*$articleaQuant;
+            
         }
-
+         if(isset ($_GET['articlebsupplier'])) {
+            $articlebPrice = ($_GET['articlebsupplier']);
+            $articlebQuant = ($_GET ['articlebquantity']);
+            
+            $priceB = $articlebPrice*$articlebQuant;
+            
+        }
+         if(isset ($_GET['articlecsupplier'])) {
+            $articlecPrice = ($_GET['articlecsupplier']);
+            $articlecQuant = ($_GET ['articlecquantity']);
+            
+            $priceC = $articlecPrice*$articlecQuant;
+            
+        }
+        
+        $offerPrice = $priceA+$priceB+$priceC;
+        
+        echo ".$offerPrice. Euro";
+               
+    }
+    
     ?>
     
-    
-    Gesamtpreis Angebot <input type='text' name='buyPrice'>
-    
-    <!--funktion: gesamtpreis der ausgewählten artikel (unter berücksichtigung der 
-    gewählten stückzahl berechnen-->
-    
     </br>   
-    <input type="submit" name="submit" value="Eintragen"/>
+    <input type="submit" name="submit" value="Angebot eintragen"/>
+    
+    <?php
+    if(isset($_GET['submit'])) {
+        
+        $dbobjek = new OfferOrderDAO;
+        $offer = $dbobjek->setOfferOrder($offernumber, $supplierID, $date); 
+        
+        /*woher kommt das date?*/
+    }
+    
+    ?>
  
    
 </form>
