@@ -13,25 +13,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 <h2>Angebot eintragen</h2>
 </br>
 <form action="" method="get" name="createoffer">
-    Angebotsnummer <input type='text' name='offernumber'>
-    <?php
-        /*eigentlich wäre es besser, wenn die nummer im hintergrund festgelegt wird 
-         *und nicht durch user-eingabe
-         */ 
-        $dbobj = new OfferOrderDAO;
-        
-        $alloffers = $dbobj->getAllOfferOrder();
-        
-        foreach ($alloffers as $offer => $number) {
-           if ($_GET['offernumber'] == $number) {
-               echo "Angebotsnummer exisitert bereits, bitte eine neue Nummer eingeben";
-           } else {
-             $offernumber = ($_GET['offernumber']);  
-           }
-       }
-    ?>
-    </br>
-
+  
     Lieferant auswählen 
     <select name="suppliername">
              <?php
@@ -42,12 +24,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
             for($i = 0; $i < count($suppliers); $i++){
                 echo "<option name=" . $suppliers[$i]->getID() . ">";
                 echo $suppliers[$i]->getName();
-                echo "</option>";
-                
-            }
-             
+                echo "</option>";     
+            }      
         ?>       
     </select>
+    
     </br>
     <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
     
@@ -149,14 +130,25 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     
     </br>   
     <input type="submit" name="submit" value="Angebot eintragen"/>
+    </br>;
     
     <?php
     if(isset($_GET['submit'])) {
         
-        $dbobjek = new OfferOrders;
+        $create = date("d.m.y");
+        /*muss das date ein bestimmtes format haben?*/
+        
+        
+        $dbobjekt = new OfferOrderDAO();
+        $offerID = $dbobjekt->getAvailableOffer($supplierID);
+        $offernumber = 10000 + $offerID;
+        
+        
+        $dbobjek = new OfferOrders();
         $offer = $dbobjek->setOffer($offernumber, $supplierID, $create, $offerPrice); 
         
-        /*woher kommt das date?*/
+        echo "Das Angebot wurde mit Angebotsnummer .$offernumber. gespeichert.";
+        
     }
     
     ?>
