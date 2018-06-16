@@ -152,8 +152,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     <?php
     if(isset($_GET['submit'])) {
         
-        $dbobjek = new OfferOrderDAO;
-        $offer = $dbobjek->setOfferOrder($offernumber, $supplierID, $date); 
+        $dbobjek = new OfferOrders;
+        $offer = $dbobjek->setOffer($offernumber, $supplierID, $create, $offerPrice); 
         
         /*woher kommt das date?*/
     }
