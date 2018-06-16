@@ -50,7 +50,7 @@ include_once './includes.php';
                         if ($_GET['menu'] == "offer") {
                             include_once './controller/offerController.php';
                         } else if ($_GET['menu'] == "order") {
-                            echo "Order";
+                            include_once './views/orders.php';
                         } else {
                             include_once './controller/stockListController.php';
                         }

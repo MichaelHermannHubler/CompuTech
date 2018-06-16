@@ -3,12 +3,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 
 if (!empty($_GET['articleNum'])) {
-   
-        $_SESSION['articleNum'] = $_GET['articleNum'];
-    
+
+    $_SESSION['articleNum'] = $_GET['articleNum'];
+
     $db = new ArticleDAO;
     $article = $db->getArticle($_SESSION['articleNum']);
     $vendorDAO = new SupplierDAO;
@@ -22,7 +22,7 @@ if (!empty($_GET['articleNum'])) {
 ?>
 
 
-<form method='GET' action="ArticleFormHandler.php">
+<form method='POST' action="ArticleFormHandler.php">
     <table>
         <tr>
             <th>Bezeichnung</th>
@@ -30,35 +30,67 @@ if (!empty($_GET['articleNum'])) {
         </tr>
         <tr>
             <td>Artikelname</td>
-            <td> <input type='text' name='name' value="<?php if (empty($new)) {  echo $articleDescription; } ?>"></td>
+            <td> <input type='text' name='name' value="<?php
+                if (empty($new)) {
+                    echo $articleDescription;
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Einkaufspreis</td>
-            <td><input type='text' name='buyPrice' value="<?php if (empty($new)) {  echo $article->getBuyingPrice(); } ?>"></td>
+            <td><input type='text' name='buyPrice' value="<?php
+                if (empty($new)) {
+                    echo $article->getBuyingPrice();
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Verkaufspreis</td>
-            <td><input type="text" name="sellPrice" value="<?php if (empty($new)) {  echo $article->getSellingPrice(); } ?>"></td>
+            <td><input type="text" name="sellPrice" value="<?php
+                if (empty($new)) {
+                    echo $article->getSellingPrice();
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Basiseinheit</td>
-            <td><input type="text" name="unit" value="<?php if (empty($new)) {  echo $article->getUnit(); } ?>"></td>
+            <td><input type="text" name="unit" value="<?php
+                if (empty($new)) {
+                    echo $article->getUnit();
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Verpackungseinheit</td>
-            <td><input type="text" name="packUnit" value="<?php if (empty($new)) {  echo $article->getPackingUnit(); } ?>"></td>
+            <td><input type="text" name="packUnit" value="<?php
+                if (empty($new)) {
+                    echo $article->getPackingUnit();
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Verpackungsgröße</td>
-            <td><input type="text" name="packSize" value="<?php if (empty($new)) {  echo $article->getPackingSize(); } ?>"></td>
+            <td><input type="text" name="packSize" value="<?php
+                if (empty($new)) {
+                    echo $article->getPackingSize();
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Mindestbestand</td>
-            <td><input type="text" name="minStock" value="<?php if (empty($new)) {  echo $article->getMinimumStockLevel(); } ?>"> </td>
+            <td><input type="text" name="minStock" value="<?php
+                if (empty($new)) {
+                    echo $article->getMinimumStockLevel();
+                }
+                ?>"> </td>
         </tr>
         <tr>
             <td>Margenaufschlag</td>
-            <td><input type="text" name="surcharge" value="<?php if (empty($new)) {  echo $article->getSurcharge(); } ?>"></td>
+            <td><input type="text" name="surcharge" value="<?php
+                if (empty($new)) {
+                    echo $article->getSurcharge();
+                }
+                ?>"></td>
         </tr>
         <tr>
             <td>Lieferant</td>
@@ -68,19 +100,17 @@ if (!empty($_GET['articleNum'])) {
                     $vendordb = new SupplierDAO;
 
                     $vendors = $vendordb->getSupplierStock();
-
-                    for ($i = 0; $i < count($vendors); $i++) {
-                        $name = utf8_encode($vendors[$i]->getName());
-                        if(empty ($new)){                            
-                            echo "<option name=" . $article->getVendor(). ">";
-                            echo $vendorName;
-                            echo "</option>";
-                        }else{
-                            echo "<option name=" . $vendors[$i]->getId(). ">";
+                    if (empty($new)) {
+                        echo "<option name=" . $article->getVendor() . ">";
+                        echo $vendorName;
+                        echo "</option>";
+                    } else {
+                        for ($i = 0; $i < count($vendors); $i++) {
+                            $name = utf8_encode($vendors[$i]->getName());
+                            echo "<option name=" . $vendors[$i]->getId() . ">";
                             echo $name;
                             echo "</option>";
                         }
-                        
                     }
                     ?>
                 </select>
@@ -94,24 +124,35 @@ if (!empty($_GET['articleNum'])) {
                     $db = new ArticleGroupDAO;
 
                     $groups = $db->getAllArtikleGroup();
-
-                    for ($i = 0; $i < count($groups); $i++) {
-                        $name = utf8_encode($groups[$i]->getName());
-                        if(empty ($new)){
-                            echo "<option name=" . $article->getArticleGroup() . ">";
-                            echo $articleGroup;
-                            echo "</option>";
-                        }else{
+                    if (empty($new)) {
+                        echo "<option name=" . $article->getArticleGroup() . ">";
+                        echo $articleGroup;
+                        echo "</option>";
+                    } else {
+                        for ($i = 0; $i < count($groups); $i++) {
+                            $name = utf8_encode($groups[$i]->getName());
                             echo "<option name=" . $groups[$i]->getId() . ">";
                             echo $name;
                             echo "</option>";
-                        }                            
-                        
+                        }
                     }
                     ?>
                 </select>
             </td>
         </tr>
+        <?php
+        if (empty($new)) {
+            echo "<tr>";
+            echo"<td>";
+            echo"<div class=\"form-group form-check\">";
+            echo"<input type=\"checkbox\" class=\"form-check-input\" id=\"delete\" name=\"delete\">";
+            echo"<label class=\"form-check-label\" for=\"delete\" >Deaktivieren</label>";
+            echo"</div>";
+            echo"</td>";
+            echo"<td></td>";
+            echo"</tr>";
+        }
+        ?>
         <tr>
             <td>
                 <?php

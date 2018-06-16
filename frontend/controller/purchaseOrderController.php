@@ -45,8 +45,6 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
         <select id="supplier" class="form-control">
             <option>Default</option>
             <?php
-            include_once '../../persistance/dao/dao_purchase/SupplierDAO.php';
-            include_once '../../persistance/model/Supplier.php';
             $dbSupplier = new SupplierDAO;
 
             $supplier = $dbSupplier->getSupplierStock();

@@ -11,18 +11,18 @@ Class ArticleDAO extends AbstractDAO {
     function getArticle($num) {
     $this->doConnect();
 
-    $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where Number = ?");
+    $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, deleted from article where Number = ?");
 
     $stmt->bind_param("i", $num);
 
     $stmt->execute();
 
-    $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
+    $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier, $delete);
 
     if ($stmt->fetch()) {
         $db = new ArticleGroupDAO;
         $articleGroupName = $db->getArtikelGroupName($articleGroup);
-        $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
+        $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge, $delete);
     }
 
     $this->closeConnect();
@@ -53,7 +53,7 @@ Class ArticleDAO extends AbstractDAO {
         return $article;
     }
 
-    function setArticle($num, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier) {
+    function setArticle($num, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minStockLevel, $surcharge, $supplier, $delete) {
         $this->doConnect();
 
         $db = new ArticleGroupDAO;
@@ -69,11 +69,11 @@ Class ArticleDAO extends AbstractDAO {
         
         if (!$this->checkNumber($num)) {
             $link = $this->doConnect();
-            $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge)";
+            $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge, deleted) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge, $delete)";
             mysqli_query($this->conn, $query);
         } else {
             $link = $this->doConnect();
-            $query = "update article set Name = '$desc', ArticleGroupID = $artikelGroupID, PurchasePrice = $buyPrice, RetailPrice = $sellPrice, Unit = '$unit', PackingType = '$packUnit', PackingQuantity = $packSize, MinimalStorage = $minStockLevel, SupplierID = $vendID, Surcharge = $surcharge where Number = '$num'";
+            $query = "update article set Name = '$desc', ArticleGroupID = $artikelGroupID, PurchasePrice = $buyPrice, RetailPrice = $sellPrice, Unit = '$unit', PackingType = '$packUnit', PackingQuantity = $packSize, MinimalStorage = $minStockLevel, SupplierID = $vendID, Surcharge = $surcharge, deleted = $delete where Number = '$num'";
             mysqli_query($this->conn, $query);
         }
         $this->closeConnect();
@@ -103,16 +103,16 @@ Class ArticleDAO extends AbstractDAO {
 
         $artikelStock = array();
 
-        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage,SupplierID, Surcharge from article");
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage,SupplierID, Surcharge, deleted from article where deleted= 1");
 
         $stmt->execute();
 
-        $stmt->bind_result($num, $name, $articleGroup, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
+        $stmt->bind_result($num, $name, $articleGroup, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete);
         
         while ($stmt->fetch()) {
             $db = new ArticleGroupDAO;
             $articleGroupName = $db->getArtikelGroupName($articleGroup);
-            $artikel = new Article($num, $name, $articleGroupName, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
+            $artikel = new Article($num, $name, $articleGroupName, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete);
             array_push($artikelStock, $artikel);
         }
 
@@ -161,13 +161,13 @@ Class ArticleDAO extends AbstractDAO {
         function getArticleFromSupplier($supplierID) {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where SupplierID = ?");
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, deleted from article where SupplierID = ? and deleted = 1");
 
         $stmt->bind_param("i", $supplierID);
 
         $stmt->execute();
 
-        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier);
+        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier, $delete);
 
         $db = new ArticleGroupDAO;
         
@@ -177,7 +177,7 @@ Class ArticleDAO extends AbstractDAO {
             
             $articleGroupName = $db->getArtikelGroupName($articleGroup);
 
-            $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge);
+            $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge, $delete);
             array_push($supplierArticles, $article);
         }
         $this->closeConnect();

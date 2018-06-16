@@ -6,84 +6,94 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
-if (!empty($_GET['subNewArticle']) && !empty($_GET['name']) && !empty($_GET['group']) && !empty($_GET['buyPrice']) && !empty($_GET['sellPrice']) && !empty($_GET['unit']) && !empty($_GET['packUnit']) && !empty($_GET['packSize']) && !empty($_GET['minStock']) && !empty($_GET['vendor']) && !empty($_GET['surcharge'])) {
+if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['group']) && !empty($_POST['buyPrice']) && !empty($_POST['sellPrice']) && !empty($_POST['unit']) && !empty($_POST['packUnit']) && !empty($_POST['packSize']) && !empty($_POST['minStock']) && !empty($_POST['vendor']) && !empty($_POST['surcharge'])) {
 
   
     $groupDAO = new ArticleGroupDAO;
-    $articleGroupID = $groupDAO->getArtikelGroupID($_GET['group']);
+    $articleGroupID = $groupDAO->getArtikelGroupID($_POST['group']);
 
     $vendDAO = new SupplierDAO;
 
-    $vendID = $vendDAO->getSupplierIDByName($_GET['vendor']);
+    $vendID = $vendDAO->getSupplierIDByName($_POST['vendor']);
 
 
-    $article = new Article(null, $_GET['name'], $_GET['group'], $_GET['buyPrice'], $_GET['sellPrice'], $_GET['unit'], $_GET['packUnit'], $_GET['packSize'], $_GET['minStock'], $_GET['vendor'], $_GET['surcharge']);
+    $delete = 1;
+    $article = new Article(null, $_POST['name'], $_POST['group'], $_POST['buyPrice'], $_POST['sellPrice'], $_POST['unit'], $_POST['packUnit'], $_POST['packSize'], $_POST['minStock'], $_POST['vendor'], $_POST['surcharge'], $delete);
     
     header("Location: http://localhost/Computech/frontend/?menu=article");
     
-} else if (!empty($_GET['modArticle'])) {
+} else if (!empty($_POST['modArticle'])) {
     $db = new ArticleDAO;
 
     $article = $db->getArticle($_SESSION['articleNum']);
 
-    if (!empty($_GET['name']) && $_GET['name'] != null && $_GET['name'] != "") {
-        $desc = $_GET['name'];
+    if (!empty($_POST['name']) && $_POST['name'] != null && $_POST['name'] != "") {
+        $desc = $_POST['name'];
     } else {
         $desc = $article->getArticleDesc();
     }
 
-    if (!empty($_GET['group']) && $_GET['group'] != null && $_GET['group'] != 0) {
-        $group = $_GET['group'];
+    if (!empty($_POST['group']) && $_POST['group'] != null && $_POST['group'] != 0) {
+        $group = $_POST['group'];
     } else {
         $group = $article->getArticleGroup();
     }
-    if (!empty($_GET['buyPrice']) && $_GET['buyPrice'] != null && $_GET['buyPrice'] > 0) {
-        $buyPrice = $_GET['buyPrice'];
+    if (!empty($_POST['buyPrice']) && $_POST['buyPrice'] != null && $_POST['buyPrice'] > 0) {
+        $buyPrice = $_POST['buyPrice'];
     } else {
         $buyPrice = $article->getBuyingPrice();
     }
-    if (!empty($_GET['sellPrice']) && $_GET['sellPrice'] != null && $_GET['sellPrice'] > 0) {
-        $sellPrice = $_GET['sellPrice'];
+    if (!empty($_POST['sellPrice']) && $_POST['sellPrice'] != null && $_POST['sellPrice'] > 0) {
+        $sellPrice = $_POST['sellPrice'];
     } else {
         $sellPrice = $article->getSellingPrice();
     }
 
-    if (!empty($_GET['unit']) && $_GET['unit'] != null && $_GET['unit'] != "") {
-        $unit = $_GET['unit'];
+    if (!empty($_POST['unit']) && $_POST['unit'] != null && $_POST['unit'] != "") {
+        $unit = $_POST['unit'];
     } else {
         $unit = $article->getUnit();
     }
 
-    if (!empty($_GET['packUnit']) && $_GET['packUnit'] != null && $_GET['packUnit'] != "") {
-        $packUnit = $_GET['packUnit'];
+    if (!empty($_POST['packUnit']) && $_POST['packUnit'] != null && $_POST['packUnit'] != "") {
+        $packUnit = $_POST['packUnit'];
     } else {
         $packUnit = $article->getPackingUnit();
     }
 
-    if (!empty($_GET['packSize']) && $_GET['packSize'] != null && $_GET['packSize'] != 0) {
-        $packSize = $_GET['packSize'];
+    if (!empty($_POST['packSize']) && $_POST['packSize'] != null && $_POST['packSize'] != 0) {
+        $packSize = $_POST['packSize'];
     } else {
         $packSize = $article->getPackingSize();
     }
 
-    if (!empty($_GET['minStock']) && $_GET['minStock'] != null && $_GET['minStock'] > 0) {
-        $min = $_GET['minStock'];
+    if (!empty($_POST['minStock']) && $_POST['minStock'] != null && $_POST['minStock'] > 0) {
+        $min = $_POST['minStock'];
     } else {
         $min = $article->getMinimumLevel();
     }
 
-    if (!empty($_GET['vendor']) && $_GET['vendor'] != null && $_GET['vendor'] != 0) {
-        $vendor = $_GET['vendor'];
+    if (!empty($_POST['vendor']) && $_POST['vendor'] != null && $_POST['vendor'] != 0) {
+        $vendor = $_POST['vendor'];
     } else {
         $vendor = $article->getVendor();
     }
 
-    if (!empty($_GET['surcharge']) && $_GET['surcharge'] != null) {
-        $surcharge = $_GET['surcharge'];
+    if (!empty($_POST['surcharge']) && $_POST['surcharge'] != null) {
+        $surcharge = $_POST['surcharge'];
     } else {
         $surcharge = $article->getSurcharge();
     }
+    
+    if(isset($_POST['delete'])){
+        echo "HI";
+        $delete = 0;
+    }else{
+        echo "no";
+        $delete = 1;
+    }
+    
     $group = utf8_encode($group);
-    $article->setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
-         header("Location: http://localhost/Computech/frontend/?menu=article");
+    $article->setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete);
+        header("Location: http://localhost/Computech/frontend/?menu=article");
 }
