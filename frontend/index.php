@@ -37,9 +37,7 @@ include_once './includes.php';
 
             if (!empty($_SESSION['user'])) {
                 echo "<button><a href=\"./logout.php\">Logout</a></button>";
-                if (empty($_SESSION['perm'])) {
-                    echo "hallo kunde";
-                }
+              
             }
             if (!empty($_SESSION['perm'])) {
                 if ($_SESSION['perm'] == 'ek') {
@@ -61,7 +59,9 @@ include_once './includes.php';
                     include './WarehouseHome.php';
                 } else if ($_SESSION['perm'] == 'vk') {
                     include './controller/sales/ArticleListController.php';
-                } else {
+                }else if($_SESSION['perm'] == 'kd'){
+                    echo "hallo Kunde.";
+                }else {
                     echo "Hallo Admin";
                     include './controller/DepartmentController/PurchaseController.php';
                 }

@@ -1,6 +1,5 @@
 <?php
 
-
 Class OfferOrderDAO extends AbstractDAO {
 
     function __construct() {
@@ -9,17 +8,17 @@ Class OfferOrderDAO extends AbstractDAO {
 
     function getOfferOrderFromSupplier($vendor) {
         $this->doConnect();
-        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated from offer where SupplierID = ?");
+        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated, totalprice from offer where SupplierID = ?");
 
         $stmt->bind_param("i", $vendor);
 
         $stmt->execute();
 
-        $stmt->bind_result($number, $supplierID, $createDate);
+        $stmt->bind_result($number, $supplierID, $createDate, $total);
 
         $vendorOffers = array();
         while ($stmt->fetch()) {
-            $offer = new OfferOrders($number, $supplierID, $createDate);
+            $offer = new OfferOrders($number, $supplierID, $createDate, $total);
             array_push($vendorOffers, $offer);
         }
 
@@ -30,16 +29,16 @@ Class OfferOrderDAO extends AbstractDAO {
     function getAllOfferOrder() {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated from offer");
+        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated, totalprice from offer");
 
         $stmt->execute();
 
-        $stmt->bind_result($number, $supplierID, $createDate);
+        $stmt->bind_result($number, $supplierID, $createDate, $total);
 
         $offers = array();
 
         while ($stmt->fetch()) {
-            $offer = new OfferOrders($number, $supplierID, $createDate);
+            $offer = new OfferOrders($number, $supplierID, $createDate, $total);
             array_push($offers, $offer);
         }
 
@@ -50,27 +49,43 @@ Class OfferOrderDAO extends AbstractDAO {
     function getOfferOrderOnDate($DateMatcher) {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated from offer where SysDateCreated = ?");
+        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated, totalprice from offer where SysDateCreated = ?");
 
         $stmt->execute();
 
+        $stmt->bind_result($number, $supplierID, $createDate, $total);
+
+        $offers = array();
+
+        while ($stmt->fetch()) {
+            $offer = new OfferOrders($number, $supplierID, $createDate, $total);
+            array_push($offers, $offer);
+        }
+
         $this->closeConnect();
+        return $offers;
     }
 
-    function setOfferOrder($number, $vendor, $date) {
+    function setOfferOrder($number, $vendor, $date, $total) {
         $this->doConnect();
 
         $id = $this->getOfferIDFromNumber($number);
 
         if ($id == null) {
-            $stmt = $this->conn->prepare("insert into offer (Number, SupplierID, SysDateCreated) values (?,?,?");
-            $stmt->bind_param("iid", $number, $vendor, $date);
+            $link = $this->doConnect();
+            $query = "INSERT into offer (Number, SupplierID, SysDateCreated, totalprice) values ('$number',$vendor, $date, $total)";
+            mysqli_query($this->conn, $query);
+           /* $stmt = $this->conn->prepare("insert into offer (Number, SupplierID, SysDateCreated, totalprice) values (?,?,?,?)");
+            $stmt->bind_param("iid", $number, $vendor, $date, $total);*/
         } else {
-            $stmt = $this->conn->prepare("update offer set Number = ?, SupplierID = ? where ID = ?");
-            $stmt->bind_param("iii", $number, $vendor, $id);
+            $link = $this->doConnect();
+            $query = "update article set Number = '$number', SupplierID = $vendor, totalPrice = $total where ID = $id";
+            mysqli_query($this->conn, $query);
+         /*   $stmt = $this->conn->prepare("update offer set Number = ?, SupplierID = ?, totalPrice = ? where ID = ?");
+            $stmt->bind_param("iii", $number, $vendor, $id, $total);*/
         }
 
-        $stmt->execute();
+        //$stmt->execute();
 
         $this->closeConnect();
     }

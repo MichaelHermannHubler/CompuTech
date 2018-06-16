@@ -13,17 +13,10 @@ class UserService
 
     function getAuthUser($username, $pw)
     {
-
-
         $userDAO = new UserDAO();
         //FIXME: ADD EXCEPTION HANDLIG darf nur ein Wert zurückkehren.
         //$result = $userDAO->getUser($username, $pw);
         $result = $userDAO->getUser($username, $pw);
-
-        
-
-        
-
         return $result;
 
 
@@ -35,6 +28,11 @@ class UserService
         $userDAO = new UserDAO();
         
         $userDAO->setUser($username, $pw, $first, $last);
+        
+        $permDAO = new UserPermissionsDAO;
+        
+        $permDAO->setPermission($userDAO->getUserID($username));
+        
         
     }
     

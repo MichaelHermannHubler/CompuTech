@@ -1,4 +1,7 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include "../../service/UserService.php";
 
 if (!empty($_GET['register']) && !empty($_GET['username']) && !empty($_GET['pw']) && !empty($_GET['vorname']) && !empty($_GET['nachname'])) {
@@ -7,7 +10,13 @@ if (!empty($_GET['register']) && !empty($_GET['username']) && !empty($_GET['pw']
     if ($userService->searchIfUserExist($_GET['username'])) {
         throw new Exception("User exist already");
     } else {
-        $userService->setUser($_GET['username'], $_GET['pw'], $_GET['vorname'], $_GET['nachname']);
+        $_SESSION['user'] = $userService->setUser($_GET['username'], $_GET['pw'], $_GET['vorname'], $_GET['nachname']);
+        $_SESSION['signedIn'] = true;
+        $userDAO = new UserDAO;
+        $permDAO = new UserPermissionsDAO;
+        $user = $_SESSION['user'];
+        $_SESSION['perm'] = $permDAO->getPermissions($userDAO->getUserID($_GET['username']));
+        header("Location: http://localhost/Computech/frontend/index.php");
     }
 }
 ?>

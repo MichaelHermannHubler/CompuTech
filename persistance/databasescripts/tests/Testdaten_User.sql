@@ -7,5 +7,5 @@ INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('lg1', 'la
 INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('lg2', 'lager2', 'Michael', 'Hermann-Hubler');
 INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('lg3', 'lager3', 'Oliver', 'Krenn');
 INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk1', 'verkauf1', 'Michael', 'Hahn');
-INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk2', 'verkauf2', 'Michael', 'Hahn');
-INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk3', 'verkauf3', 'Michael', 'Hahn');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk2', 'verkauf2', 'Bernhard', 'Hörmann');
+INSERT into user (Username, PasswortMD5, FirstName, LastName) values ('vk3', 'verkauf3', 'Susanne', 'Pötzlinger');

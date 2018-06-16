@@ -32,4 +32,16 @@ class UserPermissionsDAO extends AbstractDAO{
         return $perm;
     }
     
+    function setPermission($id){
+        $this->doConnect();
+        
+        $stmt = $this->conn->prepare("insert into userpermission (UserID,PermissionCode) values (?, 'kd')");
+        
+        $stmt->bind_param("i", $id);
+        
+        $stmt->execute();
+        
+        $this->closeConnect();
+    }
+    
 }
