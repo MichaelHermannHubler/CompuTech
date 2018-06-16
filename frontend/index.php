@@ -57,10 +57,8 @@ include_once './includes.php';
                     }
                 } else if ($_SESSION['perm'] == 'lg') {
                     include './WarehouseHome.php';
-                } else if ($_SESSION['perm'] == 'vk') {
+                } else if ($_SESSION['perm'] == 'vk' || $_SESSION['perm'] == 'kd') {
                     include './controller/sales/ArticleListController.php';
-                }else if($_SESSION['perm'] == 'kd'){
-                    echo "hallo Kunde.";
                 }else {
                     echo "Hallo Admin";
                     include './controller/DepartmentController/PurchaseController.php';
