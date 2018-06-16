@@ -120,7 +120,44 @@ Class WarehouseLocationDAO extends AbstractDAO
         }
 
         $this->closeConnect();
+    }
 
+    function addWarehouseLoation($rack, $position){
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("insert into warehouselocation (rack, position) values (?, ?)");
+        $stmt->bind_param('ss', $rack, $position);
+
+        $stmt->execute();
+        $this->closeConnect();
+    }
+
+    function addStock($warehouseLocationID, $articleID, $quantity){
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("select ID from warehouselocationarticle where warehouseLocationID = ? and articleid = ?");
+        $stmt->bind_param('ii', $warehouseLocationID, $articleID);
+
+        $stmt->execute();
+        $update = false;
+
+        while($stmt->fetch()) {
+            $update = true;
+        }
+
+        if($update){
+
+            $stmt2 = $this->conn->prepare("update warehouselocationarticle set quantityStored = quantityStored + ? where warehouseLocationID = ? and articleid = ?");
+            $stmt2->bind_param('iii', $quantity, $warehouseLocationID, $articleID);
+
+            $stmt2->execute();
+        }else {
+            $stmt2 = $this->conn->prepare("insert into warehouselocationarticle (QuantityStored, warehouseLocationID, articleid) values (?, ?, ?)");
+            $stmt2->bind_param('iii', $quantity, $warehouseLocationID, $articleID);
+
+            $stmt2->execute();
+        }
+        $this->closeConnect();
     }
 
 }
