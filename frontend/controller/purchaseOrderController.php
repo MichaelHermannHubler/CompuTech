@@ -3,6 +3,10 @@
  * user: weissn
  */
 
+if(!empty($_GET['success'])){
+    echo "<h4 style='background-color: LightBlue'>Bestellung wurde erstellt!</h4>";
+}
+
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {

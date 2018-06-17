@@ -45,3 +45,6 @@ if (!empty($_POST['offer'])) {
     echo '<h3>Submitted!</h3>';
     
 }
+
+$newURL = "http://localhost/Computech/frontend/views/orders.php?success=true";
+header("Location: ".$newURL);
