@@ -48,9 +48,15 @@ if (!empty($_POST['offer'])) {
     $articleDAO = new ArticleDAO;
     $articles = $articleDAO->getArticleFromSupplier($supplier);
     
-    echo "<h1>Artikel zu Bestellung Hinzufuegen</h1>"; 
+    $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType); 
     
-    echo "<form method='POST' method=''>";
+    echo "<h1>Artikel zu Bestellung Hinzufuegen</h1>";
+    
+    echo "<p>Order ID: ".$orderId."</p>";
+    
+    echo "<form method='POST' action='purchaseOrderArticleFormHandler.php'>";
+    echo "<input style='display: none' name='supplier' type='text' value='" . $supplier . "'>";
+    echo "<input style='display: none' name='purchaseOrder' type='text' value='" . $orderId . "'>";
     echo "<table class='table'>";
     echo "<tr>";
     echo "<th>Nummer</th>";
@@ -69,14 +75,12 @@ if (!empty($_POST['offer'])) {
         echo "<td>";
         echo $article->getSellingPrice();
         echo "</td>";
-        echo "<td><input type='number' name='" . $article->getArticleNumber() . "amount' value='0'></td>";
+        echo "<td><input type='number' name='" . $article->getArticleNumber() . "' value='0'></td>";
         echo "</tr>";
     }
     echo "</table>";
     echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
     echo "</form>";
-    //$purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
-    echo '<h3>Submitted!</h3>';
     
 }
 
