@@ -1,5 +1,4 @@
 <?php
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -7,19 +6,19 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 
 /*
-foreach ($_POST as $key => $value) {
-    echo 'key: ' . $key . '<br>';
-    echo 'value: ' . $value . '<br>';
-    
-};
-*/
+  foreach ($_POST as $key => $value) {
+  echo 'key: ' . $key . '<br>';
+  echo 'value: ' . $value . '<br>';
+
+  };
+ */
 
 $newURL = "http://localhost/CompuTech/frontend/?menu=order&success=true";
 
 if (!empty($_POST['offer'])) {
     $offerOrderDAO = new OfferOrderDAO;
     $purchaseOrderDAO = new PurchaseOrderDAO;
-    
+
     $id = null;
     $offer = $_POST['offer'];
     $offerOrder = $offerOrderDAO->getOfferOrderFromId($offer);
@@ -28,17 +27,23 @@ if (!empty($_POST['offer'])) {
     $orderDate = $offerOrder->getCreateDate();
     $deliveryStatus = null;
     $deliveryType = null;
-    
+
     $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
-    
+
+    $offerArticleDAO = new OfferArticleDAO();
+    $purchaseOrderArticleDAO = new PurchaseOrderArticleDAO();
+    $offerArticles = $offerArticleDAO->getOfferArticle($offer);
+    foreach ($offerArticles as $offerArticle) {
+        $price = $offerArticle->getPrice() * $offerArticle->getQuantity();
+        $purchaseOrderArticleDAO->setPurchaseOrderArticle(null, $offerArticle->getArticleNumber(), $orderId, $offerArticle->getQuantity(), 0, $price, 0);
+    }
     echo '<h3>Submitted!</h3>';
-    
-    header("Location: ".$newURL);
-    
+
+    header("Location: " . $newURL);
 } else if (!empty($_POST['supplier']) && !empty($_POST['orderDate']) && !empty($_POST['deliveryType'])) {
     $purchaseOrderDAO = new PurchaseOrderDAO;
     $id = null;
-    if (!empty($_POST['id'])){
+    if (!empty($_POST['id'])) {
         $id = $_POST['id'];
     }
     $offer = null;
@@ -47,17 +52,17 @@ if (!empty($_POST['offer'])) {
     $orderDate = $_POST['orderDate'];
     $deliveryStatus = null;
     $deliveryType = $_POST['deliveryType'];
-    
+
     $articleDAO = new ArticleDAO;
     $articles = $articleDAO->getArticleFromSupplier($supplier);
-    
-    $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType); 
-    
+
+    $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
+
     echo "<div class='container-fluid'>";
     echo "<h1>Artikel zu Bestellung Hinzufuegen</h1>";
-    
-    echo "<p>Order ID: ".$orderId."</p>";
-    
+
+    echo "<p>Order ID: " . $orderId . "</p>";
+
     echo "<form method='POST' action='purchaseOrderArticleFormHandler.php'>";
     echo "<input style='display: none' name='supplier' type='text' value='" . $supplier . "'>";
     echo "<input style='display: none' name='purchaseOrder' type='text' value='" . $orderId . "'>";
@@ -87,6 +92,5 @@ if (!empty($_POST['offer'])) {
     echo "</form>";
     echo "</div>";
 }
-
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">

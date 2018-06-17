@@ -9,13 +9,13 @@ Class PurchaseOrderArticleDAO extends AbstractDAO {
     function getArticlesFromOrderId($orderId) {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select OrderID, ArticleID, QuanitityOrdered, QuantityDelivered, Price, Defective from orderarticle where SupplierID = ?");
+        $stmt = $this->conn->prepare("select ID, ArticleID, QuanitityOrdered, QuantityDelivered, Price, Defective from purchaseorderarticle where OrderId = ?");
 
         $stmt->bind_param("i", $orderId);
 
         $stmt->execute();
 
-        $stmt->bind_result($orderId, $articleId, $quantityOrdered, $quantityDelivered, $price, $defective);
+        $stmt->bind_result($id, $articleId, $quantityOrdered, $quantityDelivered, $price, $defective);
         
         $orderArticles = array();
         while ($stmt->fetch()) {
