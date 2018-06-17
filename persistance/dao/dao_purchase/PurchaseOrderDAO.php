@@ -80,7 +80,6 @@ Class PurchaseOrderDAO extends AbstractDAO {
         }
 
         $stmt->execute();
-        echo $stmt->error;
 
         if ($id == null && $stmt->fetch()) {
             $id = mysqli_insert_id($stmt);
