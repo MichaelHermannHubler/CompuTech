@@ -7,6 +7,9 @@ Class OfferOrders extends Voucher {
     function __construct($num, $party, $create, $total) {
         parent::__construct($num, $party, $create);
         $this->total = $total;
+        
+        
+       
     }
 
     function setOffer($number, $vendorNumber, $create, $total) {
@@ -23,11 +26,18 @@ Class OfferOrders extends Voucher {
 
         $offerDB = new OfferOrderDAO;
 
-        $offerDB->setOfferOrder($number, $vendorNumber, $create, $total);
+        $id = $offerDB->setOfferOrder($number, $vendorNumber, $create, $total);
+        
+        
+        return $id;
     }
 
     function getTotal() {
         return $this->total;
+    }
+    
+    function getID(){
+        return $this->num-1000;
     }
 
 }

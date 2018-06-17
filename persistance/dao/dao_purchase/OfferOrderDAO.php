@@ -88,11 +88,15 @@ Class OfferOrderDAO extends AbstractDAO {
         $this->doConnect();
 
         $id = $this->getOfferIDFromNumber($number);
-
+        
+        
         if ($id == null) {
             $link = $this->doConnect();
-            $query = "INSERT into offer (Number, SupplierID, SysDateCreated, totalprice) values ('$number',$vendor, $date, $total)";
+                      
+            $query = "INSERT into offer (Number, SupplierID, SysDateCreated) values ('$number',$vendor, '$date')";
             mysqli_query($this->conn, $query);
+            $returnID = $this->conn->insert_id;
+            
            /* $stmt = $this->conn->prepare("insert into offer (Number, SupplierID, SysDateCreated, totalprice) values (?,?,?,?)");
             $stmt->bind_param("iid", $number, $vendor, $date, $total);*/
         } else {
@@ -102,10 +106,11 @@ Class OfferOrderDAO extends AbstractDAO {
          /*   $stmt = $this->conn->prepare("update offer set Number = ?, SupplierID = ?, totalPrice = ? where ID = ?");
             $stmt->bind_param("iii", $number, $vendor, $id, $total);*/
         }
-
+        
         //$stmt->execute();
 
         $this->closeConnect();
+        return $returnID;
     }
 
     function getAvailableOffer($vendor) {
@@ -144,6 +149,23 @@ Class OfferOrderDAO extends AbstractDAO {
         }
         $this->closeConnect();
 
+        return $id;
+    }
+    
+     function getHighestID() {
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("select ID from offer order by ID desc LIMIT 1");
+
+        $stmt->execute();
+
+        $stmt->bind_result($id);
+
+        if ($stmt->fetch()) {
+            $id = $id;
+        }
+
+        $this->closeConnect();
         return $id;
     }
 

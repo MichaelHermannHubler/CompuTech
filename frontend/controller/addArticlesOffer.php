@@ -13,7 +13,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 
 
-<form action="OfferArticleFormHandler.php" method="get" name="artikelwaehlen">
+<form action="OfferArticleFormHandler.php" method="get">
         
     <?php
    
@@ -23,9 +23,9 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         /*echo "$supplierName";*/
         
         $supplierDAO = new SupplierDAO; 
-        $supplierID = $supplierDAO->getSupplierIDByName($supplierName);
+        $_SESSION['supplierID'] = $supplierDAO->getSupplierIDByName($supplierName);
         $dbobje = new ArticleDAO;
-        $articles = $dbobje->getArticleFromSupplier($supplierID);
+        $articles = $dbobje->getArticleFromSupplier($_SESSION['supplierID']);
     }
         ?>
          
@@ -40,7 +40,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
                     echo "</option>";   
                 }*/
             for($i = 0; $i< count($articles); $i++) {
-                echo "<option name=" . $articles[$i]->getArticleDesc() . ">";
+                echo "<option value=" . $articles[$i]->getID() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
             }
@@ -54,7 +54,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         <select name='articlebsupplier'>
         <?php
             for($i = 0; $i< count($articles); $i++) {
-                echo "<option name=" . $articles[$i]->getArticleDesc() . ">";
+                echo "<option value=" . $articles[$i]->getID() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
             }?>
@@ -67,7 +67,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         <select name='articlecsupplier'>
         <?php
             for($i = 0; $i< count($articles); $i++) {
-                echo "<option name=" . $articles[$i]->getArticleDesc() . ">";
+                echo "<option value=" . $articles[$i]->getID() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
             }?>
