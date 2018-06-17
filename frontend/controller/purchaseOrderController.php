@@ -3,6 +3,8 @@
  * user: weissn
  */
 
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+
 if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
 
     if (empty($_SESSION['orderNum'])) {
@@ -15,19 +17,17 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
 
 <h2>Bestellung basierend auf Angebot anlegen</h2>
 
-<form method='GET'>
+<form method='POST' action='../controller/purchaseOrderFormHandler.php'>
     <div class="form-group">
         <label for="offer">Angebotsnummer</label>
-        <select id="offer" class="form-control">
-            <option>Default</option>
+        <select id="offer" name="offer" class="form-control">
+            <option value="null">None</option>
             <?php
-            include_once '../../persistance/dao/dao_purchase/OfferOrderDAO.php';
             $dbOffer = new OfferOrderDAO;
-
             $orders = $dbOffer->getAllOfferOrder();
-
+            
             for ($i = 0; $i < count($orders); $i++) {
-                echo "<option name='" . $orders[$i]->getNum() . "'>";
+                echo "<option name='" . $dbOffer->getOfferIDFromNumber($orders[$i]->getNum()) . "'>";
                 echo $orders[$i]->getNum();
                 echo "</option>";
             }
@@ -39,18 +39,33 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
 
 <h2>Bestellung ohne Angebot anlegen</h2>
 
-<form method='GET'>
+<form method='POST' action='../controller/purchaseOrderFormHandler.php'>
+    <div class="form-group">
+        <label for="offer">Angebotsnummer</label>
+        <select id="offer" name="offer" class="form-control">
+            <option value="null">None</option>
+            <?php
+            $dbOffer = new OfferOrderDAO;
+            $orders = $dbOffer->getAllOfferOrder();
+            
+            for ($i = 0; $i < count($orders); $i++) {
+                echo "<option value='" . $dbOffer->getOfferIDFromNumber($orders[$i]->getNum()) . "'>";
+                echo $orders[$i]->getNum();
+                echo "</option>";
+            }
+            ?>
+        </select>
+    </div>
     <div class="form-group">
         <label for="supplier">Lieferant</label>
-        <select id="supplier" class="form-control">
-            <option>Default</option>
+        <select id="supplier" name="supplier" class="form-control">
             <?php
             $dbSupplier = new SupplierDAO;
 
             $supplier = $dbSupplier->getSupplierStock();
 
             for ($i = 0; $i < count($supplier); $i++) {
-                echo "<option name=" . $supplier[$i]->getName() . ">";
+                echo "<option value=" . $supplier[$i]->getId() . ">";
                 echo $supplier[$i]->getName();
                 echo "</option>";
             }
@@ -58,10 +73,18 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
         </select>
     </div>
     <div class="form-group">
+        <label for="createDate">Erstellungsdatum</label>
+        <input id='createDate' name="createDate" type='date'>
+    </div>
+    <div class="form-group">
+        <label for="orderDate">Bestellungsdatum</label>
+        <input id='orderDate' name="orderDate" type='date'>
+    </div>
+    <div class="form-group">
         <label for="deliveryType">Lieferungsart</label>
-        <select id="deliveryType" class="form-control">
-            <option>Standard</option>
-            <option>Express</option>
+        <select id="deliveryType" name="deliveryType" class="form-control">
+            <option value="C">Komplett</option>
+            <option value="P">Teil</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Erstellen</button>

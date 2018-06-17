@@ -12,26 +12,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 <h2>Angebot eintragen</h2>
 </br>
-<form action="" method="get" name="createoffer">
-    Angebotsnummer <input type='text' name='offernumber'>
-    <?php
-        /*eigentlich wäre es besser, wenn die nummer im hintergrund festgelegt wird 
-         *und nicht durch user-eingabe
-         */ 
-        $dbobj = new OfferOrderDAO;
-        
-        $alloffers = $dbobj->getAllOfferOrder();
-        
-        foreach ($alloffers as $offer => $number) {
-           if ($_GET['offernumber'] == $number) {
-               echo "Angebotsnummer exisitert bereits, bitte eine neue Nummer eingeben";
-           } else {
-             $offernumber = ($_GET['offernumber']);  
-           }
-       }
-    ?>
-    </br>
-
+<form action="" method="get" name="lieferantwaehlen">
+  
     Lieferant auswählen 
     <select name="suppliername">
              <?php
@@ -40,24 +22,27 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
             $suppliers = $db->getSupplierStock();
             
             for($i = 0; $i < count($suppliers); $i++){
-                echo "<option name=" . $suppliers[$i]->getID() . ">";
+                echo "<option name=" . $suppliers[$i]->getName() . ">";
                 echo $suppliers[$i]->getName();
-                echo "</option>";
-                
-            }
-             
+                echo "</option>";     
+            }      
         ?>       
     </select>
-    </br>
-    <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
     
     </br>
+    <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
+</form>
+    
+    </br>
+    
+    
+<form action="" method="get" name="artikelwaehlen">
         
     <?php
    
     if (isset($_GET['suppliername'])) {
-        $supplierDAO = new SupplierDAO;        
-        $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);;
+        $supplierDAO = new SupplierDAO; 
+        $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);
     }
         
     $dbobje = new ArticleDAO;
@@ -107,8 +92,10 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     
     ?>
         <input type="submit" name="artikelauswahl" value="Auswahl bestätigen"/>
+</form>
+  
     
-    
+<form action="" method="get" name="totalberechnen">
     <?php
     
     if(isset($_GET['artikelauswahl']) && ((isset($_GET['articleasupplier']) && isset($_GET ['articleaquantity'])) ||  
@@ -149,17 +136,29 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     
     </br>   
     <input type="submit" name="submit" value="Angebot eintragen"/>
+    </br>;
+
+</form>
     
     <?php
     if(isset($_GET['submit'])) {
         
-        $dbobjek = new OfferOrders;
+        $create = date("d.m.y");
+        /*muss das date ein bestimmtes format haben?*/
+        
+        
+        $dbobjekt = new OfferOrderDAO();
+        $offerID = $dbobjekt->getAvailableOffer($supplierID);
+        $offernumber = 10000 + $offerID;
+        
+        
+        $dbobjek = new OfferOrders();
         $offer = $dbobjek->setOffer($offernumber, $supplierID, $create, $offerPrice); 
         
-        /*woher kommt das date?*/
+        echo "Das Angebot wurde mit Angebotsnummer .$offernumber. gespeichert.";
+        
     }
     
     ?>
  
    
-</form>
