@@ -70,28 +70,11 @@ Class PurchaseOrderDAO extends AbstractDAO {
 
     function setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType) {
         $this->doConnect();
-        echo "Hi";
-        echo "id".$id;
-        echo"<br/>";
-        echo "Angebot".$offer;
-        echo"<br/>";
-        echo"supplier".$supplier;
-        echo"<br/>";
-        echo "createDate".$createDate;
-        echo"<br/>";
-        echo "orderDate".$orderDate;
-        echo"<br/>";
-        echo "Deliverystat".$deliveryStatus;
-        echo"<br/>";
-        echo "deliverytype".$deliveryType;
-        echo"<br/>";
 
         if ($id == null) {
-            echo "null";
             $stmt = $this->conn->prepare("insert into purchaseorder (OfferID, SuplierID, SysDateCreated, OrderDate, DeliveryStatus, DeliveryType) values (?,?,?,?,?,?)");
             $stmt->bind_param("iissss", $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
         } else {
-            echo "nicht null";
             $stmt = $this->conn->prepare("update purchaseorder set OfferID = ?, SuplierID = ?, SysDateCreated = ?, OrderDate = ?, DeliveryStatus = ?, DeliveryType = ? where ID = ?");
             $stmt->bind_param("iissssi", $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType, $id);
         }
@@ -99,10 +82,7 @@ Class PurchaseOrderDAO extends AbstractDAO {
         $stmt->execute();
 
        if($id == null){
-            echo "Hi ich bins";
-            echo "ID zuvor".$id;
             $id = $stmt->insert_id;
-            echo "ID jetzt".$id;
        }
            
         
