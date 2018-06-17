@@ -1,6 +1,6 @@
 <?php
 
-Class ArticleDAO extends AbstractDAO {
+Class PurchaseOrderArticleDAO extends AbstractDAO {
 
     function __construct() {
         
@@ -32,16 +32,15 @@ Class ArticleDAO extends AbstractDAO {
         $this->doConnect();
         
         if ($id == null) {
-            $stmt = $this->conn->prepare("insert into orderarticle (ArticleID, OfferID, QuantityOrdered, QuantityDelivered, Price, Defective) values (?,?,?,?,?,?)");
+            $stmt = $this->conn->prepare("insert into purchaseorderarticle (ArticleID, OrderID, QuantityOrdered, QuantityDelivered, Price, Defective) values (?,?,?,?,?,?)");
             $stmt->bind_param("iiiiii", $articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective);
         } else {
-            $stmt = $this->conn->prepare("update purchaseorder set ArticleID = ?, OfferID = ?, QuantityOrdered = ?, QuantityDelivered = ?, Price = ?, Defective = ? where ID = ?");
+            $stmt = $this->conn->prepare("update purchaseorderarticle set ArticleID = ?, OfferID = ?, QuantityOrdered = ?, QuantityDelivered = ?, Price = ?, Defective = ? where ID = ?");
             $stmt->bind_param("iiiiiii", $articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective, $id);
         }
 
         $stmt->execute();
         
-        echo $stmt->error;
 
         if ($id == null && $stmt->fetch()) {
             $id = mysqli_insert_id($stmt);

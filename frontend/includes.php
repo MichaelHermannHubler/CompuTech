@@ -8,6 +8,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/ArticleGroupDAO.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/OfferOrderDAO.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/PurchaseOrderDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/dao/dao_purchase/PurchaseOrderArticleDAO.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech//persistance/dao/dao_purchase/SupplierDAO.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech//persistance/dao/dao_sales/OrderArticleDAO.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech//persistance/dao/dao_sales/OrderDAO.php';
@@ -26,6 +27,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/OrderArticl
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/Picklist.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/PositionArticles.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/PurchaseOrder.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/PurchaseOrderArticle.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/Supplier.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/User.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/persistance/model/WarehouseLocation.php';

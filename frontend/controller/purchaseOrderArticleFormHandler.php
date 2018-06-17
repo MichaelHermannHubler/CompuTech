@@ -24,10 +24,10 @@ if (!empty($_POST['supplier']) && !empty($_POST['purchaseOrder'])) {
         if ($key != 'supplier' && $key != 'purchaseOrder') {
             if ($value > 0) {
                 $id = null;
-                $articleId = $key;
+                $articleId = $articleDAO->getArticle($key)->getID();
                 $quantityOrdered = $value;
                 $quantityDelivered = 0;
-                $price = $articleDAO->getArticle($articleId)->getSellingPrice();
+                $price = $articleDAO->getArticle($key)->getSellingPrice() * $quantityOrdered;
                 $defective = 0;
                 $purchaseOrderArticleDAO->setPurchaseOrderArticle($id, $articleId, $purchaseOrder, $quantityOrdered, $quantityDelivered, $price, $defective);
             }
