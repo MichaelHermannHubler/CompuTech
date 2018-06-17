@@ -68,18 +68,19 @@ Class PurchaseOrderDAO extends AbstractDAO {
         return $orders;
     }
 
-    function setPurchaseOrder($id, $offer, $supplier, $createDate, $oderDate, $deliveryStatus, $deliveryType) {
+    function setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType) {
         $this->doConnect();
 
         if ($id == null) {
             $stmt = $this->conn->prepare("insert into purchaseorder (OfferID, SuplierID, SysDateCreated, OrderDate, DeliveryStatus, DeliveryType) values (?,?,?,?,?,?)");
-            $stmt->bind_param("iiiiii", $offer, $supplier, $createDate, $oderDate, $deliveryStatus, $deliveryType);
+            $stmt->bind_param("iiiiii", $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
         } else {
             $stmt = $this->conn->prepare("update purchaseorder set OfferID = ?, SuplierID = ?, SysDateCreated = ?, OrderDate = ?, DeliveryStatus = ?, DeliveryType = ? where ID = ?");
-            $stmt->bind_param("iiiiiii", $offer, $supplier, $createDate, $oderDate, $deliveryStatus, $deliveryType, $id);
+            $stmt->bind_param("iiiiiii", $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType, $id);
         }
 
         $stmt->execute();
+        echo $stmt->error;
 
         if ($id == null && $stmt->fetch()) {
             $id = mysqli_insert_id($stmt);
