@@ -18,8 +18,12 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     <?php
    
     if (isset($_GET['suppliername'])) {
+        $supplierName = $_GET['suppliername'];
+        
+        /*echo "$supplierName";*/
+        
         $supplierDAO = new SupplierDAO; 
-        $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);
+        $supplierID = $supplierDAO->getSupplierIDByName($supplierName);
         $dbobje = new ArticleDAO;
         $articles = $dbobje->getArticleFromSupplier($supplierID);
     }
@@ -30,11 +34,17 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         Artikel 1:
         <select name='articleasupplier'>
         <?php
+                /*foreach ($articles as $article => $articleDesc) {
+                    echo "<option name=".$articleDesc.">";
+                    echo $articleDesc;
+                    echo "</option>";   
+                }*/
             for($i = 0; $i< count($articles); $i++) {
-                echo "<option name=" . $articles[$i]->getBuyingprice() . ">";
+                echo "<option name=" . $articles[$i]->getArticleDesc() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
-            }?>
+            }
+            ?>
         </select>
         Stückzahl Artikel 1 angeben:
         <input type='number' name='articleaquantity'>
@@ -44,7 +54,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         <select name='articlebsupplier'>
         <?php
             for($i = 0; $i< count($articles); $i++) {
-                echo "<option name=" . $articles[$i]->getBuyingPrice() . ">";
+                echo "<option name=" . $articles[$i]->getArticleDesc() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
             }?>
@@ -57,7 +67,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         <select name='articlecsupplier'>
         <?php
             for($i = 0; $i< count($articles); $i++) {
-                echo "<option name=" . $articles[$i]->getBuyingPrice() . ">";
+                echo "<option name=" . $articles[$i]->getArticleDesc() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
             }?>
