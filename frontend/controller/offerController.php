@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 <h2>Angebot eintragen</h2>
 </br>
-<form action="" method="get" name="createoffer">
+<form action="" method="get" name="lieferantwaehlen">
   
     Lieferant auswählen 
     <select name="suppliername">
@@ -22,7 +22,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
             $suppliers = $db->getSupplierStock();
             
             for($i = 0; $i < count($suppliers); $i++){
-                echo "<option name=" . $suppliers[$i]->getID() . ">";
+                echo "<option name=" . $suppliers[$i]->getName() . ">";
                 echo $suppliers[$i]->getName();
                 echo "</option>";     
             }      
@@ -31,14 +31,18 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     
     </br>
     <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
+</form>
     
     </br>
+    
+    
+<form action="" method="get" name="artikelwaehlen">
         
     <?php
    
     if (isset($_GET['suppliername'])) {
-        $supplierDAO = new SupplierDAO;        
-        $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);;
+        $supplierDAO = new SupplierDAO; 
+        $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);
     }
         
     $dbobje = new ArticleDAO;
@@ -88,8 +92,10 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     
     ?>
         <input type="submit" name="artikelauswahl" value="Auswahl bestätigen"/>
+</form>
+  
     
-    
+<form action="" method="get" name="totalberechnen">
     <?php
     
     if(isset($_GET['artikelauswahl']) && ((isset($_GET['articleasupplier']) && isset($_GET ['articleaquantity'])) ||  
@@ -131,6 +137,8 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     </br>   
     <input type="submit" name="submit" value="Angebot eintragen"/>
     </br>;
+
+</form>
     
     <?php
     if(isset($_GET['submit'])) {
@@ -154,4 +162,3 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     ?>
  
    
-</form>
