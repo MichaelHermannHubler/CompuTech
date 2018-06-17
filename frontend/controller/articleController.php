@@ -34,7 +34,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $articleDescription;
                 }
-                ?>"></td>
+                ?>" required></td>
         </tr>
         <tr>
             <td>Einkaufspreis</td>
@@ -42,7 +42,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getBuyingPrice();
                 }
-                ?>"></td>
+                ?>" required></td>
         </tr>
         <tr>
             <td>Verkaufspreis</td>
@@ -50,7 +50,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getSellingPrice();
                 }
-                ?>"></td>
+                ?>" required></td>
         </tr>
         <tr>
             <td>Basiseinheit</td>
@@ -58,7 +58,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getUnit();
                 }
-                ?>"></td>
+                ?>" required></td>
         </tr>
         <tr>
             <td>Verpackungseinheit</td>
@@ -82,7 +82,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getMinimumStockLevel();
                 }
-                ?>"> </td>
+                ?>" required> </td>
         </tr>
         <tr>
             <td>Margenaufschlag</td>
@@ -90,7 +90,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getSurcharge();
                 }
-                ?>"></td>
+                ?>" required></td>
         </tr>
         <tr>
             <td>Lieferant</td>
