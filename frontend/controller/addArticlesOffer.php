@@ -13,7 +13,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 
 
-<form action="" method="get" name="artikelwaehlen">
+<form action="OfferArticleFormHandler.php" method="get" name="artikelwaehlen">
         
     <?php
    
