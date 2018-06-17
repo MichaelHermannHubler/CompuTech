@@ -3,6 +3,10 @@
  * user: weissn
  */
 
+if(!empty($_GET['success'])){
+    echo "<h4 style='background-color: LightBlue'>Bestellung wurde erstellt!</h4>";
+}
+
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
 if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
@@ -27,7 +31,7 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
             $orders = $dbOffer->getAllOfferOrder();
             
             for ($i = 0; $i < count($orders); $i++) {
-                echo "<option name='" . $dbOffer->getOfferIDFromNumber($orders[$i]->getNum()) . "'>";
+                echo "<option value='" . $dbOffer->getOfferIDFromNumber($orders[$i]->getNum()) . "'>";
                 echo $orders[$i]->getNum();
                 echo "</option>";
             }
@@ -39,23 +43,7 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
 
 <h2>Bestellung ohne Angebot anlegen</h2>
 
-<form method='POST' action='./controller/purchaseOrderFormHandler.php'>
-    <div class="form-group">
-        <label for="offer">Angebotsnummer</label>
-        <select id="offer" name="offer" class="form-control">
-            <option value="null">None</option>
-            <?php
-            $dbOffer = new OfferOrderDAO;
-            $orders = $dbOffer->getAllOfferOrder();
-            
-            for ($i = 0; $i < count($orders); $i++) {
-                echo "<option value='" . $dbOffer->getOfferIDFromNumber($orders[$i]->getNum()) . "'>";
-                echo $orders[$i]->getNum();
-                echo "</option>";
-            }
-            ?>
-        </select>
-    </div>
+<form method='POST' action='../controller/purchaseOrderFormHandler.php'>
     <div class="form-group">
         <label for="supplier">Lieferant</label>
         <select id="supplier" name="supplier" class="form-control">
@@ -71,10 +59,6 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
             }
             ?>
         </select>
-    </div>
-    <div class="form-group">
-        <label for="createDate">Erstellungsdatum</label>
-        <input id='createDate' name="createDate" type='date'>
     </div>
     <div class="form-group">
         <label for="orderDate">Bestellungsdatum</label>

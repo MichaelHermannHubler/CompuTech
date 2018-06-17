@@ -25,6 +25,24 @@ Class OfferOrderDAO extends AbstractDAO {
         $this->closeConnect();
         return $vendorOffers;
     }
+    
+    function getOfferOrderFromId($id) {
+        $this->doConnect();
+        $stmt = $this->conn->prepare("select Number, SupplierID, SysDateCreated, totalprice from offer where ID = ?");
+        $stmt->bind_param("i", $id);
+
+        $stmt->execute();
+
+        $stmt->bind_result($number, $supplierID, $createDate, $total);
+
+        $offer = null;
+        while ($stmt->fetch()) {
+            $offer = new OfferOrders($number, $supplierID, $createDate, $total);
+        }
+
+        $this->closeConnect();
+        return $offer;
+    }
 
     function getAllOfferOrder() {
         $this->doConnect();
