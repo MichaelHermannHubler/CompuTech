@@ -14,7 +14,7 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
     if (empty($_SESSION['orderNum'])) {
         $_SESSION['orderNum'] = $_GET['orderNum'];
     }
-    include_once './orderDataTable.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/controller/orderDataTable.php';
     $new = false;
 }
 ?>
