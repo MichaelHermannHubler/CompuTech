@@ -17,7 +17,14 @@ foreach ($_SESSION['articleList'] as $item) {
 
     if ($firstRow) {
 
-        echo "<table><tr><th>Name</th><th>Anzahl</th><th>Einkaufspreis</th><th>Aktionen</th></tr>";
+        echo "<table><tr><th>Name</th><th>Anzahl</th><th>Einkaufspreis</th>";
+        if (isset($checkOut) && $checkOut) {
+            //Dont display buttons
+
+        } else {
+            echo "<th>Aktionen</th>";
+        }
+        echo "</tr>";
         $firstRow = false;
     }
 
@@ -71,8 +78,23 @@ foreach ($_SESSION['articleList'] as $item) {
 echo "</table>";
 
 echo "<h2>Summe:" . $sum . "</h2>";
+
+
+if (isset($_SESSION['versand']) && isset($_SESSION['rechnung'])) {
+
+    if (isset($checkOut) && $checkOut) {
+
+    } else {
+        echo "<a href='../CheckoutController.php'>Zur Kasse gehen</a>";
+
+    }
+} else {
+    echo "<a href='../checkoutAdressController.php'>Zur Kasse gehen</a>";
+
+}
+
+
 ?>
 
 
-<a href="../checkoutAdressController.php">Zur Kasse gehen</a>
 

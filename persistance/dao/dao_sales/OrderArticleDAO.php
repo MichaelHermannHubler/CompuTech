@@ -6,7 +6,7 @@
  * Time: 16:59
  */
 
-class OrderArticleDAO
+class OrderArticleDAO extends AbstractDAO
 {
 
     function createOrderArticle($articleID, $orderID, $quantity, $price)
@@ -15,8 +15,12 @@ class OrderArticleDAO
 
 
         $this->doConnect();
-        $call = $this->conn->prepare("INSERT INTO ORDERARTICLE (ID, ArticleID,OrderID,QuantityOrdered,Price) VALUES(null,s,s,s,s)");
-        $call->bind_param('ssss', $articleID, $orderID, $quantity, $price);
+        echo "Art:".$articleID;
+        echo "Order:".$orderID;
+        echo "Q:".$quantity;
+        echo "p:".$price;
+        $call = $this->conn->prepare("INSERT INTO `orderarticle` (`ArticleID`, `OrderID`, `QuantityOrdered`, `Price`) VALUES(?,?,?,?)");
+        $call->bind_param('iiid', $articleID, $orderID, $quantity, $price);
         $call->execute();
     }
 

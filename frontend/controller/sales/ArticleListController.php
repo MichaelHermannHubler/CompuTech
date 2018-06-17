@@ -5,7 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/a
 
 ?>
 
-<a HREF="./controller/sales/articleList/shoppingCartDisplay.php">Warenkorb</a>
+<a HREF="./articleList/shoppingCartDisplay.php">Warenkorb</a>
 
 <br>
 
@@ -34,7 +34,7 @@ foreach ($resultCheck as $list) {
     echo "<tr><td>" . $list[0]->getArticleNumber() . "</td><td>" . $list[0]->getArticleDesc() . "</td><td>" . $list[0]->getSellingPrice() . "</td>";
 
     echo '<td><form method="get">';
-    echo '<input type="hidden" name="articleIdToAdd"  value="'.$list[0]->getArticleNumber().'"/>';
+    echo '<input type="hidden" name="articleIdToAdd"  value="'.$list[0]->getID().'"/>';
     echo '<input type="hidden" name="desc"  value="'.$list[0]->getArticleDesc().'"/>';
     echo '<input type="hidden" name="price"  value="'.$list[0]->getSellingPrice().'"/>';
     echo '<input type="submit" value="Hinzufügen" name="add">';

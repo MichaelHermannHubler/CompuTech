@@ -7,15 +7,18 @@ Class Address {
     private $city;
     private $postalCode;
     private $countryCode;
+    private $name;
     
-    function __construct($id, $street, $city, $postCode, $country) {
+    function __construct($id, $street, $city, $postCode, $country, $name) {
         $this->id = $id;
         $this->street = $street;
         $this->city = $city;
         $this->postalCode = $postCode;
         $this->countryCode = $country;
+        $this->name = $name;
     }
-    
+
+
     function setAddress($id, $street, $city, $postCode, $countryCode) {
         $this->id = $id;
         
@@ -56,5 +59,23 @@ Class Address {
     function getCountryCode() {
         return $this->countryCode;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+
 }
 

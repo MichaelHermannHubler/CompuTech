@@ -13,31 +13,15 @@ $checkOut = true;
 //SHOULD BE DONE FOR ALL
 if (isset($_POST['nameV'])) {
 //    function __construct($id, $street, $city, $postCode, $country) {
-    $rechnungsAdresse = new Address(null, $_POST['straseR'], $_POST['stadtR'], $_POST['plzR'], $_POST['landR']);
-    $versandAdresse = new Address(null, $_POST['straseV'], $_POST['stadtV'], $_POST['plzV'], $_POST['landV']);
+    $rechnungsAdresse = new Address(null, $_POST['straseR'], $_POST['stadtR'], $_POST['plzR'], $_POST['landR'], $_POST['nameR']);
+    $versandAdresse = new Address(null, $_POST['straseV'], $_POST['stadtV'], $_POST['plzV'], $_POST['landV'], $_POST['nameV']);
     $_SESSION['versand'] = $versandAdresse;
     $_SESSION['rechnung'] = $rechnungsAdresse;
 
-
-
-    var_dump($_SESSION['versand']);
-    var_dump($_SESSION['rechnung']);
 }
 
 
-if (isset($_GET['bestellen']) && $_GET['bestellen']) {
 
-	$articleService = new ArticleService();
-    $result = $articleService->processOrder($_SESSION['articleList'], $_SESSION['versand'],$_SESSION['rechnung']);
-	if (is_bool($result)){
-		echo "Bestellung wurde erstellt";
-	}
-	else{
-		echo "Es ist".$result." Artikel nicht mehr verfügbar";
-	}
-
-
-}
 
 
 ?>
@@ -59,4 +43,4 @@ if (isset($_GET['bestellen']) && $_GET['bestellen']) {
 <p><?php echo $_SESSION['rechnung'] ->getPostalCode(); ?></p>
 <p><?php echo $_SESSION['rechnung'] ->getStreet(); ?></p>
 
-<a href="CheckoutController.php?bestellen=true">Kostenpflichtig bestellen</a>
+<a href="OrderSatusController.php?bestellen=true">Kostenpflichtig bestellen</a>
