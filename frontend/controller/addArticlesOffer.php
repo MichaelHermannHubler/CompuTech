@@ -8,6 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
 
+
 ?>
 
 
@@ -22,51 +23,51 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
         $dbobje = new ArticleDAO;
         $articles = $dbobje->getArticleFromSupplier($supplierID);
     }
-        
+        ?>
          
-        echo "Artikel des gewählten Lieferanten auswählen: ";
-        echo "</br>";
-        echo "Artikel 1: ";
-        echo "<select name='articleasupplier'>";
-        
-            for($i = 0; $i<= count($articles); $i++) {
+        Artikel des gewählten Lieferanten auswählen:
+        <br/>
+        Artikel 1:
+        <select name='articleasupplier'>
+        <?php
+            for($i = 0; $i< count($articles); $i++) {
                 echo "<option name=" . $articles[$i]->getBuyingprice() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
-            }
-        echo "</select>";
-        echo "Stückzahl Artikel 1 angeben: ";
-        echo "<input type='number' name='articleaquantity'>";
-        echo "</br>";
+            }?>
+        </select>
+        Stückzahl Artikel 1 angeben:
+        <input type='number' name='articleaquantity'>
+       <br/>
         
-        echo "Artikel 2: ";
-        echo "<select name='articlebsupplier'>";
-        
-            for($i = 0; $i<= count($articles); $i++) {
+        Artikel 2:
+        <select name='articlebsupplier'>
+        <?php
+            for($i = 0; $i< count($articles); $i++) {
                 echo "<option name=" . $articles[$i]->getBuyingPrice() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
-            }
-        echo "</select>";
-        echo "Stückzahl Artikel 2 angeben: ";
-        echo "<input type='number' name='articlebquantity'>";
-        echo "</br>";
+            }?>
+        </select>
+        Stückzahl Artikel 2 angeben:
+        <input type='number' name='articlebquantity'>
+        <br/>
         
-        echo "Artikel 3: ";
-        echo "<select name='articlecsupplier'>";
-        
-            for($i = 0; $i<= count($articles); $i++) {
+        Artikel 3:
+        <select name='articlecsupplier'>
+        <?php
+            for($i = 0; $i< count($articles); $i++) {
                 echo "<option name=" . $articles[$i]->getBuyingPrice() . ">";
                 echo $articles[$i]->getArticleDesc();
                 echo "</option>";
-            }
-        echo "</select>";
-        echo "Stückzahl Artikel 3 angeben: ";
-        echo "<input type='number' name='articlecquantity'>";
-        echo "</br>";
+            }?>
+        </select>
+        Stückzahl Artikel 3 angeben:
+        <input type='number' name='articlecquantity'>
+        <br/>
        
     
-    ?>
+   
         <input type="submit" name="artikelauswahl" value="Auswahl bestätigen"/>
 </form>
     

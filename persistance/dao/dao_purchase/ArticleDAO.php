@@ -67,16 +67,20 @@ Class ArticleDAO extends AbstractDAO {
             $vendID = $supplier;
         }
         
+        $success = "Nein";
         if (!$this->checkNumber($num)) {
             $link = $this->doConnect();
             $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge, deleted) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge, $delete)";
             mysqli_query($this->conn, $query);
+            $success = "Ja";
         } else {
             $link = $this->doConnect();
             $query = "update article set Name = '$desc', ArticleGroupID = $artikelGroupID, PurchasePrice = $buyPrice, RetailPrice = $sellPrice, Unit = '$unit', PackingType = '$packUnit', PackingQuantity = $packSize, MinimalStorage = $minStockLevel, SupplierID = $vendID, Surcharge = $surcharge, deleted = $delete where Number = '$num'";
             mysqli_query($this->conn, $query);
+            
         }
         $this->closeConnect();
+        return $success;
     }
 
     function getVendor($articleNum) {

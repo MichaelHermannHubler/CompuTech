@@ -45,7 +45,9 @@ Class Article {
         $this->surcharge = $surcharge;
 
 
-        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->delete);
+        $success = $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->delete);
+        
+        return $success;
     }
 
     private function calcSellPrice($buyPrice, $surcharge) {
@@ -79,7 +81,9 @@ Class Article {
 
         $db = new ArticleDAO;
 
-        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->delete);
+        $success = $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->delete);
+        
+        return $success;
     }
 
     function getID() {
