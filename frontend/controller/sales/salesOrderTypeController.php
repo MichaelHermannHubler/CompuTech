@@ -5,7 +5,7 @@
  * Time: 12:57
  */-->
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/dao_sales/SalesOrderDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/dao_sales/SalesOrderDAO.php';
 ?>
 
 <form action="salesOrderTypeController.php" method="post">
@@ -15,9 +15,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/dao_sales/S
 
 <?php
 if (isset($_POST["allOrders"])) {
-    getAllSalesOrders();
+    $recs = new SalesOrderDAO();
+    $recs->getAllSalesOrders();
 } elseif (isset($_POST["openOrders"])) {
-    getOpenSalesOrders();
+    $recs = new SalesOrderDAO();
+    $recs->getOpenSalesOrders();
 }
 
 ?>
