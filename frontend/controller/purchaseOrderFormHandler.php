@@ -29,15 +29,18 @@ if (!empty($_POST['offer'])) {
     $deliveryStatus = null;
     $deliveryType = null;
     
-    $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
+    $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
+    
     echo '<h3>Submitted!</h3>';
     
     header("Location: ".$newURL);
     
 } else if (!empty($_POST['supplier']) && !empty($_POST['orderDate']) && !empty($_POST['deliveryType'])) {
     $purchaseOrderDAO = new PurchaseOrderDAO;
-    
     $id = null;
+    if (!empty($_POST['id'])){
+        $id = $_POST['id'];
+    }
     $offer = null;
     $supplier = $_POST['supplier'];
     $createDate = date("Y-m-d H:i:s");
@@ -50,6 +53,7 @@ if (!empty($_POST['offer'])) {
     
     $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType); 
     
+    echo "<div class='container-fluid'>";
     echo "<h1>Artikel zu Bestellung Hinzufuegen</h1>";
     
     echo "<p>Order ID: ".$orderId."</p>";
@@ -81,7 +85,7 @@ if (!empty($_POST['offer'])) {
     echo "</table>";
     echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
     echo "</form>";
-    
+    echo "</div>";
 }
 
 ?>

@@ -1,19 +1,8 @@
-<style>
-    td, th {
-        padding: 10px;
-        cell-padding: 0;
-        margin: 0px;
-        border: 1px solid black;
-    }
-    table {
-        border-collapse: collapse;
-    }
-</style>
 <?php
 
 $db = new OfferOrderDAO();
 $offerOrder = $db->getOfferOrderFromId($db->getOfferIDFromNumber($_GET['orderNum']));
-echo "<table>";
+echo "<table class='table'>";
 echo "<tr>";
 echo "<th>Nummer</th>";
 echo "<th>Lieferant</th>";
