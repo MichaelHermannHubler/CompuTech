@@ -7,7 +7,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 ?>
-<button class="NewArticle"><a href="./controller/offerController.php">Neues Angebot</a></button>
+<a href="./controller/offerController.php"><button>Neues Angebot</button></a>
 
 <table class="table table-bordered">
     <thead>
@@ -34,7 +34,7 @@ for ($i = 0; $i < count($alleOffer); $i++) {
     echo "<td>" . $supplierName . "</td>";
     echo "<td>" . $alleOffer[$i]->getCreateDate() . "</td>";
     echo "<td>" . $alleOffer[$i]->getTotal() . "</td>";
-    echo "<td><button><a href=\"./controller/offerDetailController.php?Num=$num\">Detailansicht</a></button></td>";
+    echo "<td><a href=\"./controller/offerDetailController.php?Num=$num\"><button>Detailansicht</button></a></td>";
     echo "</div>";
     echo"</tr>";
 }

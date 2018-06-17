@@ -18,7 +18,7 @@ if (!empty($_SESSION['success'])) {
 }
 $_SESSION['success'] = null;
 ?>
-<button class="NewArticle"><a href="./controller/articleController.php">Neuer Artikel</a></button>
+<a href="./controller/articleController.php"><button> Neuer Artikel</button></a>
 
 <table class="table table-bordered">
     <thead>
@@ -53,7 +53,7 @@ for ($i = 0; $i < count($stock); $i++) {
     echo "<td>" . $stock[$i]->getPackingSize() . "</td>";
     echo "<td>" . $stock[$i]->getMinimumStockLevel() . "</td>";
     echo "<td>$supplierName</td>";
-    echo "<td><button><a href=\"./controller/articleController.php?articleNum=$articleNumber\">Bearbeiten</a></button></td>";
+    echo "<td><a href=\"./controller/articleController.php?articleNum=$articleNumber\"><button>Bearbeiten</button></a></td>";
     echo "</div>";
     echo"</tr>";
 }
