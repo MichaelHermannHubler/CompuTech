@@ -14,6 +14,8 @@ foreach ($_POST as $key => $value) {
 };
 */
 
+$newURL = "http://localhost/Computech/frontend/views/orders.php?success=true";
+
 if (!empty($_POST['offer'])) {
     $offerOrderDAO = new OfferOrderDAO;
     $purchaseOrderDAO = new PurchaseOrderDAO;
@@ -30,6 +32,8 @@ if (!empty($_POST['offer'])) {
     $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
     echo '<h3>Submitted!</h3>';
     
+    header("Location: ".$newURL);
+    
 } else if (!empty($_POST['supplier']) && !empty($_POST['orderDate']) && !empty($_POST['deliveryType'])) {
     $purchaseOrderDAO = new PurchaseOrderDAO;
     
@@ -41,10 +45,40 @@ if (!empty($_POST['offer'])) {
     $deliveryStatus = null;
     $deliveryType = $_POST['deliveryType'];
     
-    $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
+    $articleDAO = new ArticleDAO;
+    $articles = $articleDAO->getArticleFromSupplier($supplier);
+    
+    echo "<h1>Artikel zu Bestellung Hinzufuegen</h1>"; 
+    
+    echo "<form method='POST' method=''>";
+    echo "<table class='table'>";
+    echo "<tr>";
+    echo "<th>Nummer</th>";
+    echo "<th>Beschreibung</th>";
+    echo "<th>Stueckpreis</th>";
+    echo "<th>Stueckzahl</th>";
+    echo "</tr>";
+    foreach ($articles as $article) {
+        echo "<tr>";
+        echo "<td>";
+        echo $article->getArticleNumber();
+        echo "</td>";
+        echo "<td>";
+        echo $article->getArticleDesc();
+        echo "</td>";
+        echo "<td>";
+        echo $article->getSellingPrice();
+        echo "</td>";
+        echo "<td><input type='number' name='" . $article->getArticleNumber() . "amount' value='0'></td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+    echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
+    echo "</form>";
+    //$purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
     echo '<h3>Submitted!</h3>';
     
 }
 
-$newURL = "http://localhost/Computech/frontend/views/orders.php?success=true";
-header("Location: ".$newURL);
+?>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
