@@ -75,8 +75,9 @@ if (!empty($_POST['offer'])) {
     echo "</table>";
     echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
     echo "</form>";
-    //$purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
+    $id = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
     echo '<h3>Submitted!</h3>';
+    echo "id ist ".$id;
     
 }
 
