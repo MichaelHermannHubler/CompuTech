@@ -18,8 +18,10 @@ $newURL = "http://localhost/CompuTech/frontend/?menu=order&success=true";
 if (!empty($_POST['supplier']) && !empty($_POST['purchaseOrder'])) {
     $supplier = $_POST['supplier'];
     $purchaseOrder = $_POST['purchaseOrder'];
-    $purchaseOrderArticleDAO = new PurchaseOrderArticleDAO;
-    $articleDAO = new ArticleDAO;
+    $purchaseOrderArticleDAO = new PurchaseOrderArticleDAO();
+    //$purchaseOrderArticles = $purchaseOrderArticleDAO->getArticlesFromOrderId($purchaseOrder);
+    //TODO: get exisitng numbers and let them be edited
+    $articleDAO = new ArticleDAO();
     foreach ($_POST as $key => $value) {
         if ($key != 'supplier' && $key != 'purchaseOrder') {
             if ($value > 0) {
