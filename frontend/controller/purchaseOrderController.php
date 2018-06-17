@@ -39,7 +39,7 @@ if (!empty($_SESSION['orderNum']) || !empty($_GET['orderNum'])) {
 
 <h2>Bestellung ohne Angebot anlegen</h2>
 
-<form method='POST' action='../controller/purchaseOrderFormHandler.php'>
+<form method='POST' action='./controller/purchaseOrderFormHandler.php'>
     <div class="form-group">
         <label for="offer">Angebotsnummer</label>
         <select id="offer" name="offer" class="form-control">

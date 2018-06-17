@@ -43,10 +43,11 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     if (isset($_GET['suppliername'])) {
         $supplierDAO = new SupplierDAO; 
         $supplierID = $supplierDAO->getSupplierIDByName($_GET['suppliername']);
+        $dbobje = new ArticleDAO;
+        $articles = $dbobje->getArticleFromSupplier($supplierID);
     }
         
-    $dbobje = new ArticleDAO;
-    $articles = $dbobje->getArticleFromSupplier($supplierID);
+   
          
         echo "Artikel des gewählten Lieferanten auswählen: ";
         echo "</br>";
