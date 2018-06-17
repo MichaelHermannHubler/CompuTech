@@ -13,7 +13,7 @@ foreach ($_POST as $key => $value) {
 };
 */
 
-$newURL = "http://localhost/Computech/frontend/views/orders.php?success=true";
+$newURL = "http://localhost/CompuTech/frontend/?menu=order&success=true";
 
 if (!empty($_POST['supplier']) && !empty($_POST['purchaseOrder'])) {
     $supplier = $_POST['supplier'];

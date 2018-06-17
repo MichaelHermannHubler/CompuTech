@@ -14,7 +14,7 @@ foreach ($_POST as $key => $value) {
 };
 */
 
-$newURL = "http://localhost/Computech/frontend/views/orders.php?success=true";
+$newURL = "http://localhost/CompuTech/frontend/?menu=order&success=true";
 
 if (!empty($_POST['offer'])) {
     $offerOrderDAO = new OfferOrderDAO;
