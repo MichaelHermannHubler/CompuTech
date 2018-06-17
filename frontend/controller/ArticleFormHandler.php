@@ -4,11 +4,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 
-if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['group']) && !empty($_POST['buyPrice']) && !empty($_POST['sellPrice']) && !empty($_POST['unit']) && !empty($_POST['packUnit']) && !empty($_POST['packSize']) && !empty($_POST['minStock']) && !empty($_POST['vendor']) && !empty($_POST['surcharge'])) {
-
-  
+if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['group']) && !empty($_POST['buyPrice']) && !empty($_POST['sellPrice']) && !empty($_POST['unit']) && !empty($_POST['minStock']) && !empty($_POST['vendor']) && !empty($_POST['surcharge'])) {
+    echo "hi";
+    $info = "";
     $groupDAO = new ArticleGroupDAO;
     $articleGroupID = $groupDAO->getArtikelGroupID($_POST['group']);
 
@@ -16,13 +16,28 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
 
     $vendID = $vendDAO->getSupplierIDByName($_POST['vendor']);
 
+    
 
+    if (empty($_POST['packUnit'])) {
+        $_POST['packUnit'] = "";
+    }
+
+    if (empty($_POST['packSize'])) {
+        $_POST['packSize'] = 0;
+        
+    }
     $delete = 1;
-    $article = new Article(null, $_POST['name'], $_POST['group'], $_POST['buyPrice'], $_POST['sellPrice'], $_POST['unit'], $_POST['packUnit'], $_POST['packSize'], $_POST['minStock'], $_POST['vendor'], $_POST['surcharge'], $delete);
+    $success = $article = new Article(null, $_POST['name'], $_POST['group'], $_POST['buyPrice'], $_POST['sellPrice'], $_POST['unit'], $_POST['packUnit'], $_POST['packSize'], $_POST['minStock'], $_POST['vendor'], $_POST['surcharge'], $delete);
     
+    if($success == "Ja"){
+        $_SESSION['success'] = "Ja";
+    }else{
+        $_SESSION['success'] = false;
+    }
+
     header("Location: http://localhost/Computech/frontend/?menu=article");
-    
 } else if (!empty($_POST['modArticle'])) {
+    $info = "";
     $db = new ArticleDAO;
 
     $article = $db->getArticle($_SESSION['articleNum']);
@@ -84,16 +99,15 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
     } else {
         $surcharge = $article->getSurcharge();
     }
-    
-    if(isset($_POST['delete'])){
-        echo "HI";
+
+    if (isset($_POST['delete'])) {
         $delete = 0;
-    }else{
-        echo "no";
+    } else {
         $delete = 1;
     }
-    
+
+
     $group = utf8_encode($group);
     $article->setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete);
-        header("Location: http://localhost/Computech/frontend/?menu=article");
+    header("Location: http://localhost/Computech/frontend/?menu=article");
 }

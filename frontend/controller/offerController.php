@@ -80,7 +80,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
     
     </br>   
     <input type="submit" name="submit" value="Angebot eintragen"/>
-    </br>;
+    </br>
 
 </form>
     
