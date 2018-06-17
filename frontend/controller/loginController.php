@@ -46,16 +46,27 @@ if (!empty($_SESSION['signedIn'])) {
 
 
 
-
+    echo"<div class=\"form-group\">";
 if (empty($_SESSION['signedIn'])) {
     echo"<form method=\"POST\">";
-    echo"<label for=\"username\">Username:</label>";
-    echo"<input type=\"text\" name=\"username\" required>";
-    echo"<label for=\"pw\">PW:</label>";
-    echo"<input type=\"password\" name=\"pw\" required>";
-    echo"<input type=\"submit\" name=\"submit\" value=\"submit\">";
-    echo "<br/>";
-    echo "<button><a href=\"./controller/registerController.php\">Registrieren</a></button>";
+    echo"<label for=\"username\">Benutzername:</label>";
+    echo"</br>";
+    echo"<input type=\"text\" class=\"form-control\" name=\"username\" placeholder=\"Benutzername\" required>";
+    echo"<small id=\"emailHelp\" class=\"form-text text-muted\">Ihren Benutzernamen finden Sie in der Registrierungsmail.</small>";
+    echo"</br>";
+    echo"<label for=\"pw\">Passwort:</label>";
+    echo"</br>";
+    echo"<input type=\"password\" class=\"form-control\" name=\"pw\" placeholder=\"Passwort\" required>";
+    echo"</br>";
+
+    echo"<input type=\"submit\" class=\"btn btn-outline-secondary my-2 my-sm-0\" name=\"submit\" value=\"Bestätigen\">";
     echo"</form>";
+    echo"</div>";
+    echo"</br>";
+    echo"<div>";
+    echo "Sie haben noch keinen Account?";
+    echo"</br>";
+    echo "<a class=\"btn btn-outline-secondary my-2 my-sm-0\" href=\"./controller/registerController.php\">Zur Registrierung</a>";
+    echo"</div>";
 }
 ?>

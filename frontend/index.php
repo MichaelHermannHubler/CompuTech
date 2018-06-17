@@ -15,13 +15,13 @@ include_once './includes.php';
 
     </head>
     <body>
-        <nav>
-
-
+    <div class="container">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand">Computech GmbH</a>
         </nav>
+    </div>
 
         <main>
-            <h1>HELLO WORLD!</h1>
 
             <?php
             if (empty($_SESSION['user'])) {
@@ -35,12 +35,12 @@ include_once './includes.php';
                 $_SESSION['perm'] = $permDAO->getPermissions($userDAO->getUserID($user->getUsername()));
             }
 
-            if (!empty($_SESSION['user'])) {
+            /*if (!empty($_SESSION['user'])) {
                 echo "<button><a href=\"./logout.php\">Logout</a></button>";
                 if (empty($_SESSION['perm'])) {
                     echo "hallo kunde";
                 }
-            }
+            }*/
             if (!empty($_SESSION['perm'])) {
                 if ($_SESSION['perm'] == 'ek') {
                     include './controller/DepartmentController/PurchaseController.php';

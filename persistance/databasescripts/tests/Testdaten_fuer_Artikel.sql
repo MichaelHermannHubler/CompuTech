@@ -1,5 +1,5 @@
-insert into address (Street, PostalCode, City, CountryCode) values ('Teststraße 5', 1200, 'Wien', 'Austria');
-insert into address (Street, PostalCode, City, CountryCode) values ('Wagramer Str. 195', 1220, 'Wien', 'Austria');
+﻿insert into address (Street, PostalCode, City, Country) values ('Teststraße 5', 1200, 'Wien', 'Austria');
+insert into address (Street, PostalCode, City, Country) values ('Wagramer Str. 195', 1220, 'Wien', 'Austria');
 
 insert into supplier (Name, AddressID, VATNumber) values ('Testlieferant 1', 1, 55453);
 insert into supplier (Name, AddressID, VATNumber) values ('Hauptlieferant 2', 1, 88776);
