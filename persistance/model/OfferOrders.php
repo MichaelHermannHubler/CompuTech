@@ -2,11 +2,11 @@
 
 Class OfferOrders extends Voucher {
 
-    private $total = 0;
+   
 
     function __construct($num, $party, $create, $total) {
         parent::__construct($num, $party, $create);
-        $this->total = $total;
+        
         
         
        
@@ -32,9 +32,6 @@ Class OfferOrders extends Voucher {
         return $id;
     }
 
-    function getTotal() {
-        return $this->total;
-    }
     
     function getID(){
         return $this->num-1000;

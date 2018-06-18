@@ -168,5 +168,15 @@ Class OfferOrderDAO extends AbstractDAO {
         $this->closeConnect();
         return $id;
     }
+    
+    function setTotal($id, $price){
+        $this->doConnect();
+        
+        $stmt = $this->conn->prepare("update offer set totalprice = ? where ID = ? ");
+        
+        $stmt->bind_param("i", $id);
+        
+        $this->closeConnect();
+    }
 
 }

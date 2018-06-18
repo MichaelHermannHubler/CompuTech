@@ -55,7 +55,7 @@ if (empty($_SESSION['signedIn'])) {
     echo"<input type=\"password\" name=\"pw\" required>";
     echo"<input type=\"submit\" name=\"submit\" value=\"submit\">";
     echo "<br/>";
-    echo "<button><a href=\"./controller/registerController.php\">Registrieren</a></button>";
+    echo "<a href=\"./controller/registerController.php\"><button>Registrieren</button></a>";
     echo"</form>";
 }
 ?>

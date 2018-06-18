@@ -36,7 +36,7 @@ include_once './includes.php';
             }
 
             if (!empty($_SESSION['user'])) {
-                echo "<button><a href=\"./logout.php\">Logout</a></button>";
+                echo "<a href=\"./logout.php\"><button>Logout</button></a>";
               
             }
             if (!empty($_SESSION['perm'])) {

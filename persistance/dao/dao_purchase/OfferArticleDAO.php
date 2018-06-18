@@ -32,15 +32,12 @@ Class OfferArticleDAO extends AbstractDAO {
         if($price == null){
             $price = 0;
         }
-
         
         if ($this->getOfferArticleFromOfferAndArticle($ref, $article) == true) {
-            echo "up";
             $link = $this->doConnect();
-            $query = "update offerarticle set Quantity = $quant, set Price = $price)";
+            $query = "update offerarticle set Quantity = $quant, Price = $price where OfferID = $ref and ArticleID = $article";
             mysqli_query($this->conn, $query);
         } else {
-            echo "ins";
             $link = $this->doConnect();
             $query = "insert into offerarticle (OfferID, ArticleID, Quantity, Price) values ($ref, $article, $quant, $price)";
             mysqli_query($this->conn, $query);

@@ -15,7 +15,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
             <th>Angebotsnummer</th>
             <th>Lieferant</th>
             <th>Erstelldatum</th>
-            <th>Gesamtpreis</th>
             <th>Detailansicht</th>
         </tr>
     </thead>
@@ -33,7 +32,6 @@ for ($i = 0; $i < count($alleOffer); $i++) {
     echo "<td>$num</td>";
     echo "<td>" . $supplierName . "</td>";
     echo "<td>" . $alleOffer[$i]->getCreateDate() . "</td>";
-    echo "<td>" . $alleOffer[$i]->getTotal() . "</td>";
     echo "<td><a href=\"./controller/offerDetailController.php?Num=$num\"><button>Detailansicht</button></a></td>";
     echo "</div>";
     echo"</tr>";
