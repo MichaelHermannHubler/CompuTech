@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 
-if (!empty($_GET['artikelauswahl'])) {
+if (!empty($_POST['artikelauswahl'])) {
 
     $createDate = date("Y-m-d H:i:s");
 
@@ -19,19 +19,19 @@ if (!empty($_GET['artikelauswahl'])) {
     $id = $offerOrder->setOffer($num, $_SESSION['supplierID'], $createDate, null);
 
 
-    if (!empty($_GET['articleaquantity'])) {
-        $AofferArticle = new OfferArticles($_GET['articleasupplier'], null, $_GET['articleaquantity'], $id);
-        $AofferArticle->setOfferArticlesOffer($_GET['articleasupplier'], $id, null, $_GET['articleaquantity']);
+    if (!empty($_POST['articleaquantity'])) {
+        $AofferArticle = new OfferArticles($_POST['articleasupplier'], null, $_POST['articleaquantity'], $id);
+        $AofferArticle->setOfferArticlesOffer($_POST['articleasupplier'], $id, null, $_POST['articleaquantity']);
     }
-    if (!empty($_GET['articlebquantity'])) {
-        $BofferArticle = new OfferArticles($_GET['articlebsupplier'], null, $_GET['articlebquantity'], $id);
-        $BofferArticle->setOfferArticlesOffer($_GET['articlebsupplier'], $id, null, $_GET['articlebquantity']);
+    if (!empty($_POST['articlebquantity'])) {
+        $BofferArticle = new OfferArticles($_POST['articlebsupplier'], null, $_POST['articlebquantity'], $id);
+        $BofferArticle->setOfferArticlesOffer($_POST['articlebsupplier'], $id, null, $_POST['articlebquantity']);
     }
-    if (!empty($_GET['articlecquantity'])) {
-        $CofferArticle = new OfferArticles($_GET['articlecsupplier'], null, $_GET['articlecquantity'], $id);
-        $CofferArticle->setOfferArticlesOffer($_GET['articlecsupplier'], $id, null, $_GET['articlecquantity']);
+    if (!empty($_POST['articlecquantity'])) {
+        $CofferArticle = new OfferArticles($_POST['articlecsupplier'], null, $_POST['articlecquantity'], $id);
+        $CofferArticle->setOfferArticlesOffer($_POST['articlecsupplier'], $id, null, $_POST['articlecquantity']);
     }
 
     header("Location: http://localhost/Computech/frontend/?menu=offer");
-    ;
+    
 }

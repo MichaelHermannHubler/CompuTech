@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
 <?php
 /**
  * Created by PhpStorm.
@@ -17,7 +20,7 @@ foreach ($_SESSION['articleList'] as $item) {
 
     if ($firstRow) {
 
-        echo "<table><tr><th>Name</th><th>Anzahl</th><th>Einkaufspreis</th><th>Aktionen</th></tr>";
+        echo "<table class=\"table table-bordered table-hover\"><tr><th>Name</th><th>Anzahl</th><th>Einkaufspreis</th><th>Aktionen</th></tr>";
         $firstRow = false;
     }
 
@@ -45,14 +48,14 @@ foreach ($_SESSION['articleList'] as $item) {
             echo '<td>';
             echo '<form method="get">';
             echo '<input type="hidden" name="articleIdToDelete"  value="' . $id . '"/>';
-            echo '<input type="submit" value="-" >';
+            echo '<input class="\btn btn-outline-secondary my-2 my-sm-0\" type="submit" value="-" >';
             echo '</form>';
 
             echo '<form method="get">';
             echo '<input type="hidden" name="articleIdToAdd"  value="' . $id . '"/>';
             echo '<input type="hidden" name="desc"  value="' . $item->getArticleDesc() . '"/>';
             echo '<input type="hidden" name="price"  value="' . $item->getPrice() . '"/>';
-            echo '<input type="submit" value="+" name="add">';
+            echo '<input class="\btn btn-outline-secondary my-2 my-sm-0\" type="submit" value="+" name="add">';
             echo '</form>';
 
             echo '</td>';
@@ -70,9 +73,8 @@ foreach ($_SESSION['articleList'] as $item) {
 
 echo "</table>";
 
-echo "<h2>Summe:" . $sum . "</h2>";
+echo "<h2>Summe: €" . $sum . "</h2>";
 ?>
 
 
-<a href="../checkoutAdressController.php">Zur Kasse gehen</a>
-
+<a class="\btn btn-outline-secondary my-2 my-sm-0\" type="button" href="../checkoutAdressController.php"> Zur Kasse gehen </a>

@@ -20,10 +20,12 @@ if (!empty($_GET['articleNum'])) {
     $new = true;
 }
 ?>
-
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
 
 <form method='POST' action="ArticleFormHandler.php">
-    <table>
+    <table  class="table table-bordered table-hover">
         <tr>
             <th>Bezeichnung</th>
             <th>Wert</th>
@@ -50,7 +52,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getSellingPrice();
                 }
-                ?>" required></td>
+                ?>"></td>
         </tr>
         <tr>
             <td>Basiseinheit</td>
@@ -69,7 +71,7 @@ if (!empty($_GET['articleNum'])) {
                 ?>"></td>
         </tr>
         <tr>
-            <td>Verpackungsgröße</td>
+            <td>Verpackungsgr&ouml;&szlig;e</td>
             <td><input type="text" name="packSize" value="<?php
                 if (empty($new)) {
                     echo $article->getPackingSize();
@@ -90,7 +92,7 @@ if (!empty($_GET['articleNum'])) {
                 if (empty($new)) {
                     echo $article->getSurcharge();
                 }
-                ?>" required></td>
+                ?>"></td>
         </tr>
         <tr>
             <td>Lieferant</td>

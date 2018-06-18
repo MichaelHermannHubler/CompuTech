@@ -1,7 +1,5 @@
 <?php
 
-
-
 Class ArticleDAO extends AbstractDAO {
 
     function __construct() {
@@ -9,34 +7,34 @@ Class ArticleDAO extends AbstractDAO {
     }
 
     function getArticle($num) {
-    $this->doConnect();
+        $this->doConnect();
 
-    $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, deleted from article where Number = ?");
+        $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, deleted from article where Number = ?");
 
-    $stmt->bind_param("i", $num);
+        $stmt->bind_param("i", $num);
 
-    $stmt->execute();
+        $stmt->execute();
 
-    $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier, $delete);
+        $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier, $delete);
 
-    if ($stmt->fetch()) {
-        $db = new ArticleGroupDAO;
-        $articleGroupName = $db->getArtikelGroupName($articleGroup);
-        $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge, $delete);
+        if ($stmt->fetch()) {
+            $db = new ArticleGroupDAO;
+            $articleGroupName = $db->getArtikelGroupName($articleGroup);
+            $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge, $delete);
+        }
+
+        $this->closeConnect();
+
+        return $article;
     }
 
-    $this->closeConnect();
-
-    return $article;
-}
-
-    function reduceAvailability($articleID, $amount){
+    function reduceAvailability($articleID, $amount) {
 
         $this->doConnect();
 
         $stmt = $this->conn->prepare("UPDATE ARTICLE SET Number = (SELECT NUMBER FROM ARTICLE WHERE ID = i) - i WHERE ID = i");
 
-        $stmt->bind_param("iii", $articleID, $amount,$articleID);
+        $stmt->bind_param("iii", $articleID, $amount, $articleID);
 
         $stmt->execute();
 
@@ -57,30 +55,27 @@ Class ArticleDAO extends AbstractDAO {
         $this->doConnect();
 
         $db = new ArticleGroupDAO;
-        
+
         $artikelGroupID = $db->getArtikelGroupID($group);
 
         $vendDB = new SupplierDAO;
         if (!$this->checkNumber($num)) {
             $vendID = $vendDB->getSupplierIDByName($supplier);
-        } else {            
+        } else {
             $vendID = $supplier;
         }
-        
-        $success = "Nein";
+
+
         if (!$this->checkNumber($num)) {
             $link = $this->doConnect();
             $query = "INSERT into article (Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, SupplierID, Surcharge, deleted) values ('$num','$desc',$artikelGroupID,$buyPrice,$sellPrice,'$unit','$packUnit',$packSize,$minStockLevel,$vendID,$surcharge, $delete)";
             mysqli_query($this->conn, $query);
-            $success = "Ja";
         } else {
             $link = $this->doConnect();
             $query = "update article set Name = '$desc', ArticleGroupID = $artikelGroupID, PurchasePrice = $buyPrice, RetailPrice = $sellPrice, Unit = '$unit', PackingType = '$packUnit', PackingQuantity = $packSize, MinimalStorage = $minStockLevel, SupplierID = $vendID, Surcharge = $surcharge, deleted = $delete where Number = '$num'";
             mysqli_query($this->conn, $query);
-            
         }
         $this->closeConnect();
-        return $success;
     }
 
     function getVendor($articleNum) {
@@ -112,7 +107,7 @@ Class ArticleDAO extends AbstractDAO {
         $stmt->execute();
 
         $stmt->bind_result($num, $name, $articleGroup, $buyPice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete);
-        
+
         while ($stmt->fetch()) {
             $db = new ArticleGroupDAO;
             $articleGroupName = $db->getArtikelGroupName($articleGroup);
@@ -161,8 +156,7 @@ Class ArticleDAO extends AbstractDAO {
         return $exist;
     }
 
-    
-        function getArticleFromSupplier($supplierID) {
+    function getArticleFromSupplier($supplierID) {
         $this->doConnect();
 
         $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, deleted from article where SupplierID = ? and deleted = 1");
@@ -174,11 +168,11 @@ Class ArticleDAO extends AbstractDAO {
         $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier, $delete);
 
         $db = new ArticleGroupDAO;
-        
+
         $supplierArticles = array();
-        
+
         while ($stmt->fetch()) {
-            
+
             $articleGroupName = $db->getArtikelGroupName($articleGroup);
 
             $article = new Article($articleNum, $articleDesc, $articleGroupName, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge, $delete);
@@ -188,13 +182,8 @@ Class ArticleDAO extends AbstractDAO {
 
         return $supplierArticles;
     }
-    
-    
-    
-    
-    
-    function getWarehouseLocationArticles($articleID)
-    {
+
+    function getWarehouseLocationArticles($articleID) {
         $this->doConnect();
         $stmt = $this->conn->prepare("SELECT WarehouseLocationID, QuantityStored from warehouselocationarticle where ArticleID = ?");
         $stmt->bind_param("i", $articleID);
@@ -207,8 +196,7 @@ Class ArticleDAO extends AbstractDAO {
 
         $warehouseArray = array();
 
-        while($stmt->fetch())
-        {
+        while ($stmt->fetch()) {
             $warehouseLocationGetter = new WarehouseLocationDAO();
             $warehouseLocation = $warehouseLocationGetter->getWarehouseLocation($warehouseLocationId);
 
@@ -221,21 +209,19 @@ Class ArticleDAO extends AbstractDAO {
         return $warehouseArray;
     }
 
-    function getArticlesByFilter($filter){
+    function getArticlesByFilter($filter) {
         $db = new ArticleGroupDAO;
 
         $this->doConnect();
-        if ($filter != null){
+        if ($filter != null) {
             echo "filter:";
             echo $filter;
 
             $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article where Name = ?");
             $stmt->bind_param("s", $filter);
-
-        }else{
+        } else {
             echo "nofilter";
             $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID from article");
-
         }
 
 
@@ -251,13 +237,11 @@ Class ArticleDAO extends AbstractDAO {
         while ($stmt->fetch()) {
             $articleArrayEntry = array(new Article($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge));
             array_push($articleArray, $articleArrayEntry);
-
         }
 
         $this->closeConnect();
 
         return $articleArray;
-
-
     }
+
 }

@@ -7,8 +7,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 ?>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-<a href="http://localhost/Computech/frontend/?menu=offer"><button>Zurück</button></a>
-<form action="offerDetailHandler.php">
+<a href="http://localhost/Computech/frontend/?menu=offer"><button class="btn btn-primary">Zur&uuml;ck</button></a>
+<form action="offerDetailHandler.php" method="POST">
     <table  class="table table-bordered">
         <thead>
             <tr>
@@ -44,7 +44,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
     </table>
     <?php
     if($cnt > 0){
-        echo"<input type=\"submit\" name=\"speichern\" value=\"Speichern\"/>";
+        echo"<input type=\"submit\" name=\"speichern\" value=\"Speichern\" class=\"btn btn-primary\"/>";
     }
     ?>
     

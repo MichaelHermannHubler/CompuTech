@@ -15,13 +15,13 @@ include_once './includes.php';
 
     </head>
     <body>
-        <nav>
-
-
+    <div class="container">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand">Computech GmbH</a>
         </nav>
+    </div>
 
         <main>
-            <h1>HELLO WORLD!</h1>
 
             <?php
             if (empty($_SESSION['user'])) {
@@ -36,8 +36,7 @@ include_once './includes.php';
             }
 
             if (!empty($_SESSION['user'])) {
-                echo "<a href=\"./logout.php\"><button>Logout</button></a>";
-              
+                echo "<a href=\"./logout.php\"><button class=\"btn btn-primary\">Logout</button></a>";
             }
             if (!empty($_SESSION['perm'])) {
                 if ($_SESSION['perm'] == 'ek') {
@@ -60,7 +59,6 @@ include_once './includes.php';
                 } else if ($_SESSION['perm'] == 'vk' || $_SESSION['perm'] == 'kd') {
                     include './controller/sales/ArticleListController.php';
                 }else {
-                    echo "Hallo Admin";
                     include './controller/DepartmentController/PurchaseController.php';
                 }
             }

@@ -3,9 +3,9 @@
 </div>
 <div class="nav" id="menu-bar">
     <div class="form-row">
-        <button type="button" name="offer" value="offer">Angebotsverwaltung</button>
-        <button type="button" name="order" value="order">Bestellverwaltung</button>
-        <button type="button" name="article" value="article">Artikelverwaltung</button>
+        <button type="button" name="offer" value="offer" class="btn btn-primary">Angebotsverwaltung</button>
+        <button type="button" name="order" value="order" class="btn btn-primary">Bestellverwaltung</button>
+        <button type="button" name="article" value="article" class="btn btn-primary">Artikelverwaltung</button>
     </div>
 </div>
 
