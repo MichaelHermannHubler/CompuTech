@@ -24,19 +24,28 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
             $_SESSION['id'] = $_GET['Num'] - 1000;
 
             $articles = $OfferArticle->getOfferArticle($_SESSION['id']);
-
+            $cnt = 0;
             foreach ($articles as $article) {
                 $price = $article->getPrice();
                 $quant = $article->getQuantity();
-                $_SESSION['num'] = $article->getArticleNumber();
+
+                //$_SESSION[$cnt] = $article->getArticleNumber();
+                $num = $article->getArticleNumber();
                 echo"<tr>";
-                echo"<td>" . $_SESSION['num'] . "</td>";
-                echo"<td><input type=\"text\" value=\"$price\" name=\"price\"></td>";
-                echo"<td><input type=\"text\" value=\"$quant\" name=\"quantity\"></td>";
+                //echo"<td>" . $_SESSION['num'] . "</td>";
+                echo"<td><input type=\"hidden\" name= \"num$cnt\" value=\"$num\">$num</td>";
+                echo"<td><input type=\"text\" value=\"$price\" name=\"price$cnt\" required></td>";
+                echo"<td><input type=\"text\" value=\"$quant\" name=\"quantity$cnt\" required></td>";
                 echo "</tr>";
+                $cnt++;
             }
             ?>
         </tbody>
     </table>
-    <input type="submit" name="speichern" value="Speichern"/>
+    <?php
+    if($cnt > 0){
+        echo"<input type=\"submit\" name=\"speichern\" value=\"Speichern\"/>";
+    }
+    ?>
+    
 </form>
