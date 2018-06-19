@@ -60,7 +60,7 @@ if (!empty($_POST['orderNum'])) {
                 }
                 ?></h2>
 
-            <form method='POST' action='./controller/purchaseOrderFormHandler.php' class="padded">
+            <form method='POST' action='./controller/purchaseOrderFormHandler.php<?php if(!$new){ echo "?edit=true"; } ?>' class="padded">
                 <?php 
                 if (!$new) {
                     echo "<input type='text' style='display: none' name='id' value='".$purchaseOrder->getNum()."'>";

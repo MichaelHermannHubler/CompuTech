@@ -53,9 +53,6 @@ if (!empty($_POST['offer'])) {
     $deliveryStatus = null;
     $deliveryType = $_POST['deliveryType'];
 
-    $articleDAO = new ArticleDAO;
-    $articles = $articleDAO->getArticleFromSupplier($supplier);
-
     $orderId = $purchaseOrderDAO->setPurchaseOrder($id, $offer, $supplier, $createDate, $orderDate, $deliveryStatus, $deliveryType);
 
     echo "<div class='container-fluid'>";
@@ -63,33 +60,70 @@ if (!empty($_POST['offer'])) {
 
     echo "<p>Order ID: " . $orderId . "</p>";
 
-    echo "<form method='POST' action='purchaseOrderArticleFormHandler.php'>";
-    echo "<input style='display: none' name='supplier' type='text' value='" . $supplier . "'>";
-    echo "<input style='display: none' name='purchaseOrder' type='text' value='" . $orderId . "'>";
-    echo "<table class='table'>";
-    echo "<tr>";
-    echo "<th>Nummer</th>";
-    echo "<th>Beschreibung</th>";
-    echo "<th>Stueckpreis</th>";
-    echo "<th>Stueckzahl</th>";
-    echo "</tr>";
-    foreach ($articles as $article) {
+    if (!empty($_GET['edit'])) {
+        $purchaseOrderArticleDAO = new PurchaseOrderArticleDAO();
+        $purchaseOrderArticles = $purchaseOrderArticleDAO->getArticlesFromOrderId($orderId);
+        $articleDAO = new ArticleDAO();
+        echo "<form method='POST' action='purchaseOrderArticleFormHandler.php?edit=true'>";
+        echo "<table class='table'>";
         echo "<tr>";
-        echo "<td>";
-        echo $article->getArticleNumber();
-        echo "</td>";
-        echo "<td>";
-        echo $article->getArticleDesc();
-        echo "</td>";
-        echo "<td>";
-        echo $article->getSellingPrice();
-        echo "</td>";
-        echo "<td><input type='number' name='" . $article->getArticleNumber() . "' value='0'></td>";
+        echo "<th>Nummer</th>";
+        echo "<th>Beschreibung</th>";
+        echo "<th>Stueckpreis</th>";
+        echo "<th>Stueckzahl</th>";
         echo "</tr>";
+        foreach ($purchaseOrderArticles as $purchaseOrderArticle) {
+            $articleId = $purchaseOrderArticle->getArticleId();
+            $article = $articleDAO->getArticle($articleId+10000);
+            echo "<tr>";
+            echo "<td>";
+            echo $articleId;
+            echo "</td>";
+            echo "<td>";
+            echo $article->getArticleDesc();
+            echo "</td>";
+            echo "<td>";
+            echo $purchaseOrderArticle->getPrice();
+            echo "</td>";
+            echo "<td><input type='number' name='". $purchaseOrderArticle->getId() ."' value='" . $purchaseOrderArticle->getQuantityOrdered() . "'></td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
+        echo "</form>";
+    } else {
+        $articleDAO = new ArticleDAO;
+        $articles = $articleDAO->getArticleFromSupplier($supplier);
+
+        echo "<form method='POST' action='purchaseOrderArticleFormHandler.php'>";
+        echo "<input style='display: none' name='supplier' type='text' value='" . $supplier . "'>";
+        echo "<input style='display: none' name='purchaseOrder' type='text' value='" . $orderId . "'>";
+        echo "<table class='table'>";
+        echo "<tr>";
+        echo "<th>Nummer</th>";
+        echo "<th>Beschreibung</th>";
+        echo "<th>Stueckpreis</th>";
+        echo "<th>Stueckzahl</th>";
+        echo "</tr>";
+        foreach ($articles as $article) {
+            echo "<tr>";
+            echo "<td>";
+            echo $article->getArticleNumber();
+            echo "</td>";
+            echo "<td>";
+            echo $article->getArticleDesc();
+            echo "</td>";
+            echo "<td>";
+            echo $article->getSellingPrice();
+            echo "</td>";
+            echo "<td><input type='number' name='" . $article->getArticleNumber() . "' value='0'></td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+        echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
+        echo "</form>";
     }
-    echo "</table>";
-    echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
-    echo "</form>";
+
     echo "</div>";
 }
 ?>

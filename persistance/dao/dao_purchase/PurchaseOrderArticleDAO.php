@@ -9,17 +9,17 @@ Class PurchaseOrderArticleDAO extends AbstractDAO {
     function getArticlesFromOrderId($orderId) {
         $this->doConnect();
 
-        $stmt = $this->conn->prepare("select ID, ArticleID, QuanitityOrdered, QuantityDelivered, Price, Defective from purchaseorderarticle where OrderId = ?");
+        $stmt = $this->conn->prepare("select ID, ArticleID, QuantityOrdered, QuantityDelivered, Price, Defective from purchaseorderarticle where OrderId = ?");
 
         $stmt->bind_param("i", $orderId);
 
         $stmt->execute();
 
         $stmt->bind_result($id, $articleId, $quantityOrdered, $quantityDelivered, $price, $defective);
-        
+
         $orderArticles = array();
         while ($stmt->fetch()) {
-            $orderArticle = new PurchaseOrderArticle($articleId, $quantityOrdered, $quantityDelivered, $price, $defective);
+            $orderArticle = new PurchaseOrderArticle($id, $articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective);
             array_push($orderArticles, $orderArticle);
         }
 
@@ -30,7 +30,7 @@ Class PurchaseOrderArticleDAO extends AbstractDAO {
 
     function setPurchaseOrderArticle($id, $articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective) {
         $this->doConnect();
-        
+
         if ($id == null) {
             $stmt = $this->conn->prepare("insert into purchaseorderarticle (ArticleID, OrderID, QuantityOrdered, QuantityDelivered, Price, Defective) values (?,?,?,?,?,?)");
             $stmt->bind_param("iiiiii", $articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective);
@@ -40,7 +40,7 @@ Class PurchaseOrderArticleDAO extends AbstractDAO {
         }
 
         $stmt->execute();
-        
+
 
         if ($id == null && $stmt->fetch()) {
             $id = mysqli_insert_id($stmt);
@@ -49,4 +49,17 @@ Class PurchaseOrderArticleDAO extends AbstractDAO {
         $this->closeConnect();
         return $id;
     }
+
+    function setQuantity($id, $quantityOrdered) {
+        $this->doConnect();
+
+        $stmt = $this->conn->prepare("update purchaseorderarticle set QuantityOrdered = ? where ID = ?");
+        $stmt->bind_param("ii", $quantityOrdered, $id);
+
+        $stmt->execute();
+
+        $this->closeConnect();
+        return $id;
+    }
+
 }

@@ -2,6 +2,7 @@
 
 Class PurchaseOrderArticle {
 
+    private $id;
     private $articleId;
     private $orderId;
     private $quantityOrdered;
@@ -9,13 +10,18 @@ Class PurchaseOrderArticle {
     private $price;
     private $defective;
 
-    function __construct($articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective) {
+    function __construct($id, $articleId, $orderId, $quantityOrdered, $quantityDelivered, $price, $defective) {
+        $this->id = $id;
         $this->articleId = $articleId;
         $this->orderId = $orderId;
         $this->quantityOrdered = $quantityOrdered;
         $this->quantityDelivered = $quantityDelivered;
         $this->price = $price;
         $this->defective = $defective;
+    }
+    
+    function getId() {
+        return $this->id;
     }
 
     function getArticleId() {
