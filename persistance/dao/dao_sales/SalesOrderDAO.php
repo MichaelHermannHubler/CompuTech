@@ -5,7 +5,7 @@
  * Date: 17.06.2018
  * Time: 16:49
  */
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/AbstractDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/AbstractDAO.php';
 
 class SalesOrderDAO extends AbstractDAO
 {
