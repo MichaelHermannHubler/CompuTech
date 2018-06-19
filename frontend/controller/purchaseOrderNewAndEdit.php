@@ -75,10 +75,11 @@ if (!empty($_POST['orderNum'])) {
                         $supplier = $dbSupplier->getSupplierStock();
 
                         for ($i = 0; $i < count($supplier); $i++) {
-                            echo "<option value=" . $supplier[$i]->getId();
+                            $suppId = $supplier[$i]->getId();
+                            echo "<option value=" . $suppId;
                             if (!$new) {
-                                if ($supplier[$i]->getName() == $dbSupplier->getSupplier($purchaseOrder->getParty())) {
-                                    echo " selected='selected'";
+                                if ($suppId == $dbSupplier->getSupplier($purchaseOrder->getParty())->getId()) {
+                                    echo " selected";
                                 }
                             }
 
