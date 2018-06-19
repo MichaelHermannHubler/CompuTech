@@ -5,44 +5,69 @@
  * Date: 17.06.2018
  * Time: 16:49
  */
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/AbstractDAO.php';
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/AbstractDAO.php';
+class SalesOrderDAO extends AbstractDAO
+{
 
-class SalesOrderDAO extends AbstractDAO {
+    public function __construct()
+    {
 
- public function __construct() {
+    }
 
-}
+    function getAllSalesOrders()
+    {
+        $this->doConnect();
 
-function getAllSalesOrders() {
-    $this->doConnect();
-    $stmt = $this->conn->prepare("select salesorder.ID, FirstName, LastName, Street, PostalCode, City, QuantityOrdered*Price AS Total, SysDateCreated from salesorder join user on salesorder.CustomerID = user.ID join address on salesorder.InvoiceAddressID = address.ID join order on salesorder.ID = order.ID join orderarticle on order.ID = orderarticle.ID;");
-    $stmt->execute();
-    if ($stmt->num_rows > 0) {
-        echo "<table>";
-        echo "<tr><td>Rechnungsnummer</td><td>Kunde</td><td>Adresse</td><td>Rechnungsbetrag</td><td>Rechnungsdatum</td><td>Rechnung bezahlt?</td></tr>";
-        //$items = array();
-        while ($row = $stmt->mysqli_fetch_array()) {
-            echo "<tr><td>" . $row["salesorder.ID"] . "</td><td>" . $row["FirstName"] . " " . $row["LastName"] . "</td><td>" . $row["Street"] . ", " . $row["PostalCode"] . " " . $row["City"] . "</td><td>" . $row["Total"] . "</td><td>" . $row["SysDateCreated"];
-            echo "<input type='checkbox' id='check' name='check' /></tr>";
+        $stmt = $this->conn->prepare(
+            "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, /*QuantityOrdered*Price AS Total,*/ SysDateCreated, paid 
+             FROM salesorder LEFT JOIN user ON salesorder.CustomerID=user.ID 
+                             LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID 
+                             /*LEFT JOIN order ON salesorder.ID=order.ID 
+                             LEFT JOIN orderarticle ON order.ID=orderarticle.ID*/");
+                            //not working with last two joins
+        $stmt->execute();
+
+        $stmt->bind_result($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated, $paid);
+
+        $salesOrders = array();
+        //multidimensional array
+        while ($stmt->fetch()) {
+            $salesOrder = new SalesOrderDAO($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated);
+            array_push($salesOrders, $salesOrder);
         }
+
+        $this->closeConnect();
+
+        return $salesOrders;
+    }
+
+    function getOpenSalesOrders()
+    {
+        $this->doConnect();
+        $stmt = $this->conn->prepare(
+            "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, /*QuantityOrdered*Price AS Total,*/ SysDateCreated, paid 
+             FROM salesorder LEFT JOIN user ON salesorder.CustomerID=user.ID 
+                             LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID 
+                             /*LEFT JOIN order ON salesorder.ID=order.ID 
+                             LEFT JOIN orderarticle ON order.ID=orderarticle.ID*/
+             WHERE paid=0");
+
+        $stmt->execute();
+
+        $stmt->bind_result($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated, $paid);
+
+        $salesOrders = array();
+        //multidimensional array
+        while ($stmt->fetch()) {
+            $salesOrder = new SalesOrderDAO($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated);
+            array_push($salesOrders, $salesOrder);
+        }
+
+        $this->closeConnect();
+
+        return $salesOrders;
     }
 }
 
-function getOpenSalesOrders() {
-    $this->doConnect();
-//field OrderPaid does not exist yet -> create in DB
-    $stmt = $this->conn->prepare("select salesorder.ID, FirstName, LastName, Street, PostalCode, City, QuantityOrdered*Price AS Total, SysDateCreated from salesorder join user on salesorder.CustomerID = user.ID join address on salesorder.InvoiceAddressID = address.ID join order on salesorder.ID = order.ID join orderarticle on order.ID = orderarticle.ID where paid = 0;");
-    $stmt->execute();
-    if ($stmt->num_rows > 0) {
-        echo "<table>";
-        echo "<tr><td>Rechnungsnummer</td><td>Kunde</td><td>Adresse</td><td>Rechnungsbetrag</td><td>Rechnungsdatum</td><td>Rechnung bezahlt?</td></tr>";
-        $items = array();
-        while ($row = $stmt->mysqli_fetch_array($stmt)) {
-            echo "<tr><td>" . $row["salesorder.ID"] . "</td><td>" . $row["FirstName"] . " " . $row["LastName"] . "</td><td>" . $row["Street"] . ", " . $row["PostalCode"] . " " . $row["City"] . "</td><td>" . $row["Total"] . "</td><td>" . $row["SysDateCreated"];
-            echo "<input type='checkbox' id='check' name='check' /></tr>";
-        }
-    }
-}
-}
 ?>
