@@ -89,7 +89,7 @@ if (!empty($_POST['offer'])) {
             echo "</tr>";
         }
         echo "</table>";
-        echo "<button type='submit' class='btn btn-primary'>Hinzufuegen</button>";
+        echo "<button type='submit' class='btn btn-primary'>Speichern</button>";
         echo "</form>";
     } else {
         $articleDAO = new ArticleDAO;
