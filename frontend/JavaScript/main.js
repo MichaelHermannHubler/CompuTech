@@ -3,22 +3,7 @@ $(function () {
     $("#menu-icon").click(function () {
         $("#menu-bar").slideToggle();
     });
-  
 
-    $("#menu-bar").click(function () {
-        selection = ($(document.activeElement).val());
-        
-        if (!getQueryVariable("menu")) {
-            window.location += "?menu=" + selection;
-        } else {
-            selection = ($(document.activeElement).val());           
-            var reExp = /menu=.*/;
-            var url = window.location.toString();
-            var newUrl = url.replace(reExp, "menu=" + selection);
-            window.location = newUrl;
-        }
-
-    });
 
     function getQueryVariable(variable)
     {

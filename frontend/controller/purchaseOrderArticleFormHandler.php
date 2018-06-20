@@ -7,11 +7,11 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
 
 /*
-foreach ($_POST as $key => $value) {
-    echo 'key: ' . $key . '<br>';
-    echo 'value: ' . $value . '<br>';
-};
-*/
+  foreach ($_POST as $key => $value) {
+  echo 'key: ' . $key . '<br>';
+  echo 'value: ' . $value . '<br>';
+  };
+ */
 
 $newURL = "http://localhost/CompuTech/frontend/?menu=order&success=true";
 
@@ -19,8 +19,6 @@ if (!empty($_POST['supplier']) && !empty($_POST['purchaseOrder'])) {
     $supplier = $_POST['supplier'];
     $purchaseOrder = $_POST['purchaseOrder'];
     $purchaseOrderArticleDAO = new PurchaseOrderArticleDAO();
-    //$purchaseOrderArticles = $purchaseOrderArticleDAO->getArticlesFromOrderId($purchaseOrder);
-    //TODO: get exisitng numbers and let them be edited
     $articleDAO = new ArticleDAO();
     foreach ($_POST as $key => $value) {
         if ($key != 'supplier' && $key != 'purchaseOrder') {
@@ -34,6 +32,13 @@ if (!empty($_POST['supplier']) && !empty($_POST['purchaseOrder'])) {
                 $purchaseOrderArticleDAO->setPurchaseOrderArticle($id, $articleId, $purchaseOrder, $quantityOrdered, $quantityDelivered, $price, $defective);
             }
         }
+    }
+} else {
+    $purchaseOrderArticleDAO = new PurchaseOrderArticleDAO();
+    foreach ($_POST as $key => $value) {
+        $id = $key;
+        $quantityOrdered = $value;
+        $purchaseOrderArticleDAO->setQuantity($id, $quantityOrdered);
     }
 }
 
