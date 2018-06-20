@@ -25,11 +25,18 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
 
     if (empty($_POST['surcharge']) && !empty($_POST['sellPrice'])) {
         $_POST['surcharge'] = ($_POST['sellPrice'] - $_POST['buyPrice']) / $_POST['sellPrice'] * 100;
-    }  
+    }
 
+    if (!empty($_POST['surcharge']) && !empty($_POST['sellPrice'])) {
+        $_POST['surcharge'] = ($_POST['sellPrice'] - $_POST['buyPrice']) / $_POST['sellPrice'] * 100;
+    }
 
     if (empty($_POST['packUnit'])) {
         $_POST['packUnit'] = "";
+    }
+    
+    if(gettype($_POST['minStock']) == "string"){
+        $_POST['minStock'] = 0;
     }
 
     if (empty($_POST['packSize'])) {
@@ -60,11 +67,38 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
     } else {
         $buyPrice = $article->getBuyingPrice();
     }
-    if (!empty($_POST['sellPrice']) && $_POST['sellPrice'] != null && $_POST['sellPrice'] > 0) {
-        $sellPrice = $_POST['sellPrice'];
-    } else {
-        $sellPrice = $article->getSellingPrice();
+
+    if (empty($_POST['sellPrice']) && !empty($_POST['surcharge'])) {
+        echo "Test";
+        if ($_POST['surcharge'] != 0) {
+            echo "test2";
+            $sellPrice = $_POST['buyPrice'] * (1 + ($_POST['surcharge'] / 100));
+        } else {
+            $sellPrice = $_POST['buyPrice'];
+        }
+        $surcharge = $_POST['surcharge'];
     }
+
+    if (empty($_POST['sellPrice']) && empty($_POST['surcharge'])) {
+        $sellPrice = $_POST['buyPrice'];
+        $surcharge = 0;
+    }
+
+    if (empty($_POST['surcharge']) && !empty($_POST['sellPrice'])) {
+        $surcharge = ($_POST['sellPrice'] - $_POST['buyPrice']) / $_POST['sellPrice'] * 100;
+        $sellPrice = $_POST['sellPrice'];
+    }
+
+    if (!empty($_POST['surcharge']) && !empty($_POST['sellPrice'])) {
+        $surcharge = ($_POST['sellPrice'] - $_POST['buyPrice']) / $_POST['sellPrice'] * 100;
+        $sellPrice = $_POST['sellPrice'];
+    }
+
+    /* if (!empty($_POST['sellPrice']) && $_POST['sellPrice'] != null && $_POST['sellPrice'] > 0) {
+      $sellPrice = $_POST['sellPrice'];
+      } else {
+      $sellPrice = $article->getSellingPrice();
+      } */
 
     if (!empty($_POST['unit']) && $_POST['unit'] != null && $_POST['unit'] != "") {
         $unit = $_POST['unit'];
@@ -75,13 +109,15 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
     if (!empty($_POST['packUnit']) && $_POST['packUnit'] != null && $_POST['packUnit'] != "") {
         $packUnit = $_POST['packUnit'];
     } else {
-        $packUnit = $article->getPackingUnit();
+        //$packUnit = $article->getPackingUnit();
+        $packUnit = "";
     }
 
     if (!empty($_POST['packSize']) && $_POST['packSize'] != null && $_POST['packSize'] != 0) {
         $packSize = $_POST['packSize'];
     } else {
-        $packSize = $article->getPackingSize();
+        //$packSize = $article->getPackingSize();
+        $packSize = 0;
     }
 
     if (!empty($_POST['minStock']) && $_POST['minStock'] != null && $_POST['minStock'] > 0) {
@@ -96,11 +132,11 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
         $vendor = $article->getVendor();
     }
 
-    if (!empty($_POST['surcharge']) && $_POST['surcharge'] != null) {
-        $surcharge = $_POST['surcharge'];
-    } else {
-        $surcharge = $article->getSurcharge();
-    }
+    /*  if (!empty($_POST['surcharge']) && $_POST['surcharge'] != null) {
+      $surcharge = $_POST['surcharge'];
+      } else {
+      $surcharge = $article->getSurcharge();
+      } */
 
     if (isset($_POST['delete'])) {
         $delete = 0;
