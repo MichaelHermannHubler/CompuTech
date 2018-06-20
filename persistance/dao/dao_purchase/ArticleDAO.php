@@ -227,14 +227,13 @@ Class ArticleDAO extends AbstractDAO
 
         $this->doConnect();
         if ($filter != null) {
-            echo "filter:";
-            echo $filter;
 
-            $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, ReservedStock from article where Name = ? AND ReservedStock >0");
-            $stmt->bind_param("s", $filter);
+            $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, ReservedStock from article where Name LIKE ? AND ReservedStock >0");
+            $di = "%".$filter."%";
+
+            $stmt->bind_param("s", $di);
 
         } else {
-            echo "nofilter";
             $stmt = $this->conn->prepare("select Number, Name, ArticleGroupID, PurchasePrice, RetailPrice, Unit, PackingType, PackingQuantity, MinimalStorage, Surcharge, SupplierID, ReservedStock from article WHERE ReservedStock > 0");
 
         }
@@ -245,7 +244,6 @@ Class ArticleDAO extends AbstractDAO
         $stmt->bind_result($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $surcharge, $supplier, $reservedStock);
 
         $articleArray = array();
-
         while ($stmt->fetch()) {
             $articleArrayEntry = array(new Article($articleNum, $articleDesc, $articleGroup, $buyingPrice, $sellingPrice, $unit, $packingUnit, $packingSize, $minimumStockLevel, $supplier, $surcharge, $reservedStock));
             array_push($articleArray, $articleArrayEntry);
@@ -264,8 +262,8 @@ Class ArticleDAO extends AbstractDAO
         $this->doConnect();
 
 
-        $stmt = $this->conn->prepare("UPDATE article SET `ReservedStock`= (SELECT `ReservedStock` WHERE `ID` = ?) - ? WHERE `ID` = ?");
-        $stmt->bind_param("iii", $articleID,$amount,$articleID);
+        $stmt = $this->conn->prepare("UPDATE article SET `ReservedStock`= `ReservedStock` - ? WHERE `ID` = ?");
+        $stmt->bind_param("ii", $amount,$articleID);
 
 
         $stmt->execute();

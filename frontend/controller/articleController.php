@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/computech/frontend/includes.php';
 
 if (!empty($_GET['articleNum'])) {
    
@@ -20,10 +20,12 @@ if (!empty($_GET['articleNum'])) {
     $new = true;
 }
 ?>
-
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
 
 <form method='GET' action="ArticleFormHandler.php">
-    <table>
+    <table  class="table table-bordered table-hover">
         <tr>
             <th>Bezeichnung</th>
             <th>Wert</th>

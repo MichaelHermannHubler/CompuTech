@@ -106,7 +106,7 @@ $warehouses = $warehousedb->getWarehouseLocations();
         <?php
         if(isset($_GET["filtertype"]) && $_GET["filter"] != -1) {
             ?>
-            <table class="table" id="returnTable">
+            <table class="table table-bordered table-hover" id="returnTable">
                 <thead>
                 <tr>
                     <th scope="col">#</th>

@@ -1,9 +1,9 @@
 ALTER TABLE salesorder ADD COLUMN OrderID INT(11) NOT NULL;
 
-ALTER TABLE `computecherp`.`salesorder`
+ALTER TABLE `s18-bbb2-fst-10`.`salesorder`
 ADD CONSTRAINT `sale_order_id`
   FOREIGN KEY (OrderID)
-  REFERENCES `computecherp`.`order` (`ID`)
+  REFERENCES `s18-bbb2-fst-10`.`order` (`ID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
@@ -11,7 +11,7 @@ ALTER TABLE salesorder DROP FOREIGN KEY SalesOrder_Order;
 
 
 
-ALTER TABLE offerarticle DROP COLUMN price;
+ALTER TABLE orderarticle DROP COLUMN price;
 ALTER TABLE `orderarticle` CHANGE `Price` `Price` DECIMAL(18,2) NOT NULL;
 
 ALTER TABLE salesorder ADD COLUMN paid int(1);

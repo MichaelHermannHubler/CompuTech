@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
 <?php
 /**
  * Created by PhpStorm.
@@ -7,7 +11,7 @@
  */
 
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 $checkOut = true;
 //SHOULD BE DONE FOR ALL
@@ -26,16 +30,17 @@ if (isset($_POST['nameV'])) {
 
 ?>
 
-<h>Bestellunsgübersicht</h>
+<?php include_once$_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartDisplay.php'; ?>
+</br>
 
-<?php include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartDisplay.php'; ?>
-
+<div class="container">
 <h2>Versanddetails</h2>
 <p><?php echo $_SESSION['versand']->getCity(); ?></p>
 <p><?php echo $_SESSION['versand'] ->getCountryCode(); ?></p>
 <p><?php echo $_SESSION['versand'] ->getPostalCode(); ?></p>
 <p><?php echo $_SESSION['versand'] ->getStreet(); ?></p>
 
+</br>
 <h2>Rechnungsdetails</h2>
 
 <p><?php echo $_SESSION['rechnung'] ->getCity(); ?></p>
@@ -43,4 +48,5 @@ if (isset($_POST['nameV'])) {
 <p><?php echo $_SESSION['rechnung'] ->getPostalCode(); ?></p>
 <p><?php echo $_SESSION['rechnung'] ->getStreet(); ?></p>
 
-<a href="OrderSatusController.php?bestellen=true">Kostenpflichtig bestellen</a>
+<a type="button" class="btn btn-outline-secondary my-2 my-sm-0" href="OrderSatusController.php?bestellen=true">Kostenpflichtig bestellen</a>
+</div>

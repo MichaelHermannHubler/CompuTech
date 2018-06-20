@@ -6,8 +6,8 @@
  * Time: 16:14
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/service/ArticleService.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 
 

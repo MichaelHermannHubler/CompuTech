@@ -6,10 +6,10 @@
  * Time: 13:53
  */
 
-include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
-include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/loginController.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/computech/service/ArticleService.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/loginController.php';
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/Address.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/persistance/model/Address.php';
 
 
 $arrayUtil = new ArrayUtil();
