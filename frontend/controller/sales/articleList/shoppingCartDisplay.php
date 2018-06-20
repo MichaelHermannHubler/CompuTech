@@ -77,4 +77,4 @@ echo "<h2>Summe: €" . $sum . "</h2>";
 ?>
 
 
-<a class="\btn btn-outline-secondary my-2 my-sm-0\" type="button" href="../checkoutAdressController.php"> Zur Kasse gehen </a>
+<a class="btn btn-outline-secondary my-2 my-sm-0" type="button" href="../checkoutAdressController.php"> Zur Kasse gehen </a>
