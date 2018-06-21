@@ -9,7 +9,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/a
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand">Webshop</a>
         <a class="btn btn-outline-secondary my-2 my-sm-0" href="./controller/sales/articleList/shoppingCartDisplay.php">Zum Warenkorb</a>
-        <a class="btn btn-outline-secondary my-2 my-sm-0" href="./logout.php\">Logout</a>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="./logout.php">Logout</a>
     </nav>
 </div>
 
