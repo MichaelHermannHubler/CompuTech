@@ -34,7 +34,7 @@ class ArticleService
     }
 
 
-    function processOrder($articleDTOList, $versand, $rechnung)
+    function processOrder($articleDTOList, $versand, $rechnung, $user)
     {
 
 
@@ -46,6 +46,7 @@ class ArticleService
             $orderDAO = new OrderDAO();
             $orderArticleDAO = new OrderArticleDAO();
             $order = $orderDAO->createOrder(rand(100000,999999));
+            var_dump($order);
             $articles = array();
             $articleDAO = new ArticleDAO();
 
@@ -59,9 +60,11 @@ class ArticleService
             $addressDAO = new AddressDAO();
             $versandID = $addressDAO->setAddress(null, $versand->getStreet(),$versand->getCity(),$versand->getPostalCode(), $versand->getCountryCode(), $versand->getName());
             $rechnungID = $addressDAO->setAddress(null, $rechnung->getStreet(),$rechnung->getCity(),$rechnung->getPostalCode(), $rechnung->getCountryCode(), $rechnung->getName());
+
+
             //create bill
             $saleOrderDAO = new SalesOrderDAO();
-            $saleOrderDAO->createBill($versandID, $rechnungID, $order->getId(), null);
+            $saleOrderDAO->createBill(null, null, $order->getId(), $user);
 
 
             //reduce Article quantity

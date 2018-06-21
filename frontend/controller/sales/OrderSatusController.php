@@ -14,7 +14,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/a
 if (isset($_GET['bestellen']) && $_GET['bestellen']) {
 
     $articleService = new ArticleService();
-    $result = $articleService->processOrder($_SESSION['articleList'], $_SESSION['versand'],$_SESSION['rechnung']);
+    $result = $articleService->processOrder($_SESSION['articleList'], $_SESSION['versand'],$_SESSION['rechnung'], $_SESSION['user']->getUsername());
     if (is_bool($result)){
         echo "Bestellung wurde erstellt";
 

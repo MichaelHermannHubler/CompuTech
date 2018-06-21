@@ -19,3 +19,10 @@ ALTER TABLE salesorder ADD COLUMN paid int(1);
 ALTER TABLE warehouselocationarticle DROP COLUMN `ReservedStock`;
 
 ALTER TABLE article ADD COLUMN ReservedStock INT DEFAULT '0';
+
+
+ALTER TABLE salesorder MODIFY COLUMN ID INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE salesorder MODIFY `CustomerID` int(11);
+ALTER TABLE salesorder MODIFY `DeliveryAddressID` int(11);
+ALTER TABLE salesorder MODIFY `InvoiceAddressID` int(11);

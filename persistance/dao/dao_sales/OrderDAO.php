@@ -25,9 +25,11 @@ class OrderDAO extends AbstractDAO
 
 
         $call->execute();
-        $last_id= $call->insert_id;
 
         $call->fetch();
+
+        $last_id= $call->insert_id;
+        echo "Last Call ID Order:".$last_id;
         $order = new Order($last_id, $number);
 
         return $order;
