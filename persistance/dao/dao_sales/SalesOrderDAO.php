@@ -24,6 +24,34 @@ class SalesOrderDAO extends AbstractDAO
 
     }
 
+
+    function getPrice($id){
+
+        $sum = null;
+
+
+
+            $this->doConnect();
+            $call = $this->conn->prepare("SELECT  SUM(oa.Price * oa.QuantityOrdered) AS 'PRICE PER ORDER'
+                                            FROM salesorder so
+                                              JOIN `order` o
+                                                ON o.ID = so.OrderID
+                                              JOIN orderarticle oa
+                                                ON oa.OrderID = o.ID
+                                            WHERE so.ID = ?");
+            $call->bind_param('i', $id);
+            $call->execute();
+            $call->bind_result($sum);
+
+            $call->fetch();
+
+            $this->closeConnect();
+            return $sum;
+
+
+    }
+
+
     function getAllSalesOrders()
     {
         $this->doConnect();

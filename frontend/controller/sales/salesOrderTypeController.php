@@ -61,6 +61,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/SalesOrde
             echo "<td>" . $rec->getStreet() . ", " . $rec->getPostal() . " " . $rec->getCity() . "</td>";
             echo "<td>" . $rec->getDateCreated() . "</td>";
 
+            echo "DER PREIS IST HEIß:".$recs->getPrice($rec->getId());
+
             if ($rec->getPaid() <> 1) {
                 echo "<td><input type='checkbox' name='paid' /></td>";
             } else {
