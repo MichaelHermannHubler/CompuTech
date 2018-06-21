@@ -5,13 +5,22 @@
  * Date: 17.06.2018
  * Time: 16:49
  */
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/AbstractDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/AbstractDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrder.php';
 
 class SalesOrderDAO extends AbstractDAO
 {
+    protected $id;
+    protected $firstn;
+    protected $lastn;
+    protected $street;
+    protected $postal;
+    protected $city;
+    protected $dateCreated;
+    protected $paid;
+    private $salesOrders = array();
 
-    public function __construct()
-    {
+    public function __construct() {
 
     }
 
@@ -22,24 +31,31 @@ class SalesOrderDAO extends AbstractDAO
         $stmt = $this->conn->prepare(
             "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, /*QuantityOrdered*Price AS Total,*/ SysDateCreated, paid 
              FROM salesorder LEFT JOIN user ON salesorder.CustomerID=user.ID 
-                             LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID 
+                             LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID
                              /*LEFT JOIN order ON salesorder.ID=order.ID 
                              LEFT JOIN orderarticle ON order.ID=orderarticle.ID*/");
-                            //not working with last two joins
+
         $stmt->execute();
 
-        $stmt->bind_result($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated, $paid);
+        $result = $stmt->get_result();
 
-        $salesOrders = array();
-        //multidimensional array
-        while ($stmt->fetch()) {
-            $salesOrder = new SalesOrderDAO($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated);
-            array_push($salesOrders, $salesOrder);
+        while ($sO = $result->fetch_assoc()) {
+            $salesOrder = new SalesOrder($sO['ID'],
+                                            $sO['FirstName'],
+                                            $sO['LastName'],
+                                            $sO['Street'],
+                                            $sO['PostalCode'],
+                                            $sO['City'], /*$total,*/
+                                            $sO['SysDateCreated'],
+                                            $sO['paid']);
+            array_push($this->salesOrders, $salesOrder);
         }
 
+        $stmt->free_result();
+        $result->close();
         $this->closeConnect();
 
-        return $salesOrders;
+        return $this->salesOrders;
     }
 
     function getOpenSalesOrders()
@@ -55,18 +71,25 @@ class SalesOrderDAO extends AbstractDAO
 
         $stmt->execute();
 
-        $stmt->bind_result($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated, $paid);
+        $result = $stmt->get_result();
 
-        $salesOrders = array();
-        //multidimensional array
-        while ($stmt->fetch()) {
-            $salesOrder = new SalesOrderDAO($id, $firstn, $lastn, $street, $postal, $city/*, $total*/, $dateCreated);
-            array_push($salesOrders, $salesOrder);
+        while ($sO = $result->fetch_assoc()) {
+            $salesOrder = new SalesOrder($sO['ID'],
+                $sO['FirstName'],
+                $sO['LastName'],
+                $sO['Street'],
+                $sO['PostalCode'],
+                $sO['City'], /*$total,*/
+                $sO['SysDateCreated'],
+                $sO['paid']);
+            array_push($this->salesOrders, $salesOrder);
         }
 
+        $stmt->free_result();
+        $result->close();
         $this->closeConnect();
 
-        return $salesOrders;
+        return $this->salesOrders;
     }
 }
 
