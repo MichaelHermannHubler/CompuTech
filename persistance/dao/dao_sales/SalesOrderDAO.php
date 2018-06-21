@@ -5,8 +5,8 @@
  * Date: 17.06.2018
  * Time: 16:49
  */
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/AbstractDAO.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/SalesOrder.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/AbstractDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrder.php';
 
 class SalesOrderDAO extends AbstractDAO
 {
@@ -24,44 +24,32 @@ class SalesOrderDAO extends AbstractDAO
 
     }
 
-
     function getPrice($id){
-
         $sum = null;
-
-
-
-            $this->doConnect();
-            $call = $this->conn->prepare("SELECT  SUM(oa.Price * oa.QuantityOrdered) AS 'PRICE PER ORDER'
+        $this->doConnect();
+        $call = $this->conn->prepare("SELECT  SUM(oa.Price * oa.QuantityOrdered) AS 'PRICE PER ORDER'
                                             FROM salesorder so
                                               JOIN `order` o
                                                 ON o.ID = so.OrderID
                                               JOIN orderarticle oa
                                                 ON oa.OrderID = o.ID
                                             WHERE so.ID = ?");
-            $call->bind_param('i', $id);
-            $call->execute();
-            $call->bind_result($sum);
-
-            $call->fetch();
-
-            $this->closeConnect();
-            return $sum;
-
-
+        $call->bind_param('i', $id);
+        $call->execute();
+        $call->bind_result($sum);
+        $call->fetch();
+        $this->closeConnect();
+        return $sum;
     }
-
 
     function getAllSalesOrders()
     {
         $this->doConnect();
 
         $stmt = $this->conn->prepare(
-            "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, /*QuantityOrdered*Price AS Total,*/ SysDateCreated, paid 
+            "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, SysDateCreated, paid 
              FROM salesorder LEFT JOIN user ON salesorder.CustomerID=user.ID 
-                             LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID
-                             /*LEFT JOIN order ON salesorder.ID=order.ID 
-                             LEFT JOIN orderarticle ON order.ID=orderarticle.ID*/");
+                             LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID");
 
         $stmt->execute();
 
@@ -73,7 +61,7 @@ class SalesOrderDAO extends AbstractDAO
                                             $sO['LastName'],
                                             $sO['Street'],
                                             $sO['PostalCode'],
-                                            $sO['City'], /*$total,*/
+                                            $sO['City'],
                                             $sO['SysDateCreated'],
                                             $sO['paid']);
             array_push($this->salesOrders, $salesOrder);
@@ -90,11 +78,9 @@ class SalesOrderDAO extends AbstractDAO
     {
         $this->doConnect();
         $stmt = $this->conn->prepare(
-            "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, /*QuantityOrdered*Price AS Total,*/ SysDateCreated, paid 
+            "SELECT salesorder.ID, FirstName, LastName, Street, PostalCode, City, SysDateCreated, paid 
              FROM salesorder LEFT JOIN user ON salesorder.CustomerID=user.ID 
                              LEFT JOIN address ON salesorder.InvoiceAddressID=address.ID 
-                             /*LEFT JOIN order ON salesorder.ID=order.ID 
-                             LEFT JOIN orderarticle ON order.ID=orderarticle.ID*/
              WHERE paid=0");
 
         $stmt->execute();
@@ -107,7 +93,7 @@ class SalesOrderDAO extends AbstractDAO
                 $sO['LastName'],
                 $sO['Street'],
                 $sO['PostalCode'],
-                $sO['City'], /*$total,*/
+                $sO['City'],
                 $sO['SysDateCreated'],
                 $sO['paid']);
             array_push($this->salesOrders, $salesOrder);
@@ -122,7 +108,7 @@ class SalesOrderDAO extends AbstractDAO
 
     function setPaid($id) {
         $this->doConnect();
-        $stmt = $this->prepare("UPDATE salesorder SET paid=1 WHERE ID = ?");
+        $stmt = $this->conn->prepare("UPDATE salesorder SET paid=1 WHERE ID = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $this->closeConnect();
