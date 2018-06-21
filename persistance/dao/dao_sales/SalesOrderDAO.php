@@ -5,8 +5,8 @@
  * Date: 17.06.2018
  * Time: 16:49
  */
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/AbstractDAO.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrder.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/AbstractDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/SalesOrder.php';
 
 class SalesOrderDAO extends AbstractDAO
 {
@@ -90,6 +90,14 @@ class SalesOrderDAO extends AbstractDAO
         $this->closeConnect();
 
         return $this->salesOrders;
+    }
+
+    function setPaid($id) {
+        $this->doConnect();
+        $stmt = $this->prepare("UPDATE salesorder SET paid=1 WHERE ID = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $this->closeConnect();
     }
 }
 
