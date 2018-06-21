@@ -7,8 +7,8 @@
  * Time: 12:57
  */-->
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/dao/dao_sales/SalesOrderDAO.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrder.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/dao_sales/SalesOrderDAO.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/SalesOrder.php';
 ?>
 
 <form action="salesOrderTypeController.php" method="post">
@@ -20,7 +20,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrd
     <?php
     if (isset($_POST["allOrders"])) {
         echo "<table class='table table-hover'>";
-        echo "<tr><td>Rechnungs-ID</td><td>Kunde</td><td>Adresse</td><td>Rechnungsdatum</td><td>Rechnung bezahlt?</td></tr>";
+        echo "<tr><td>Rechnungs-ID</td><td>Kunde</td><td>Adresse</td><td>Rechnungsdatum</td><td>Rechnung bezahlt?</td><td>Bezahlstatus</td></tr>";
         $recs = new SalesOrderDAO();
         $allRecs = $recs->getAllSalesOrders();
         //var_dump($allRecs);
@@ -36,20 +36,21 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrd
             } else {
                 echo "<td><input type='checkbox' name='paid' checked /></td>";
             }
+
+            echo "<td><form action='salesOrderTypeController.php' method='post'>";
+            echo "<button type='submit' name='saveChanges'>als bezahlt hinterlegen";
+            echo "</form></td>";
             echo "</tr>";
         }
-        ?>
-        </table>
-        <form action="salesOrderTypeController.php" method="post">
-            <button type="submit" name="saveChanges">Änderungen speichern</button>
-        </form>
-        <?php
+        echo "</table>";
+
+
         if (isset($_POST['saveChanges'])) {
 
         }
     } elseif (isset($_POST["openOrders"])) {
         echo "<table class='table table-hover'>";
-        echo "<tr><td>Rechnungs-ID</td><td>Kunde</td><td>Adresse</td><td>Rechnungsdatum</td><td>Rechnung bezahlt?</td></tr>";
+        echo "<tr><td>Rechnungs-ID</td><td>Kunde</td><td>Adresse</td><td>Rechnungsdatum</td><td>Rechnung bezahlt?</td><td>Bezahlstatus</td></tr>";
         $recs = new SalesOrderDAO();
         $openRecs = $recs->getOpenSalesOrders();
         //var_dump($openRecs);
@@ -65,16 +66,24 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTechX/persistance/model/SalesOrd
             } else {
                 echo "<td><input type='checkbox' name='paid' checked /></td>";
             }
+
+            echo "<td><form action='salesOrderTypeController.php' method='post'>";
+            echo "<button type='submit' name='saveChanges'>als bezahlt hinterlegen";
+            echo "</form></td>";
             echo "</tr>";
         }
-        echo "</table>";
-        ?>
-        <form action="salesOrderTypeController.php" method="post">
-            <button type="submit" name="saveChanges">Änderungen speichern</button>
-        </form>
-        <?php
-        if (isset($_POST['saveChanges'])) {
 
+        echo "</table>";
+
+        if (isset($_POST['saveChanges'])) {
+            $rec->setPaid($id);
+        } else {
+            echo "no";
         }
+
     }
     ?>
+
+
+
+
