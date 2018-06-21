@@ -14,7 +14,7 @@ ALTER TABLE salesorder DROP FOREIGN KEY SalesOrder_Order;
 ALTER TABLE orderarticle DROP COLUMN price;
 ALTER TABLE `orderarticle` CHANGE `Price` `Price` DECIMAL(18,2) NOT NULL;
 
-ALTER TABLE salesorder ADD COLUMN paid int(1);
+ALTER TABLE salesorder ADD COLUMN paid int(1) DEFAULT '0';
 
 ALTER TABLE warehouselocationarticle DROP COLUMN `ReservedStock`;
 
