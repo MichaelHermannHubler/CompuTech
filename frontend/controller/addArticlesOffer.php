@@ -46,7 +46,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
         ?>
     </select>
     St&uuml;ckzahl Artikel 1 angeben:
-    <input type='number' name='articleaquantity'>
+    <input type='number' min='0' name='articleaquantity'>
     <br/>
 
     <label for="artikel2">Artikel 2:</label>
@@ -59,8 +59,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
         }
         ?>
     </select>
-    Stückzahl Artikel 2 angeben:
-    <input type='number' name='articlebquantity'>
+    St&uuml;ckzahl Artikel 2 angeben:
+    <input type='number' min='0' name='articlebquantity'>
     <br/>
 
     <label for="artikel3">Artikel 3:</label>
@@ -73,8 +73,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
         }
         ?>
     </select>
-    Stückzahl Artikel 3 angeben:
-    <input type='number' name='articlecquantity'>
+    St&uuml;ckzahl Artikel 3 angeben:
+    <input type='number' min='0' name='articlecquantity'>
     <br/>
 
 
