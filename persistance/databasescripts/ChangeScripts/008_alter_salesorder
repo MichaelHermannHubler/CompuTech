@@ -26,3 +26,7 @@ ALTER TABLE salesorder MODIFY COLUMN ID INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE salesorder MODIFY `CustomerID` int(11);
 ALTER TABLE salesorder MODIFY `DeliveryAddressID` int(11);
 ALTER TABLE salesorder MODIFY `InvoiceAddressID` int(11);
+
+
+alter table address
+  MODIFY name nvarchar(50);

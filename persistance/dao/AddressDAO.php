@@ -11,9 +11,12 @@ Class AddressDAO extends AbstractDAO {
     function setAddress($id, $street, $city, $postCode, $countryCode, $name) {
         $this->doConnect();
 
+
         if ($id == null) {
-            $stmt = $this->conn->prepare("insert into address (Street, City, PostalCode,`Country`, `name`) values (?,?,?,?,?)");
-            $stmt->bind_param("ssiss", $street, $city, $postCode, $countryCode, $name);
+            $stmt = $this->conn->prepare("insert into address (Street, City, PostalCode,Country, name) values (?,?,?,?,?)");
+            $stmt->bind_param("sssss", $street, $city, $postCode, $countryCode, $name);
+
+
         } else {
             $stmt = $this->conn->prepare("update address set Street = ?, City = ?, PostalCode = ?, `Country` = ?, `name` = ? where ID = ?");
             $stmt->bind_param("ssissi", $street, $city, $postCode, $countryCode, $name, $id);
@@ -21,9 +24,17 @@ Class AddressDAO extends AbstractDAO {
 
         $stmt->execute();
 
+
+        $id=$stmt->insert_id;
+
+
+
         if ($id == null && $stmt->fetch()) {
             $id = mysqli_insert_id($stmt);
         }
+
+
+
 
         $this->closeConnect();
         return $id;

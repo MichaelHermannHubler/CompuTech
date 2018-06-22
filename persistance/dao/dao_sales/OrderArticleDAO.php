@@ -16,6 +16,8 @@ class OrderArticleDAO extends AbstractDAO
         $call = $this->conn->prepare("INSERT INTO `orderarticle` (`ArticleID`, `OrderID`, `QuantityOrdered`, `Price`) VALUES(?,?,?,?)");
         $call->bind_param('iiid', $articleID, $orderID, $quantity, $price);
         $call->execute();
+
+        $this->closeConnect();
     }
 
 }

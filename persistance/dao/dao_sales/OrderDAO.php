@@ -31,6 +31,7 @@ class OrderDAO extends AbstractDAO
         $last_id= $call->insert_id;
         $order = new Order($last_id, $number);
 
+        $this->closeConnect();
         return $order;
 
 
