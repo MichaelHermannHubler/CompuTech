@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f10fee36-ba45-4f41-b979-e7d8c881d87d" name="Default" comment="">
+    <list default="true" id="f10fee36-ba45-4f41-b979-e7d8c881d87d" name="Default" comment="merger of sales">
+      <change beforePath="" afterPath="$PROJECT_DIR$/frontend/controller/goodsReceiptController.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/frontend/controller/sales/salesOrderTypeController.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/persistance/databasescripts/tests/salesOrderTests.sql" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/persistance/model/SalesOrder.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/frontend/WarehouseHome.php" afterPath="$PROJECT_DIR$/frontend/WarehouseHome.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/ArticleFormHandler.php" afterPath="$PROJECT_DIR$/frontend/controller/ArticleFormHandler.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/articleController.php" afterPath="$PROJECT_DIR$/frontend/controller/articleController.php" />
       <change beforePath="$PROJECT_DIR$/frontend/controller/articleStockController.php" afterPath="$PROJECT_DIR$/frontend/controller/articleStockController.php" />
       <change beforePath="$PROJECT_DIR$/frontend/controller/goodsIssueController.php" afterPath="$PROJECT_DIR$/frontend/controller/goodsIssueController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/loginController.php" afterPath="$PROJECT_DIR$/frontend/controller/loginController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/offerController.php" afterPath="$PROJECT_DIR$/frontend/controller/offerController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/sales/ArticleListController.php" afterPath="$PROJECT_DIR$/frontend/controller/sales/ArticleListController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/sales/CheckoutController.php" afterPath="$PROJECT_DIR$/frontend/controller/sales/CheckoutController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/sales/OrderSatusController.php" afterPath="$PROJECT_DIR$/frontend/controller/sales/OrderSatusController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartController.php" afterPath="$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartDisplay.php" afterPath="$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartDisplay.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/sales/checkoutAdressController.php" afterPath="$PROJECT_DIR$/frontend/controller/sales/checkoutAdressController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/controller/stockListController.php" afterPath="$PROJECT_DIR$/frontend/controller/stockListController.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/includes.php" afterPath="$PROJECT_DIR$/frontend/includes.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.php" afterPath="$PROJECT_DIR$/frontend/index.php" />
-      <change beforePath="$PROJECT_DIR$/frontend/logout.php" afterPath="$PROJECT_DIR$/frontend/logout.php" />
-      <change beforePath="$PROJECT_DIR$/persistance/dao/AbstractDAO.php" afterPath="$PROJECT_DIR$/persistance/dao/AbstractDAO.php" />
-      <change beforePath="$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php" afterPath="$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php" />
-      <change beforePath="$PROJECT_DIR$/persistance/dao/dao_sales/OrderArticleDAO.php" afterPath="$PROJECT_DIR$/persistance/dao/dao_sales/OrderArticleDAO.php" />
-      <change beforePath="$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_alter_salesorder" afterPath="$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_alter_salesorder" />
-      <change beforePath="$PROJECT_DIR$/service/UserService.php" afterPath="$PROJECT_DIR$/service/UserService.php" />
+      <change beforePath="$PROJECT_DIR$/persistance/dao/dao_purchase/PurchaseOrderDAO.php" afterPath="$PROJECT_DIR$/persistance/dao/dao_purchase/PurchaseOrderDAO.php" />
+      <change beforePath="$PROJECT_DIR$/persistance/dao/dao_sales/SalesOrderDAO.php" afterPath="$PROJECT_DIR$/persistance/dao/dao_sales/SalesOrderDAO.php" />
+      <change beforePath="$PROJECT_DIR$/persistance/dao/dao_warehouse/WarehouseLocationDAO.php" afterPath="$PROJECT_DIR$/persistance/dao/dao_warehouse/WarehouseLocationDAO.php" />
     </list>
     <ignored path="C:\xampp\htdocs\CompuTech\.idea\shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,7 +35,140 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ArticleService.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/ArticleService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="58" column="39" lean-forward="false" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderArticleDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/OrderArticleDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding>
+                <marker date="1529672561008" expanded="true" signature="279:374" ph="INSERT INTO `orderarticle`... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleGroupDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleGroupDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-408">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1529256843000" expanded="true" signature="246:303" ph="insert into articlegroup... " />
+                <marker date="1529256843000" expanded="true" signature="417:479" ph="update articlegroup... " />
+                <marker date="1529256843000" expanded="true" signature="844:886" ph="Select Name articlegroup" />
+                <marker date="1529256843000" expanded="true" signature="1263:1305" ph="Select ID fr... articlegroup" />
+                <marker date="1529256843000" expanded="true" signature="1636:1682" ph="select ID, N... articlegroup" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddressDAO.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/AddressDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+              <folding>
+                <marker date="1529673123534" expanded="true" signature="272:351" ph="insert into address... " />
+                <marker date="1529673123534" expanded="true" signature="504:599" ph="update address... " />
+                <marker date="1529673123534" expanded="true" signature="1028:1108" ph="select ID, S... address" />
+                <marker date="1529673123534" expanded="true" signature="1550:1617" ph="select ID, S... address" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Address.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/model/Address.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="359">
+              <caret line="269" column="0" lean-forward="false" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
+              <folding>
+                <marker date="1529672542725" expanded="true" signature="192:371" ph="select Numbe... article" />
+                <marker date="1529672542725" expanded="true" signature="1185:1271" ph="UPDATE ARTICLE... " />
+                <marker date="1529672542725" expanded="true" signature="1214:1253" ph="SELECT NUMBE... ARTICLE" />
+                <marker date="1529672542725" expanded="true" signature="2572:2882" ph="INSERT into article... " />
+                <marker date="1529672542725" expanded="true" signature="3011:3335" ph="update article... " />
+                <marker date="1529672542725" expanded="true" signature="3561:3600" ph="select ID fr... article" />
+                <marker date="1529672542725" expanded="true" signature="3910:3957" ph="select Suppl... article" />
+                <marker date="1529672542725" expanded="true" signature="4342:4507" ph="select Numbe... article" />
+                <marker date="1529672542725" expanded="true" signature="5227:5274" ph="select ID fr... article" />
+                <marker date="1529672542725" expanded="true" signature="5584:5770" ph="select Numbe... " />
+                <marker date="1529672542725" expanded="true" signature="6692:6784" ph="SELECT Wareh... warehouselocationarticle" />
+                <marker date="1529672542725" expanded="true" signature="7623:7828" ph="select Numbe... article" />
+                <marker date="1529672542725" expanded="true" signature="7969:8159" ph="select Numbe... article" />
+                <marker date="1529672542725" expanded="true" signature="8957:9027" ph="UPDATE article... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderSatusController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/controller/sales/OrderSatusController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/AbstractDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="31" column="19" lean-forward="false" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/OrderDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+              <folding>
+                <marker date="1529672560994" expanded="true" signature="237:274" ph="INSERT INTO `order`... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserPermissionsDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/persistance/dao/UserPermissionsDAO.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+              <folding>
+                <marker date="1529668368400" expanded="true" signature="300:358" ph="Select Permi... userpermission" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -71,6 +192,12 @@
       <find>available</find>
       <find>articleList</find>
       <find>articleIdToAdd</find>
+      <find>if ($id == null &amp;&amp; $stmt-&gt;fetch())</find>
+      <find>if ($id == null &amp;&amp; $stmt-&gt;fetch())</find>
+      <find>mysqli</find>
+      <find>result</find>
+      <find>$result</find>
+      <find>while</find>
     </findStrings>
     <replaceStrings>
       <replace>$_SESSION['signedIn']</replace>
@@ -88,7 +215,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="RechnungsVerw" />
       </map>
     </option>
   </component>
@@ -122,22 +249,22 @@
         <option value="$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_orderAuto.sql" />
         <option value="$PROJECT_DIR$/persistance/databasescripts/CreateDatabaseScript.sql" />
         <option value="$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/006_add_picklist.sql" />
-        <option value="$PROJECT_DIR$/persistance/dao/dao_sales/OrderDAO.php" />
         <option value="$PROJECT_DIR$/persistance/databasescripts/CreateDatabaseWithRelations.sql" />
         <option value="$PROJECT_DIR$/frontend/includes.php" />
         <option value="$PROJECT_DIR$/persistance/model/Address.php" />
         <option value="$PROJECT_DIR$/frontend/controller/sales/CheckoutController.php" />
-        <option value="$PROJECT_DIR$/persistance/dao/AddressDAO.php" />
         <option value="$PROJECT_DIR$/persistance/dao/dao_sales/SalesOrderDAO.php" />
-        <option value="$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_alter_salesorder" />
         <option value="$PROJECT_DIR$/persistance/databasescripts/tests/Testdaten_fuer_Artikel.sql" />
         <option value="$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartDisplay.php" />
         <option value="$PROJECT_DIR$/persistance/model/Article.php" />
-        <option value="$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php" />
         <option value="$PROJECT_DIR$/frontend/controller/sales/ArticleListController.php" />
         <option value="$PROJECT_DIR$/frontend/controller/sales/OrderSatusController.php" />
+        <option value="$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_alter_salesorder" />
         <option value="$PROJECT_DIR$/service/ArticleService.php" />
+        <option value="$PROJECT_DIR$/persistance/dao/dao_sales/OrderDAO.php" />
+        <option value="$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php" />
         <option value="$PROJECT_DIR$/persistance/dao/dao_sales/OrderArticleDAO.php" />
+        <option value="$PROJECT_DIR$/persistance/dao/AddressDAO.php" />
       </list>
     </option>
   </component>
@@ -169,7 +296,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -182,11 +308,76 @@
               <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="frontend" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="frontend" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="frontend" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sales" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="frontend" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sales" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="articleList" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="persistance" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="persistance" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dao" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="persistance" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dao" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dao_purchase" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="persistance" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dao" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="dao_sales" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="persistance" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="databasescripts" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="persistance" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="databasescripts" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ChangeScripts" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompuTech" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompuTech" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="service" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -220,8 +411,9 @@
   <component name="RunManager">
     <configuration name="index.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/CompuTech/frontend/index.php" />
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.index.php" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.index.php" />
       </list>
     </recent_temporary>
   </component>
@@ -250,33 +442,54 @@
       <workItem from="1529137062727" duration="16802000" />
       <workItem from="1529507880649" duration="26000" />
     </task>
+    <task id="LOCAL-00001" summary="resolved issue where ID was not given back from address">
+      <created>1529673166371</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1529673166371</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57213000" />
+    <option name="totallyTimeSpent" value="62590000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6021739" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3326087" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33152175" sideWeight="0.4914712" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6021739" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,7 +536,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="bla" />
-    <option name="LAST_COMMIT_MESSAGE" value="bla" />
+    <MESSAGE value="resolved issue where ID was not given back from address" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolved issue where ID was not given back from address" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -332,21 +546,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleGroupDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/005_modify_Article_ID_autoincrement.txt" />
-    <entry file="file://$PROJECT_DIR$/frontend/controller/orderDataTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
@@ -410,13 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/UserPermissionsDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="67" lean-forward="false" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_orderAuto.sql" />
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/001_add_Article_deleted.sql">
       <provider selected="true" editor-type-id="text-editor">
@@ -432,13 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/007_addpicklistposcompleted.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="39" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/004_add_warehouselocation_reserved.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -446,17 +631,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/005_modify_Article_ID_autoincrement.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="25" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/tests/Testdaten_User.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="108" />
+          <caret line="10" column="34" lean-forward="false" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <marker date="1529256929000" expanded="true" signature="0:105" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="107:214" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="216:323" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="325:434" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="436:543" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="545:651" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="653:768" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="770:875" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="877:984" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="986:1093" ph="INSERT into user... " />
+            <marker date="1529256929000" expanded="true" signature="1095:1202" ph="INSERT into user... " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -469,22 +660,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/CreateDatabaseScript.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
+        <state relative-caret-position="4097">
           <caret line="241" column="51" lean-forward="false" selection-start-line="241" selection-start-column="51" selection-end-line="241" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/CreateDatabaseWithRelations.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="332" column="27" lean-forward="false" selection-start-line="332" selection-start-column="27" selection-end-line="332" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/006_add_picklist.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="20" selection-end-column="22" />
+        <state relative-caret-position="3400">
+          <caret line="200" column="28" lean-forward="false" selection-start-line="200" selection-start-column="2" selection-end-line="200" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -497,22 +683,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/UserDAO.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/OrderDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="39" column="1" lean-forward="true" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/003_add_Address_Name.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+        <state relative-caret-position="476">
+          <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+          <folding>
+            <marker date="1529256843000" expanded="true" signature="423:532" ph="SELECT Usern... USER" />
+            <marker date="1529256843000" expanded="true" signature="1398:1475" ph="insert into user... " />
+            <marker date="1529256843000" expanded="true" signature="1737:1775" ph="select ID fr... user" />
+            <marker date="1529256843000" expanded="true" signature="2100:2146" ph="Select ID fr... user" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -530,13 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/AbstractDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/controller/articleController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -548,20 +719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="20" column="82" lean-forward="true" selection-start-line="20" selection-start-column="82" selection-end-line="20" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/AddressDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/model/Address.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -582,29 +739,9 @@
     <entry file="das://src:table:/920694e4/9ae29529-fead-49a9-acd8-58dd4bc1a6ce/computecherp.warehouselocationarticle" />
     <entry file="file://$PROJECT_DIR$/persistance/databasescripts/tests/Testdaten_fuer_Artikel.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
+        <state relative-caret-position="459">
           <caret line="27" column="59" lean-forward="false" selection-start-line="27" selection-start-column="59" selection-end-line="27" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_alter_salesorder">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/controller/sales/checkoutAdressController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -622,20 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/controller/sales/CheckoutController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="267" column="52" lean-forward="false" selection-start-line="267" selection-start-column="52" selection-end-line="267" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/controller/sales/ArticleListController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -643,31 +766,205 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/SalesOrderDAO.php">
+    <entry file="file://$PROJECT_DIR$/persistance/model/PurchaseOrder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/OrderArticleDAO.php">
+    <entry file="file://$PROJECT_DIR$/frontend/controller/sales/articleList/shoppingCartController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="867">
+          <caret line="56" column="7" lean-forward="false" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/controller/sales/CheckoutController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="50" column="15" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/controller/sales/checkoutAdressController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="3" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/SalesOrderDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <marker date="1529673650763" expanded="true" signature="264:395" ph="INSERT INTO `salesorder`... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/007_addpicklistposcompleted.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="48" lean-forward="true" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/006_add_picklist.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/005_modify_Article_ID_autoincrement.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="25" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/003_add_Address_Name.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/databasescripts/ChangeScripts/008_alter_salesorder">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="3" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/model/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-164">
+          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleGroupDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1529256843000" expanded="true" signature="246:303" ph="insert into articlegroup... " />
+            <marker date="1529256843000" expanded="true" signature="417:479" ph="update articlegroup... " />
+            <marker date="1529256843000" expanded="true" signature="844:886" ph="Select Name articlegroup" />
+            <marker date="1529256843000" expanded="true" signature="1263:1305" ph="Select ID fr... articlegroup" />
+            <marker date="1529256843000" expanded="true" signature="1636:1682" ph="select ID, N... articlegroup" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/controller/sales/OrderSatusController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+        <state relative-caret-position="196">
+          <caret line="20" column="16" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/UserPermissionsDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+          <folding>
+            <marker date="1529668368400" expanded="true" signature="300:358" ph="Select Permi... userpermission" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/AbstractDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="31" column="19" lean-forward="false" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/OrderDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+          <folding>
+            <marker date="1529672560994" expanded="true" signature="237:274" ph="INSERT INTO `order`... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_purchase/ArticleDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="269" column="0" lean-forward="false" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
+          <folding>
+            <marker date="1529672542725" expanded="true" signature="192:371" ph="select Numbe... article" />
+            <marker date="1529672542725" expanded="true" signature="1185:1271" ph="UPDATE ARTICLE... " />
+            <marker date="1529672542725" expanded="true" signature="1214:1253" ph="SELECT NUMBE... ARTICLE" />
+            <marker date="1529672542725" expanded="true" signature="2572:2882" ph="INSERT into article... " />
+            <marker date="1529672542725" expanded="true" signature="3011:3335" ph="update article... " />
+            <marker date="1529672542725" expanded="true" signature="3561:3600" ph="select ID fr... article" />
+            <marker date="1529672542725" expanded="true" signature="3910:3957" ph="select Suppl... article" />
+            <marker date="1529672542725" expanded="true" signature="4342:4507" ph="select Numbe... article" />
+            <marker date="1529672542725" expanded="true" signature="5227:5274" ph="select ID fr... article" />
+            <marker date="1529672542725" expanded="true" signature="5584:5770" ph="select Numbe... " />
+            <marker date="1529672542725" expanded="true" signature="6692:6784" ph="SELECT Wareh... warehouselocationarticle" />
+            <marker date="1529672542725" expanded="true" signature="7623:7828" ph="select Numbe... article" />
+            <marker date="1529672542725" expanded="true" signature="7969:8159" ph="select Numbe... article" />
+            <marker date="1529672542725" expanded="true" signature="8957:9027" ph="UPDATE article... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/dao_sales/OrderArticleDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <marker date="1529672561008" expanded="true" signature="279:374" ph="INSERT INTO `orderarticle`... " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service/ArticleService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-214">
-          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        <state relative-caret-position="325">
+          <caret line="58" column="39" lean-forward="false" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/model/Address.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistance/dao/AddressDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding>
+            <marker date="1529673123534" expanded="true" signature="272:351" ph="insert into address... " />
+            <marker date="1529673123534" expanded="true" signature="504:599" ph="update address... " />
+            <marker date="1529673123534" expanded="true" signature="1028:1108" ph="select ID, S... address" />
+            <marker date="1529673123534" expanded="true" signature="1550:1617" ph="select ID, S... address" />
+          </folding>
         </state>
       </provider>
     </entry>
