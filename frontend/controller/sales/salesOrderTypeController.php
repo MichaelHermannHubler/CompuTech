@@ -52,9 +52,9 @@ if (isset($_POST['saveChanges'])) {
             echo "<td>" . $recs->getPrice($rec->getId()) . "</td>";
 
             if ($rec->getPaid() <> 1) {
-                echo "<td><input type='checkbox' name='paid' /></td>";
+                echo "<td><input disabled='true' type='checkbox' name='paid' /></td>";
             } else {
-                echo "<td><input type='checkbox' name='paid' checked /></td>";
+                echo "<td><input disabled='true' type='checkbox' name='paid' checked /></td>";
             }
 
             $id = $rec->getId();
@@ -93,9 +93,9 @@ if (isset($_POST['saveChanges'])) {
             echo "<td>" . $recs->getPrice($rec->getId()) . "</td>";
 
             if ($rec->getPaid() <> 1) {
-                echo "<td><input type='checkbox' name='paid' /></td>";
+                echo "<td><input disabled='true' type='checkbox' name='paid' /></td>";
             } else {
-                echo "<td><input type='checkbox' name='paid' checked /></td>";
+                echo "<td><input disabled='true' type='checkbox' name='paid' checked /></td>";
             }
 
             $id = $rec->getId();
