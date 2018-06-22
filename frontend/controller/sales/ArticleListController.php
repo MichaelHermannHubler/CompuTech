@@ -11,6 +11,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/a
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand">Webshop</a>
         <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/index.php">Home</a>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/controller/sales/salesOrderTypeController.php">Zum Rechnungssystem</a>
         <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/controller/sales/articleList/shoppingCartDisplay.php">Zum Warenkorb</a>
         <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/logout.php">Logout</a>
     </nav>

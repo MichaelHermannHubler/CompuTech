@@ -5,6 +5,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/dao/dao_sales/SalesOrderDAO.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/SalesOrder.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 if (isset($_POST['saveChanges'])) {
     $id = $_POST['id'];
@@ -12,10 +13,23 @@ if (isset($_POST['saveChanges'])) {
     $update->setPaid($id);
 }
 ?>
+<head>
+	<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css\" integrity=\"sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4\" crossorigin=\"anonymous\">
+
+</head>
+<body>
+<div class="container">
+	<nav class="navbar navbar-light bg-light justify-content-between">
+		<a class="navbar-brand">Rechnungen</a>
+		<a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/index.php">Home</a>
+		<a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/controller/sales/articleList/shoppingCartDisplay.php">Zum Warenkorb</a>
+		<a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/logout.php">Logout</a>
+	</nav>
+
 
 <form action="salesOrderTypeController.php" method="post">
-	<button type="submit" name="allOrders">Alle Rechnungen anzeigen</button>
-	<button type="submit" name="openOrders">Offene Rechnungen anzeigen</button>
+	<button type="submit" class="btn btn-outline-secondary my-2 my-sm-0" name="allOrders">Alle Rechnungen anzeigen</button>
+	<button type="submit"  class="btn btn-outline-secondary my-2 my-sm-0" name="openOrders">Offene Rechnungen anzeigen</button>
 </form>
 
 <?php
@@ -108,3 +122,6 @@ if (isset($_POST["allOrders"])) {
     echo "</table>";
 }
 ?>
+
+</div>
+</body>

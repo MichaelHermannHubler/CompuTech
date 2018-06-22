@@ -113,6 +113,22 @@ class SalesOrderDAO extends AbstractDAO
         $stmt->execute();
         $this->closeConnect();
     }
+
+    function createBill($addressV, $addressR, $orderID, $userID){
+        $this->doConnect();
+
+        $call = $this->conn->prepare("INSERT INTO `salesorder`(`CustomerID`, `DeliveryAddressID`, `InvoiceAddressID`, `SysDateCreated`, `OrderID`) VALUES (?,?,?,NOW(),?)");
+        $call->bind_param('iiii',$userID, $addressV, $addressR, $orderID);
+
+
+        $call->execute();
+        $call->fetch();
+
+
+        $this->closeConnect();
+
+    }
+
 }
 
 ?>

@@ -17,6 +17,8 @@ $arrayUtil = new ArrayUtil();
 if (isset($_GET['articleIdToAdd']) && isset($_GET['desc']) && isset($_GET['price'])) {
     $article = null;
 
+
+
     if (!isset($_SESSION['articleList'])){
         $_SESSION['articleList'] = array();
     }
@@ -33,7 +35,9 @@ if (isset($_GET['articleIdToAdd']) && isset($_GET['desc']) && isset($_GET['price
         $article = new ArticleListDTO($_GET['articleIdToAdd'], 1, $_GET['desc'], $_GET['price']);
         $_SESSION['articleList'][]= $article;
     }
-    //var_dump($_SESSION['articleList']);
+    echo "<div class='alert alert-success' role='alert'>";
+    echo "Artikel zum Warenkorb hinzugefügt";
+    echo "</div>";
 
 }
 
@@ -46,7 +50,9 @@ if (isset($_GET['articleIdToDelete'])) {
             }
         }
     }
-
+    echo "<div class='alert alert-success' role='alert'>";
+    echo "Artikel vom Warenkorb entfernt";
+    echo "</div>";
 
 }
 
