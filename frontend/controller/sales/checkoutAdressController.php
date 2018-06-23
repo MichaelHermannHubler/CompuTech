@@ -11,7 +11,6 @@
     </div>
 </br>
 
-
  <div class="container">
 <form action="CheckoutController.php" method="post">
     <div>
@@ -29,7 +28,7 @@
 </tr>
 <tr>
 <td>
-    <label for="straseV">Straﬂe</label>
+    <label for="straseV">Stra√üe</label>
 </td>
 <td>
     <input required type="text" name="straseV" />
@@ -63,7 +62,6 @@
 </table>
     </div>
 
-
     <div>
     <h2>Rechnungsdetails</h2>
 
@@ -78,7 +76,7 @@
 </tr>
 <tr>
 <td>
-    <label for="straseR">Straﬂe</label>
+    <label for="straseR">Stra√üe</label>
 </td>
 <td>
     <input required type="text" name="straseR" />
@@ -114,7 +112,7 @@
 <!--
     <label for="nameR">Name</label>
     <input required type="text" name="nameR"  />
-    <label for="straseR">Stra√üe</label>
+    <label for="straseR">Stra√É≈∏e</label>
     <input required type="text" name="straseR" />
     <label for="plzR">PLZ</label>
     <input required type="text" name="plzR"  />
@@ -123,9 +121,8 @@
     <label for="stadtR">Stadt</label>
     <input required type="text" name="stadtR"  />
     </div>
--->
 </br>    
-<input type="submit" class="btn btn-outline-secondary" value="Zur ‹berpr¸fung">
+<input type="submit" class="btn btn-outline-secondary" value="Zur √úberpr√ºfung">
 </form>
 </div>
 </body>

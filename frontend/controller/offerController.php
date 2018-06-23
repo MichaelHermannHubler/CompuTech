@@ -1,5 +1,5 @@
 <?php
-/*falls alle felder ausgefüllt wurden:
+/* falls alle felder ausgef�llt wurden:
  * neues Offer in DB inserten: setOffer 
  *  */
 if (session_status() == PHP_SESSION_NONE) {
@@ -9,90 +9,38 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once $_SERVER['DOCUMENT_ROOT'].'/computech/frontend/includes.php';
 
 ?>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<div class="container">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">Computech GmbH</a>
+    </nav>
+</div>
+<div class="container">
 
-<h2>Angebot eintragen</h2>
-</br>
-<form action="" method="get" name="createoffer">
-    Angebotsnummer <input type='text' name='offernumber'>
-    <?php
-        /*Datenbankzugriff: Eingegebenen Angebotsnummer mit bereits gespeicherten vergleichen:*/
-        /*eventuell doch lieber automatisch genrieren lassen?? brauche funktion!*/
-    
-        
-        $dbobj = new OfferOrderDAO;
-        
-        $alloffers = $dbobj->getAllOfferOrder();
-        
-        foreach ($alloffers as $offer => $number) {
-           if ($_GET['offernumber'] == $number) {
-               echo "Angebotsnummer exisitert bereits, bitte eine neue Nummer eingeben";
-           }
-       }
-    ?>
     </br>
 
-    Lieferant auswählen 
-    <select name="suppliername">
-        <!--<option>Lieferant</option>-->
-        <?php
-            /*Datenbankzugriff
-             * Exisitierende Lieferantennamen zur Auswahl anzeigen*/
-             /*ausgewählter Lieferant muss übergeben werden, da nur jene Artikel
-              *weiter unten ausgewählt werden können, die dem gewählten Lieferanten
-              *zuzurechnen sind. jquery: onchange submit
-              */
+    <h2>Angebot eintragen</h2>
+    </br>
+    <form action="addArticlesOffer.php" method="POST" name="lieferantwaehlen">
+
+
+        <label for="suppliername">Lieferant ausw&auml;hlen</label>
+        <select class="form-control" id="suppliername" name="suppliername">
+            <?php
             $db = new SupplierDAO;
             $suppliers = $db->getSupplierStock();
-            
-            for($i = 0; $i < count($suppliers); $i++){
-                echo "<option name=" . $suppliers[$i]->getID() . ">";
+
+            for ($i = 0; $i < count($suppliers); $i++) {
+                echo "<option name=" . $suppliers[$i]->getName() . ">";
                 echo $suppliers[$i]->getName();
                 echo "</option>";
-                
             }
-             
-        ?>       
-    </select>
-    </br>
-    <input type="submit" name="lieferantauswahl" value="Auswahl bestätigen"/>
-    
-    </br>
+            ?>       
+        </select>
 
-    <!--Anzahl unterschiedlicher Artikel <input type='number' name='numberofarticles'>
-    </br>-->
-        
-    <?php
-   
-    if (isset($_GET['suppliername'])) {
-        $supplierID = $_GET['suppliername'];
-    }
-        
-    $dbobje = new ArticleDAO;
-    $articles = $dbobje->getArticleFromSupplier($supplierID);
-        
-    $count = count($supplierID);    
-        
-     
-        echo "Artikel des gewählten Lieferanten: ";
-        echo "</br>";
-        
-    foreach ($articles as $article => $articleDesc) {
-        echo ".$articleDesc.";
-        echo "</br>";
-        echo "Stückzahl Artikel auswählen: ";
-        echo "<input type='number' name='stueckzahl'>";
-        }
+        </br>
+        <input type="submit" class="btn btn-outline-secondary my-2 my-sm-0" name="lieferantauswahl" value="Auswahl best&auml;tigen"/>
+    </form>
 
-    ?>
-    
-    
-    Gesamtpreis Angebot <input type='text' name='buyPrice'>
-    
-    <!--funktion: gesamtpreis der ausgewählten artikel (unter berücksichtigung der 
-    gewählten stückzahl berechnen-->
-    
-    </br>   
-    <input type="submit" name="submit" value="Eintragen"/>
- 
-   
-</form>

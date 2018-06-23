@@ -13,47 +13,41 @@ Class Article {
     private $minimumStockLevel = 0;
     private $vendor;
     private $surcharge = 0;
+    private $delete = 0;
     private $reservedStock = 0;
 
-    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $reservedStock) {
+    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $reservedStock, $delete) {
         $db = new ArticleDAO;
-        
-        if($number == null){
-            
+
+        if ($number == null) {
             $num = ($db->getHighestID()) + 1;
-            $this->articleNumber = 10000+$num;
-        }else{
+            $this->articleNumber = 10000 + $num;
+        } else {
             $this->articleNumber = $number;
         }
-        
+
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
-        if ($buyPrice > 0) {
-            $this->buyingPrice = $buyPrice;
-        } else {
-            echo "BuyingPrice should be higher than zero.";
-        }
+        $this->buyingPrice = $buyPrice;
+        $this->surcharge = $surcharge;
+        $this->reservedStock = $reservedStock;
+
         if ($sellPrice > 0) {
             $this->sellingPrice = $sellPrice;
-        } else if ($sellPrice == null) {
+        } else{
             $this->sellingPrice = $this->calcSellPrice($this->buyingPrice, $this->surcharge);
-        } else {
-            echo "SellingPrice should be higher than zero.";
         }
         $this->unit = $unit;
         $this->packingUnit = $packUnit;
         $this->packingSize = $packSize;
 
+        $this->delete = $delete;
+
         $this->minimumStockLevel = $min;
         $this->vendor = $vendor;
-        $this->surcharge = $surcharge;
-        $this->reservedStock = $reservedStock;
-
-     
-                $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->reservedStock);
-            
-            
-        
+      
+        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->reservedStock, $this->delete);
+               
     }
 
     private function calcSellPrice($buyPrice, $surcharge) {
@@ -68,40 +62,32 @@ Class Article {
         return $sell;
     }
 
-    function setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minLevel, $vendor, $surcharge) {
+    function setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $minLevel, $vendor, $surcharge, $delete) {
 
- 
+
         $this->articleDesc = $desc;
         $this->articleGroup = $group;
-        if ($buyPrice > 0) {
-            $this->buyingPrice = $buyPrice;
-        } else {
-            echo "BuyingPrice should be higher than zero.";
-        }
-        if ($sellPrice > 0) {
-            $this->sellingPrice = $sellPrice;
-        } else {
-            echo "SellingPrice should be higher than zero.";
-        }
+        $this->buyingPrice = $buyPrice;
+        $this->sellingPrice = $sellPrice;
+
         $this->unit = $unit;
         $this->packingUnit = $packUnit;
-        if ($packSize > 0) {
-            $this->packingSize = $packSize;
-        } else {
-            echo "PackingSize should be higher than zero.";
-        }
+        $this->packingSize = $packSize;
         $this->minimumStockLevel = $minLevel;
         $this->vendor = $vendor;
         $this->surcharge = $surcharge;
 
-        
+        $this->delete = $delete;
+
         $db = new ArticleDAO;
 
-        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor);
+        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->delete);
+        
+       
     }
-    
-    function getID(){
-        if($this->articleNumber != null){
+
+    function getID() {
+        if ($this->articleNumber != null) {
             return $this->articleNumber - 10000;
         }
     }
@@ -109,51 +95,42 @@ Class Article {
     /**
      * @return int|string
      */
-    public function getArticleNumber()
-    {
+    public function getArticleNumber() {
         return $this->articleNumber;
     }
-
 
     /**
      * @return string
      */
-    public function getArticleDesc()
-    {
+    public function getArticleDesc() {
         return $this->articleDesc;
     }
 
-
     /**
      * @return int
      */
-    public function getArticleGroup()
-    {
+    public function getArticleGroup() {
         return $this->articleGroup;
     }
 
-
     /**
      * @return int
      */
-    public function getBuyingPrice()
-    {
+    public function getBuyingPrice() {
         return $this->buyingPrice;
     }
 
     /**
      * @return float|int
      */
-    public function getSellingPrice()
-    {
+    public function getSellingPrice() {
         return $this->sellingPrice;
     }
 
     /**
      * @return string
      */
-    public function getUnit()
-    {
+    public function getUnit() {
         return $this->unit;
     }
 
@@ -174,30 +151,28 @@ Class Article {
     /**
      * @return int
      */
-    public function getMinimumStockLevel()
-    {
+    public function getMinimumStockLevel() {
         return $this->minimumStockLevel;
     }
-
-
 
     /**
      * @return mixed
      */
-    public function getVendor()
-    {
+    public function getVendor() {
         return $this->vendor;
     }
-
 
     /**
      * @return int
      */
-    public function getSurcharge()
-    {
+    public function getSurcharge() {
         return $this->surcharge;
     }
 
+    public function getDelete() {
+        return $this->delete;
+    }
+  
     /**
      * @return int
      */
@@ -213,8 +188,4 @@ Class Article {
     {
         $this->reservedStock = $reservedStock;
     }
-
-
-
-
 }

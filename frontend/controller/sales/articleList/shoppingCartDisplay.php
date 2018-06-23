@@ -66,7 +66,6 @@ if (isset($_SESSION['articleList'])) {
             echo '<td>';
             echo $item->getAmount();
             echo '</td>';
-
             echo '<td>';
             echo $item->getPrice();
             echo '</td>';
@@ -127,6 +126,3 @@ if (isset($_SESSION['articleList'])) {
 echo "</div>";
 
 ?>
-
-
-

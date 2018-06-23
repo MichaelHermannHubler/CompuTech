@@ -15,62 +15,59 @@ include_once './includes.php';
 
     </head>
     <body>
-    <div class="container">
-        <nav class="navbar navbar-light bg-light justify-content-between">
-            <a class="navbar-brand">Computech GmbH</a>
-        </nav>
-    </div>
+        <div class="container">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <a class="navbar-brand">Computech GmbH</a>
+            </nav>
+        </div>
 
         <main>
+            </br>
+            <div class="container">
 
-            <?php
-            if (empty($_SESSION['user'])) {
-                require "controller/loginController.php";
-            }
-
-            if (!empty($_SESSION['user']) && empty($_SESSION['perm'])) {
-                $user = $_SESSION['user'];
-                $userDAO = new UserDAO;
-                $permDAO = new UserPermissionsDAO;
-                $_SESSION['perm'] = $permDAO->getPermissions($userDAO->getUserID($user->getUsername()));
-                var_dump($_SESSION['perm']);
-            }
-
-            /*if (!empty($_SESSION['user'])) {
-                echo "<button><a href=\"./logout.php\">Logout</a></button>";
-                if (empty($_SESSION['perm'])) {
-                    echo "hallo kunde";
+                <?php
+                if (empty($_SESSION['user'])) {
+                    require "controller/loginController.php";
                 }
-            }*/
-            if (!empty($_SESSION['perm'])) {
-                if ($_SESSION['perm'] == 'ek') {
-                    include './controller/DepartmentController/PurchaseController.php';
-                    if (!empty($_GET['menu'])) {
-                        $_SESSION['menu'] = $_GET['menu'];
-                    }
 
-                    if (!empty($_SESSION['menu'])) {
-                        if ($_GET['menu'] == "offer") {
-                            include_once './controller/offerController.php';
-                        } else if ($_GET['menu'] == "order") {
-                            echo "Order";
-                        } else {
-                            include_once './controller/stockListController.php';
+                if (!empty($_SESSION['user']) && empty($_SESSION['perm'])) {
+                    $user = $_SESSION['user'];
+                    $userDAO = new UserDAO;
+                    $permDAO = new UserPermissionsDAO;
+                    $_SESSION['perm'] = $permDAO->getPermissions($userDAO->getUserID($user->getUsername()));
+                }
+
+                if (!empty($_SESSION['user'])) {
+                    echo "<a href=\"./logout.php\"><button class=\"btn btn-primary\">Logout</button></a>";
+                }
+                if (!empty($_SESSION['perm'])) {
+                    if ($_SESSION['perm'] == 'ek') {
+                        include './controller/DepartmentController/PurchaseController.php';
+                        if (!empty($_GET['menu'])) {
+                            $_SESSION['menu'] = $_GET['menu'];
                         }
+
+                        if (!empty($_SESSION['menu'])) {
+                            if ($_GET['menu'] == "offer") {
+                                include_once './views/offers.php';
+                            } else if ($_GET['menu'] == "order") {
+                                include_once './views/orders.php';
+                            } else {
+                                include_once './controller/stockListController.php';
+                            }
+                        }
+                    } else if ($_SESSION['perm'] == 'lg') {
+                        include './WarehouseHome.php';
+                    } else if ($_SESSION['perm'] == 'vk' || $_SESSION['perm'] == 'kd') {
+                        include './controller/sales/ArticleListController.php';
+                    } else {
+                        include './controller/DepartmentController/PurchaseController.php';
                     }
-                } else if ($_SESSION['perm'] == 'lg') {
-                    include './WarehouseHome.php';
-                } else if ($_SESSION['perm'] == 'vk') {
-                    include './controller/sales/ArticleListController.php';
-                } else {
-                    echo "Hallo Admin";
-                    include './controller/DepartmentController/PurchaseController.php';
                 }
-            }
-            ?>
+                ?>
 
 
-
+            </div>
         </main>
 
 
