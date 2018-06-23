@@ -6,10 +6,10 @@
  * Time: 13:53
  */
 
-include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
-include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/loginController.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/computech/service/ArticleService.php';
+include_once$_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/loginController.php';
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/persistance/model/Address.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/persistance/model/Address.php';
 
 
 $arrayUtil = new ArrayUtil();
@@ -17,15 +17,15 @@ $arrayUtil = new ArrayUtil();
 if (isset($_GET['articleIdToAdd']) && isset($_GET['desc']) && isset($_GET['price'])) {
     $article = null;
 
+
+
     if (!isset($_SESSION['articleList'])){
         $_SESSION['articleList'] = array();
     }
 
     foreach ($_SESSION['articleList'] as $item) {
-        echo "Available Article:".$item->getArticleId();
         if ($item->getArticleId() == $_GET['articleIdToAdd']) {
             $item->setAmount($item->getAmount() + 1);
-            echo "Matching Article:".$item->getArticleId();
             $article = $item;
             break;
         }
@@ -33,26 +33,31 @@ if (isset($_GET['articleIdToAdd']) && isset($_GET['desc']) && isset($_GET['price
 
     if ($article == null) {
         $article = new ArticleListDTO($_GET['articleIdToAdd'], 1, $_GET['desc'], $_GET['price']);
-        echo "Add new article:".$article->getArticleId();
         $_SESSION['articleList'][]= $article;
     }
-    //var_dump($_SESSION['articleList']);
+    echo "<div class='alert alert-success' role='alert'>";
+    echo "Artikel zum Warenkorb hinzugefügt";
+    echo "</div>";
 
 }
 
 if (isset($_GET['articleIdToDelete'])) {
-    echo "articleIdToDelete:".$_GET['articleIdToDelete'];
 
     foreach ($_SESSION['articleList'] as $item) {
         if ($item->getArticleId() == $_GET['articleIdToDelete']) {
-            echo "foundArticle";
             if ($item->getAmount() > 0) {
                 $item->setAmount($item->getAmount() - 1);
-                echo "reduce";
             }
         }
     }
-
+    echo "<div class='alert alert-success' role='alert'>";
+    echo "Artikel vom Warenkorb entfernt";
+    echo "</div>";
 
 }
 
+
+?>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>

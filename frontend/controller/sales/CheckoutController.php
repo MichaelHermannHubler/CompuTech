@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
 <?php
 /**
  * Created by PhpStorm.
@@ -7,51 +11,36 @@
  */
 
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 $checkOut = true;
 //SHOULD BE DONE FOR ALL
 if (isset($_POST['nameV'])) {
 //    function __construct($id, $street, $city, $postCode, $country) {
-    $rechnungsAdresse = new Address(null, $_POST['straseR'], $_POST['stadtR'], $_POST['plzR'], $_POST['landR']);
-    $versandAdresse = new Address(null, $_POST['straseV'], $_POST['stadtV'], $_POST['plzV'], $_POST['landV']);
+    $rechnungsAdresse = new Address(null, $_POST['straseR'], $_POST['stadtR'], $_POST['plzR'], $_POST['landR'], $_POST['nameR']);
+    $versandAdresse = new Address(null, $_POST['straseV'], $_POST['stadtV'], $_POST['plzV'], $_POST['landV'], $_POST['nameV']);
     $_SESSION['versand'] = $versandAdresse;
     $_SESSION['rechnung'] = $rechnungsAdresse;
 
-
-
-    var_dump($_SESSION['versand']);
-    var_dump($_SESSION['rechnung']);
 }
 
 
-if (isset($_GET['bestellen']) && $_GET['bestellen']) {
 
-	$articleService = new ArticleService();
-    $result = $articleService->processOrder($_SESSION['articleList'], $_SESSION['versand'],$_SESSION['rechnung']);
-	if (is_bool($result)){
-		echo "Bestellung wurde erstellt";
-	}
-	else{
-		echo "Es ist".$result." Artikel nicht mehr verfügbar";
-	}
-
-
-}
 
 
 ?>
 
-<h>Bestellunsgübersicht</h>
+<?php include_once$_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartDisplay.php'; ?>
+</br>
 
-<?php include_once$_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartDisplay.php'; ?>
-
+<div class="container">
 <h2>Versanddetails</h2>
 <p><?php echo $_SESSION['versand']->getCity(); ?></p>
 <p><?php echo $_SESSION['versand'] ->getCountryCode(); ?></p>
 <p><?php echo $_SESSION['versand'] ->getPostalCode(); ?></p>
 <p><?php echo $_SESSION['versand'] ->getStreet(); ?></p>
 
+</br>
 <h2>Rechnungsdetails</h2>
 
 <p><?php echo $_SESSION['rechnung'] ->getCity(); ?></p>
@@ -59,4 +48,5 @@ if (isset($_GET['bestellen']) && $_GET['bestellen']) {
 <p><?php echo $_SESSION['rechnung'] ->getPostalCode(); ?></p>
 <p><?php echo $_SESSION['rechnung'] ->getStreet(); ?></p>
 
-<a href="CheckoutController.php?bestellen=true">Kostenpflichtig bestellen</a>
+<a type="button" class="btn btn-outline-secondary my-2 my-sm-0" href="OrderSatusController.php?bestellen=true">Kostenpflichtig bestellen</a>
+</div>

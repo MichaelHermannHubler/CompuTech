@@ -14,8 +14,9 @@ Class Article {
     private $vendor;
     private $surcharge = 0;
     private $delete = 0;
+    private $reservedStock = 0;
 
-    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete) {
+    function __construct($number, $desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $reservedStock, $delete) {
         $db = new ArticleDAO;
 
         if ($number == null) {
@@ -29,6 +30,7 @@ Class Article {
         $this->articleGroup = $group;
         $this->buyingPrice = $buyPrice;
         $this->surcharge = $surcharge;
+        $this->reservedStock = $reservedStock;
 
         if ($sellPrice > 0) {
             $this->sellingPrice = $sellPrice;
@@ -43,12 +45,9 @@ Class Article {
 
         $this->minimumStockLevel = $min;
         $this->vendor = $vendor;
-        
-
-
-        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->delete);
-        
-        
+      
+        $db->setArticle($this->articleNumber, $this->articleDesc, $this->articleGroup, $this->buyingPrice, $this->sellingPrice, $this->unit, $this->packingUnit, $this->packingSize, $this->minimumStockLevel, $this->surcharge, $this->vendor, $this->reservedStock, $this->delete);
+               
     }
 
     private function calcSellPrice($buyPrice, $surcharge) {
@@ -173,5 +172,20 @@ Class Article {
     public function getDelete() {
         return $this->delete;
     }
+  
+    /**
+     * @return int
+     */
+    public function getReservedStock()
+    {
+        return $this->reservedStock;
+    }
 
+    /**
+     * @param int $reservedStock
+     */
+    public function setReservedStock($reservedStock)
+    {
+        $this->reservedStock = $reservedStock;
+    }
 }

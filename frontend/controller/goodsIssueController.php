@@ -20,7 +20,7 @@ $picklistdb = new PicklistDAO();
 $cont = true;
 ?>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+<link rel="stylesheet" href="https:/stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
       integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <div class="container">
@@ -46,8 +46,9 @@ $cont = true;
             $cont = false;
 
             ?>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success alert-dismissible" role="alert">
                 Pickliste <?php echo $picklist->getNumber(); ?>  wurde erfolgreich abgeschlossen.
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <?php
         }else if (isset($_GET["save"])){
@@ -65,8 +66,9 @@ $cont = true;
             }
 
             ?>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success alert-dismissible" role="alert">
                 Pickliste <?php echo $picklist->getNumber(); ?>  wurde erfolgreich gespeichert.
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <?php
         }

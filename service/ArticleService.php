@@ -34,7 +34,7 @@ class ArticleService
     }
 
 
-    function processOrder($articleDTOList, $versand, $liefer)
+    function processOrder($articleDTOList, $versand, $rechnung, $user)
     {
 
 
@@ -45,17 +45,33 @@ class ArticleService
             //create order
             $orderDAO = new OrderDAO();
             $orderArticleDAO = new OrderArticleDAO();
-            $order = $orderDAO->createOrder("123456");
-            $articles = array();
+            $order = $orderDAO->createOrder(rand(100000,999999));
             $articleDAO = new ArticleDAO();
 
             foreach ($articleDTOList as $item) {
 
-                $orderArticleDAO->createOrderArticle($item->getArticleId, $order->getId(), $item->getAmount(), $item->getPrice());
+                $orderArticleDAO->createOrderArticle($item->getArticleId(), $order->getId(), $item->getAmount(), $item->getPrice());
+                $articleDAO->reduceAvaiabilityByNumber($item->getArticleId(), $item->getAmount());
 
             }
 
+            $addressDAO = new AddressDAO();
+            $versandID = $addressDAO->setAddress(null, $versand->getStreet(),$versand->getCity(),$versand->getPostalCode(), $versand->getCountryCode(), $versand->getName());
+
+
             //create bill
+            $saleOrderDAO = new SalesOrderDAO();
+            $articles = array();
+
+            $rechnungID = $addressDAO->setAddress(null, $rechnung->getStreet(),$rechnung->getCity(),$rechnung->getPostalCode(), $rechnung->getCountryCode(), $rechnung->getName());
+
+            $saleOrderDAO->createBill($versandID, $rechnungID, $order->getId(), $user);
+
+
+            //reduce Article quantity
+
+
+
             return true;
         }else{
 
@@ -74,9 +90,7 @@ class ArticleService
         foreach ($articleDTOList as $item) {
 
             $article = $articleDAO->getArticle($item->getArticleId());
-            if ($article->getArticleNumber()<$item->getAmount()){
-                echo "not available";
-
+            if ($article->getReservedStock()<$item->getAmount()){
                 return  $item->getArticleDesc();
 
             }
@@ -86,7 +100,6 @@ class ArticleService
             }
 
         }
-        echo "available";
         return $articles;
 
 

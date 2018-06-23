@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/computech/frontend/includes.php';
 
 if (!empty($_GET['articleNum'])) {
 

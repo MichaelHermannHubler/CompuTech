@@ -6,8 +6,8 @@
  * Date: 24.05.2018
  * Time: 18:36
  */
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/util/ArrayUtil.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/UserService.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/util/ArrayUtil.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/service/UserService.php';
 
 
 

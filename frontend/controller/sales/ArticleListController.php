@@ -1,20 +1,24 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/service/ArticleService.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/articleList/shoppingCartController.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/service/ArticleService.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/computech/frontend/controller/sales/articleList/shoppingCartController.php';
 
 ?>
+<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css\" integrity=\"sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4\" crossorigin=\"anonymous\">
+
 <body>
 <div class="container">
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand">Webshop</a>
-        <a class="btn btn-outline-secondary my-2 my-sm-0" href="./controller/sales/articleList/shoppingCartDisplay.php">Zum Warenkorb</a>
-        <a class="btn btn-outline-secondary my-2 my-sm-0" href="./logout.php">Logout</a>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/index.php">Home</a>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/controller/sales/salesOrderTypeController.php">Zum Rechnungssystem</a>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/controller/sales/articleList/shoppingCartDisplay.php">Zum Warenkorb</a>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="<?php  $_SERVER['DOCUMENT_ROOT'] ?>/computech/frontend/logout.php">Logout</a>
     </nav>
 </div>
 
 <br>
-
+<div class="container">
 <div class="search-container">
 	<form method="post">
 		<input type="text" placeholder="Suche..." name="search">
@@ -23,7 +27,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/controller/sales/a
 </div>
 
 <?php
-
 
 
 $articleService = new ArticleService();
@@ -45,7 +48,7 @@ foreach ($resultCheck as $list) {
     echo "<tr><td>" . $list[0]->getArticleNumber() . "</td><td>" . $list[0]->getArticleDesc() . "</td><td>" . $list[0]->getSellingPrice() . "</td>";
 
     echo '<td><form method="get">';
-    echo '<input type="hidden" name="articleIdToAdd"  value="'.$list[0]->getArticleNumber().'"/>';
+    echo '<input type="hidden" name="articleIdToAdd"  value="'.$list[0]->getID().'"/>';
     echo '<input type="hidden" name="desc"  value="'.$list[0]->getArticleDesc().'"/>';
     echo '<input type="hidden" name="price"  value="'.$list[0]->getSellingPrice().'"/>';
     echo '<input type="submit" class="\btn btn-outline-secondary my-2 my-sm-0\" name="add" value="Hinzufügen"/>';
@@ -63,3 +66,4 @@ if (!empty($resultCheck)) {
 
 
 ?>
+</div>

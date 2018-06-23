@@ -8,10 +8,15 @@
 
 class AbstractDAO
 {
-
+/*
+    private $user = "s18-bbb2-fst-13";
+    private $pwd = "DbPass4b813";
+    private $host = "wi-projectdb.technikum-wien.at";
+    private $dbname ="s18-bbb2-fst-10";
+    */
     private $user = "root";
     private $pwd = "";
-    private $host = "127.0.0.1";
+    private $host = "localhost";
     private $dbname ="computecherp";
     protected $conn = null;
 

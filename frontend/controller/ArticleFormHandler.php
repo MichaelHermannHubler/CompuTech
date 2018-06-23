@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/computech/frontend/includes.php';
 
 if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['group']) && !empty($_POST['buyPrice']) && !empty($_POST['unit']) && !empty($_POST['minStock']) && !empty($_POST['vendor'])) {
     $groupDAO = new ArticleGroupDAO;
@@ -145,6 +145,6 @@ if (!empty($_POST['subNewArticle']) && !empty($_POST['name']) && !empty($_POST['
     }
 
     $group = utf8_encode($group);
-    $article->setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge, $delete);
-    header("Location: http://localhost/Computech/frontend/?menu=article");
+    $article->setArticle($desc, $group, $buyPrice, $sellPrice, $unit, $packUnit, $packSize, $min, $vendor, $surcharge);
+         header("Location: http://localhost/frontend/?menu=article");
 }

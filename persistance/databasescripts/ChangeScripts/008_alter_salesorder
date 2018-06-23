@@ -1,0 +1,32 @@
+ALTER TABLE salesorder ADD COLUMN OrderID INT(11) NOT NULL;
+
+ALTER TABLE `s18-bbb2-fst-10`.`salesorder`
+ADD CONSTRAINT `sale_order_id`
+  FOREIGN KEY (OrderID)
+  REFERENCES `s18-bbb2-fst-10`.`order` (`ID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE salesorder DROP FOREIGN KEY SalesOrder_Order;
+
+
+
+ALTER TABLE orderarticle DROP COLUMN price;
+ALTER TABLE `orderarticle` CHANGE `Price` `Price` DECIMAL(18,2) NOT NULL;
+
+ALTER TABLE salesorder ADD COLUMN paid int(1) DEFAULT '0';
+
+ALTER TABLE warehouselocationarticle DROP COLUMN `ReservedStock`;
+
+ALTER TABLE article ADD COLUMN ReservedStock INT DEFAULT '0';
+
+
+ALTER TABLE salesorder MODIFY COLUMN ID INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE salesorder MODIFY `CustomerID` int(11);
+ALTER TABLE salesorder MODIFY `DeliveryAddressID` int(11);
+ALTER TABLE salesorder MODIFY `InvoiceAddressID` int(11);
+
+
+alter table address
+  MODIFY name nvarchar(50);
