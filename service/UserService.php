@@ -5,7 +5,7 @@
  * Date: 24.05.2018
  * Time: 18:38
  */
-include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/computech/frontend/includes.php';
 class UserService
 {
 

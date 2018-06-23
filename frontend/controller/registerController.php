@@ -8,6 +8,7 @@ if (!empty($_GET['register']) && !empty($_GET['username']) && !empty($_GET['pw']
         throw new Exception("User exist already");
     } else {
         $userService->setUser($_GET['username'], $_GET['pw'], $_GET['vorname'], $_GET['nachname']);
+
     }
 }
 ?>

@@ -79,7 +79,7 @@ $warehouses = $warehousedb->getWarehouseLocations();
                         ?>
                         <option
                             value="<?php echo $article->getId(); ?>"
-                            <?php if(isset($_GET["filter"]) && $_GET["filter"] == $article->getId()) { echo "selected"; }?>
+                             <?php if(isset($_GET["filter"]) && $_GET["filter"] == $article->getId()) { echo "selected"; }?>
                         >
                             <?php echo $article->getArticleNumber(); ?>
                         </option>
@@ -106,7 +106,7 @@ $warehouses = $warehousedb->getWarehouseLocations();
         <?php
         if(isset($_GET["filtertype"]) && $_GET["filter"] != -1) {
             ?>
-            <table class="table" id="returnTable">
+            <table class="table table-bordered table-hover" id="returnTable">
                 <thead>
                 <tr>
                     <th scope="col">#</th>

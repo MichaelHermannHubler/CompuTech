@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/CompuTech/frontend/includes.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/computech/frontend/includes.php';
 $db = new ArticleDAO;
 $stock = $db->getStockList();
 $vendor = new SupplierDAO;

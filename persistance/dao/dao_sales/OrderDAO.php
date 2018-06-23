@@ -17,14 +17,21 @@ class OrderDAO extends AbstractDAO
 
 
         $this->doConnect();
-        $call = $this->conn->prepare("INSERT INTO ORDER (ID, Number) VALUES(null,s)");
+        $call = $this->conn->prepare("INSERT INTO `order`(Number) VALUE (?)");
         $call->bind_param('s', $number);
+
+        //$stmt = $this->conn->prepare("insert into user (Username, PasswortMD5, FirstName, LastName) values(?,?,?,?)");
+        //$stmt->bind_param("ssss", $user, $pw, $first, $last);
+
+
         $call->execute();
-        $last_id= $call->insert_id;
 
         $call->fetch();
+
+        $last_id= $call->insert_id;
         $order = new Order($last_id, $number);
 
+        $this->closeConnect();
         return $order;
 
 
